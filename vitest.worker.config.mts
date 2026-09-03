@@ -1,0 +1,40 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { cloudflareTest, readD1Migrations } from "@cloudflare/vitest-plugin";
+import { defineConfig } from "vitest/config";
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
+  plugins: [
+    cloudflareTest(async () => ({
+      wrangler: { configPath: path.join(projectRoot, "wrangler.jsonc") },
+      miniflare: {
+        bindings: {
+          TEST_MIGRATIONS: await readD1Migrations(path.join(projectRoot, "worker/migrations")),
+          ALLOWED_ORIGINS: "https://site.test",
+          PUBLIC_API_URL: "https://api.test",
+          SUBSCRIPTION_CONFIRMATION_REDIRECT_URL: "https://site.test/en",
+          ORGANIZATION_NAME: "Test Organization",
+          TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA",
+          TURNSTILE_EXPECTED_HOSTNAMES: "localhost",
+          RATE_LIMIT_SALT: "test-only-rate-limit-salt-32-characters-long",
+          RESEND_TRANSACTIONAL_API_KEY: "re_test_transactional",
+          RESEND_CONTACTS_API_KEY: "re_test_contacts",
+          RESEND_FROM_EMAIL: "Test Organization <no-reply@example.test>",
+          CONTACT_TO_EMAIL: "team@example.test",
+          RESEND_NEWSLETTER_TOPIC_ID: "topic_newsletter",
+          RESEND_EVENTS_TOPIC_ID: "topic_events",
+          RESEND_WEBHOOK_SECRET: "whsec_dGVzdC1yZXNlbmQtc2VjcmV0",
+          STRIPE_SECRET_KEY: "sk_test_placeholder",
+          STRIPE_PRICE_ID: "price_test",
+          STRIPE_WEBHOOK_SECRET: "whsec_stripe_test"
+        }
+      }
+    }))
+  ],
+  test: {
+    include: ["worker/test/**/*.test.ts"],
+    setupFiles: ["./worker/test/setup.ts"]
+  }
+});

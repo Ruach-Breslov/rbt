@@ -1,0 +1,24 @@
+# Copy to .dev.vars for `npm run worker:dev`. Never commit .dev.vars.
+ALLOWED_ORIGINS=http://localhost:3000
+PUBLIC_API_URL=http://localhost:8787
+SUBSCRIPTION_CONFIRMATION_REDIRECT_URL=http://localhost:3000/en
+ORGANIZATION_NAME=Organization Name
+
+# Cloudflare's documented always-pass test secret; never use it in production.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+TURNSTILE_EXPECTED_HOSTNAMES=localhost
+RATE_LIMIT_SALT=replace-with-at-least-32-random-characters
+
+RESEND_TRANSACTIONAL_API_KEY=re_replace_me
+RESEND_CONTACTS_API_KEY=re_replace_me
+RESEND_FROM_EMAIL=Organization Name <no-reply@example.com>
+CONTACT_TO_EMAIL=hello@example.com
+RESEND_NEWSLETTER_TOPIC_ID=replace-me
+RESEND_EVENTS_TOPIC_ID=replace-me
+
+# Optional custom Checkout. Prefer NEXT_PUBLIC_STRIPE_PAYMENT_LINK for ordinary support.
+STRIPE_SECRET_KEY=
+STRIPE_PRICE_ID=
+STRIPE_WEBHOOK_SECRET=
+RESEND_WEBHOOK_SECRET=
+RSVP_RETENTION_DAYS=365

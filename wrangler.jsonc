@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "organization-website-api",
+  "main": "worker/src/index.ts",
+  "compatibility_date": "2026-09-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "http://localhost:3000",
+    "PUBLIC_API_URL": "http://localhost:8787",
+    "SUBSCRIPTION_CONFIRMATION_REDIRECT_URL": "http://localhost:3000/en",
+    "ORGANIZATION_NAME": "Organization Name",
+    "TURNSTILE_EXPECTED_HOSTNAMES": "localhost",
+    "RSVP_RETENTION_DAYS": "365"
+  },
+  "triggers": { "crons": ["17 3 * * *"] },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "organization-website",
+      "database_id": "4e5f0932-6d9c-42f5-bf5c-71d36aca30be",
+      "migrations_dir": "worker/migrations"
+    }
+  ]
+}

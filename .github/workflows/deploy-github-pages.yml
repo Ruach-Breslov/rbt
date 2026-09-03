@@ -1,0 +1,122 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build static site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Setup GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit dependencies
+        run: npm run audit
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Typecheck Worker
+        run: npm run typecheck:worker
+
+      - name: Typecheck tests
+        run: npm run typecheck:tests
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test Worker
+        run: npm run test:worker
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test site in Chromium
+        run: npm run test:e2e
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_EN: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_EN }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_HE: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_HE }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_ES: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_ES }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_FA: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_FA }}
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+          NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+          NEXT_PUBLIC_CONTACT_PHONE: ${{ vars.NEXT_PUBLIC_CONTACT_PHONE }}
+          NEXT_PUBLIC_CONTACT_ADDRESS: ${{ vars.NEXT_PUBLIC_CONTACT_ADDRESS }}
+          NEXT_PUBLIC_STRIPE_PAYMENT_LINK: ${{ vars.NEXT_PUBLIC_STRIPE_PAYMENT_LINK }}
+          NEXT_PUBLIC_YOUTUBE_VIDEO_IDS: ${{ vars.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS }}
+          NEXT_PUBLIC_YOUTUBE_CHANNEL_URL: ${{ vars.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL }}
+          NEXT_PUBLIC_HERO_IMAGE: ${{ vars.NEXT_PUBLIC_HERO_IMAGE }}
+
+      - name: Check static export
+        run: npm run check:static-export
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+
+      - name: Check launch configuration
+        run: npm run check:launch
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_EN: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_EN }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_HE: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_HE }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_ES: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_ES }}
+          NEXT_PUBLIC_ORGANIZATION_NAME_FA: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_FA }}
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+          NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+          NEXT_PUBLIC_CONTACT_PHONE: ${{ vars.NEXT_PUBLIC_CONTACT_PHONE }}
+          NEXT_PUBLIC_CONTACT_ADDRESS: ${{ vars.NEXT_PUBLIC_CONTACT_ADDRESS }}
+          NEXT_PUBLIC_STRIPE_PAYMENT_LINK: ${{ vars.NEXT_PUBLIC_STRIPE_PAYMENT_LINK }}
+          NEXT_PUBLIC_YOUTUBE_VIDEO_IDS: ${{ vars.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS }}
+          NEXT_PUBLIC_YOUTUBE_CHANNEL_URL: ${{ vars.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

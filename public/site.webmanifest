@@ -1,0 +1,14 @@
+{
+  "name": "Organization Name",
+  "short_name": "Organization",
+  "description": "A multilingual organization website.",
+  "id": ".",
+  "start_url": ".",
+  "scope": ".",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "theme_color": "#090b14",
+  "background_color": "#090b14",
+  "display": "standalone"
+}
