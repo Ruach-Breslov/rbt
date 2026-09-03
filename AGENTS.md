@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Project continuity
+
+Before changing project content, infrastructure, or deployment settings, read `PROJECT_MEMORY.md`. Update it whenever the owner confirms a durable decision or a major task is completed. Never copy project-specific changes back into the clean template repository.

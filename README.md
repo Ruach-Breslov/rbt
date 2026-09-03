@@ -1,8 +1,8 @@
-# Multilingual Organization Website Template
+# Ruach Breslov Main Site
 
-A clean, static-first Next.js template for organizations, communities, events, and media libraries. The site exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pages from the included GitHub Actions workflow.
+The multilingual public website for Ruach Breslov. It brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection.
 
-No previous organization’s copy, people, logos, photos, payment links, forms, or service accounts remain in this project.
+The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pages from the included GitHub Actions workflow. Secure forms, RSVP storage, and optional payment services run through the separate Cloudflare Worker backend.
 
 ## Included
 
