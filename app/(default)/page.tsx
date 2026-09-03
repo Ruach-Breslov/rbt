@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/home-page";
+import { LocalePreference } from "@/components/locale-preference";
 import { defaultLocale, getDictionary, localeHref, locales } from "@/data/locales";
 import { absoluteUrl } from "@/data/site";
 
@@ -18,5 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function DefaultHomePage() {
-  return <HomePage locale={defaultLocale} dictionary={dictionary} />;
+  return (
+    <>
+      <LocalePreference locale={defaultLocale} restore />
+      <HomePage locale={defaultLocale} dictionary={dictionary} />
+    </>
+  );
 }

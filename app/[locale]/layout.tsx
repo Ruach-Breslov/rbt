@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { AmbientBackground } from "@/components/ambient-background";
+import { LocalePreference } from "@/components/locale-preference";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getDictionary, isLocale, localeDetails, locales } from "@/data/locales";
@@ -41,9 +42,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale} dir={localeDetails[locale].dir}>
+    <html lang={locale} dir={localeDetails[locale].dir} data-scroll-behavior="smooth">
       <head><meta httpEquiv="Content-Security-Policy" content={contentSecurityPolicy()} /></head>
       <body>
+        <LocalePreference locale={locale} />
         <a className="skip-link" href="#main-content">{dictionary.system.skipToContent}</a>
         <AmbientBackground />
         <SiteHeader locale={locale} dictionary={dictionary} />

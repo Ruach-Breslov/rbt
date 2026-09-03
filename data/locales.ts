@@ -130,7 +130,7 @@ export type Dictionary = {
 };
 
 const en: Dictionary = {
-  siteName: "Organization Name",
+  siteName: "Ruach Breslov",
   siteTagline: "A clear, human foundation for meaningful work.",
   languageLabel: "Language",
   system: {
@@ -264,7 +264,7 @@ const en: Dictionary = {
 };
 
 const he: Dictionary = {
-  siteName: "שם הארגון",
+  siteName: "Ruach Breslov",
   siteTagline: "בסיס ברור ואנושי לעשייה משמעותית.",
   languageLabel: "שפה",
   system: {
@@ -398,7 +398,7 @@ const he: Dictionary = {
 };
 
 const es: Dictionary = {
-  siteName: "Nombre de la organización",
+  siteName: "Ruach Breslov",
   siteTagline: "Una base clara y humana para un trabajo con sentido.",
   languageLabel: "Idioma",
   system: {
@@ -532,7 +532,7 @@ const es: Dictionary = {
 };
 
 const fa: Dictionary = {
-  siteName: "نام سازمان",
+  siteName: "Ruach Breslov",
   siteTagline: "پایه‌ای روشن و انسانی برای کاری معنادار.",
   languageLabel: "زبان",
   system: {

@@ -23,6 +23,27 @@ test("sets language and direction for every locale", async ({ page }) => {
   }
 });
 
+test("remembers the selected language and restores it on the root page", async ({ page }) => {
+  await page.goto("/en/contact");
+  await page.locator(".language-menu summary").click();
+  await page.getByRole("link", { name: "עברית" }).click();
+
+  await expect(page).toHaveURL(/\/he\/contact$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "he");
+  await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/he$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "he");
+});
+
+test("shows Ruach Breslov's public contact details", async ({ page }) => {
+  await page.goto("/en/contact");
+  await expect(page.getByRole("link", { name: "info@ruachbreslov.org" })).toHaveAttribute("href", "mailto:info@ruachbreslov.org");
+  await expect(page.getByRole("link", { name: "917-740-4509" })).toHaveAttribute("href", "tel:9177404509");
+  await expect(page.getByText("71-27 147th St, Flushing, NY 11367", { exact: true })).toBeVisible();
+});
+
 test("opens and closes an RSVP dialog with the keyboard", async ({ page }) => {
   await page.goto("/en/events");
   await page.getByRole("button", { name: "RSVP" }).first().click();

@@ -23,9 +23,9 @@ const heroImage = configuredHeroImage.startsWith("/") && !configuredHeroImage.st
 export const site = {
   url: configuredSiteUrl,
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "hello@example.com",
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "+1 000 000 0000",
-    address: process.env.NEXT_PUBLIC_CONTACT_ADDRESS?.trim() || "Add your public address"
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "info@ruachbreslov.org",
+    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "917-740-4509",
+    address: process.env.NEXT_PUBLIC_CONTACT_ADDRESS?.trim() || "71-27 147th St, Flushing, NY 11367"
   },
   api: {
     baseUrl: apiBaseUrl,

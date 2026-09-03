@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" data-scroll-behavior="smooth">
       <head><meta httpEquiv="Content-Security-Policy" content={contentSecurityPolicy()} /></head>
       <body>
         <a className="skip-link" href="#main-content">{dictionary.system.skipToContent}</a>

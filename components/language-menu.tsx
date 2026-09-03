@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Languages } from "lucide-react";
 import { localeDetails, localeHref, locales, type Dictionary, type Locale } from "@/data/locales";
 import { basePath } from "@/lib/paths";
+import { rememberLocale } from "@/components/locale-preference";
 
 export function LanguageMenu({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const pathname = usePathname();
@@ -29,6 +30,8 @@ export function LanguageMenu({ locale, dictionary }: { locale: Locale; dictionar
             href={availableLocale === "en" && !pagePath ? "/" : localeHref(availableLocale, pagePath)}
             hrefLang={availableLocale}
             lang={availableLocale}
+            aria-current={availableLocale === locale ? "page" : undefined}
+            onClick={() => rememberLocale(availableLocale)}
           >
             {localeDetails[availableLocale].nativeLabel}
           </Link>
