@@ -131,7 +131,7 @@ export type Dictionary = {
 
 const en: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "A clear, human foundation for meaningful work.",
+  siteTagline: "Bringing Rebbe Nachman’s timeless wisdom to life through faith, joy, personal growth, and meaningful connection.",
   languageLabel: "Language",
   system: {
     skipToContent: "Skip to content",
@@ -157,9 +157,9 @@ const en: Dictionary = {
     openMenu: "Open menu"
   },
   home: {
-    eyebrow: "A flexible digital foundation",
-    title: "Build connection. Share ideas. Move people.",
-    description: "A production-ready website template for organizations that need beautiful storytelling, events, video, multilingual access, and secure third-party services.",
+    eyebrow: "The timeless wisdom of Rebbe Nachman",
+    title: "Find hope. Grow with faith. Live with purpose.",
+    description: "Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection. We create a welcoming space for people of all backgrounds to find hope, deepen their relationship with God, face life’s challenges with strength, and discover greater purpose, goodness, and meaning.",
     featureTitle: "Everything important, working together",
     featureCopy: "Start with a fast static website and connect only the services your organization needs.",
     features: [
@@ -257,7 +257,7 @@ const en: Dictionary = {
     ]
   },
   footer: {
-    description: "A reusable multilingual website foundation for organizations and communities.",
+    description: "Sharing Rebbe Nachman’s timeless wisdom through faith, joy, growth, and meaningful connection.",
     privacy: "Privacy",
     rights: "All rights reserved."
   }
@@ -265,7 +265,7 @@ const en: Dictionary = {
 
 const he: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "בסיס ברור ואנושי לעשייה משמעותית.",
+  siteTagline: "מביאים לחיים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה אישית וחיבור משמעותי.",
   languageLabel: "שפה",
   system: {
     skipToContent: "דילוג לתוכן",
@@ -291,9 +291,9 @@ const he: Dictionary = {
     openMenu: "פתיחת תפריט"
   },
   home: {
-    eyebrow: "תשתית דיגיטלית גמישה",
-    title: "יוצרים חיבור. משתפים רעיונות. מניעים אנשים.",
-    description: "תבנית אתר מוכנה לארגונים הזקוקים לסיפור חזותי, אירועים, וידאו, נגישות רב־לשונית ושירותים חיצוניים מאובטחים.",
+    eyebrow: "חכמתו הנצחית של רבי נחמן",
+    title: "מוצאים תקווה. צומחים באמונה. חיים עם תכלית.",
+    description: "Ruach Breslov מביאה לחיים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה אישית וחיבור משמעותי. אנו יוצרים מרחב מזמין לאנשים מכל רקע כדי למצוא תקווה, להעמיק את הקשר שלהם עם ה׳, להתמודד בכוח עם אתגרי החיים ולגלות תכלית, טוב ומשמעות עמוקים יותר.",
     featureTitle: "כל מה שחשוב, מחובר יחד",
     featureCopy: "מתחילים באתר סטטי מהיר ומחברים רק את השירותים שהארגון צריך.",
     features: [
@@ -391,7 +391,7 @@ const he: Dictionary = {
     ]
   },
   footer: {
-    description: "תשתית אתר רב־לשונית לשימוש חוזר עבור ארגונים וקהילות.",
+    description: "משתפים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה וחיבור משמעותי.",
     privacy: "פרטיות",
     rights: "כל הזכויות שמורות."
   }
@@ -399,7 +399,7 @@ const he: Dictionary = {
 
 const es: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "Una base clara y humana para un trabajo con sentido.",
+  siteTagline: "Damos vida a la sabiduría atemporal del Rebe Najmán por medio de la fe, la alegría, el crecimiento personal y vínculos significativos.",
   languageLabel: "Idioma",
   system: {
     skipToContent: "Saltar al contenido",
@@ -425,9 +425,9 @@ const es: Dictionary = {
     openMenu: "Abrir menú"
   },
   home: {
-    eyebrow: "Una base digital flexible",
-    title: "Crea conexión. Comparte ideas. Inspira acción.",
-    description: "Una plantilla web lista para organizaciones que necesitan narración visual, eventos, video, acceso multilingüe y servicios externos seguros.",
+    eyebrow: "La sabiduría atemporal del Rebe Najmán",
+    title: "Encuentra esperanza. Crece con fe. Vive con propósito.",
+    description: "Ruach Breslov da vida a la sabiduría atemporal del Rebe Najmán por medio de la fe, la alegría, el crecimiento personal y vínculos significativos. Creamos un espacio acogedor para que personas de todos los orígenes encuentren esperanza, profundicen su relación con Dios, afronten con fortaleza los desafíos de la vida y descubran un mayor propósito, bondad y sentido.",
     featureTitle: "Todo lo importante, trabajando en conjunto",
     featureCopy: "Comienza con un sitio estático rápido y conecta solo los servicios que tu organización necesita.",
     features: [
@@ -525,7 +525,7 @@ const es: Dictionary = {
     ]
   },
   footer: {
-    description: "Una base web multilingüe y reutilizable para organizaciones y comunidades.",
+    description: "Compartimos la sabiduría atemporal del Rebe Najmán mediante la fe, la alegría, el crecimiento y vínculos significativos.",
     privacy: "Privacidad",
     rights: "Todos los derechos reservados."
   }
@@ -533,7 +533,7 @@ const es: Dictionary = {
 
 const fa: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "پایه‌ای روشن و انسانی برای کاری معنادار.",
+  siteTagline: "حکمت جاودانۀ ربی نحمان را از راه ایمان، شادی، رشد فردی و پیوندی معنادار زنده می‌کنیم.",
   languageLabel: "زبان",
   system: {
     skipToContent: "رفتن به محتوا",
@@ -559,9 +559,9 @@ const fa: Dictionary = {
     openMenu: "باز کردن منو"
   },
   home: {
-    eyebrow: "زیرساخت دیجیتال انعطاف‌پذیر",
-    title: "ارتباط بسازید. ایده‌ها را به اشتراک بگذارید. الهام‌بخش باشید.",
-    description: "یک قالب آماده برای سازمان‌هایی که به روایت زیبا، رویداد، ویدیو، دسترسی چندزبانه و خدمات امن بیرونی نیاز دارند.",
+    eyebrow: "حکمت جاودانۀ ربی نحمان",
+    title: "امید را بیابید. با ایمان رشد کنید. هدفمند زندگی کنید.",
+    description: "Ruach Breslov حکمت جاودانۀ ربی نحمان را از راه ایمان، شادی، رشد فردی و پیوندی معنادار زنده می‌کند. ما فضایی پذیرا برای افراد با هر پیشینه‌ای فراهم می‌کنیم تا امید بیابند، رابطۀ خود با خدا را عمیق‌تر کنند، با قدرت با چالش‌های زندگی روبه‌رو شوند و هدف، نیکی و معنای بیشتری کشف کنند.",
     featureTitle: "همه چیز مهم، در کنار هم",
     featureCopy: "با یک وب‌سایت ایستای سریع آغاز کنید و فقط خدمات مورد نیاز را متصل کنید.",
     features: [
@@ -659,7 +659,7 @@ const fa: Dictionary = {
     ]
   },
   footer: {
-    description: "زیرساخت وب‌سایت چندزبانه و قابل استفاده مجدد برای سازمان‌ها و جوامع.",
+    description: "حکمت جاودانۀ ربی نحمان را با ایمان، شادی، رشد و پیوندی معنادار به اشتراک می‌گذاریم.",
     privacy: "حریم خصوصی",
     rights: "همه حقوق محفوظ است."
   }

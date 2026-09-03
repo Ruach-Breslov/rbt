@@ -44,6 +44,20 @@ test("shows Ruach Breslov's public contact details", async ({ page }) => {
   await expect(page.getByText("71-27 147th St, Flushing, NY 11367", { exact: true })).toBeVisible();
 });
 
+test("presents Ruach Breslov's purpose in every supported language", async ({ page }) => {
+  const localizedPurpose = {
+    en: "Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life",
+    he: "Ruach Breslov מביאה לחיים את חכמתו הנצחית של רבי נחמן",
+    es: "Ruach Breslov da vida a la sabiduría atemporal del Rebe Najmán",
+    fa: "Ruach Breslov حکمت جاودانۀ ربی نحمان را از راه ایمان"
+  } as const;
+
+  for (const [locale, purpose] of Object.entries(localizedPurpose)) {
+    await page.goto(`/${locale}`);
+    await expect(page.getByText(new RegExp(`^${purpose}`))).toBeVisible();
+  }
+});
+
 test("opens and closes an RSVP dialog with the keyboard", async ({ page }) => {
   await page.goto("/en/events");
   await page.getByRole("button", { name: "RSVP" }).first().click();
