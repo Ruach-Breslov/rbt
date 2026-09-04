@@ -94,3 +94,5 @@ Last updated: September 4, 2026
 - `6ad4a5b` — verified Resend connection and HTTPS canonical URL normalization for Pages
 - `18b4082` — production Worker services, D1, Turnstile, Resend Topics, and signed webhook
 - `4351620` — verification-ready public content and launch-safe optional integrations
+- `5327ccb` — production launch continuity record
+- `2c1dfae` — confirmed community content, optimized gallery, and live recurring donations
