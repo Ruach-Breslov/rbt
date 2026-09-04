@@ -73,6 +73,8 @@ Last updated: September 4, 2026
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 - GitHub Actions deployment run `33858694809` passed the dependency audit, all typechecks, lint, Worker tests, 18 browser tests, production build, static-export check, launch gate, artifact upload, and Pages deployment.
 - `https://ruachbreslov.org`, all four canonical language homepages, the events page, and the privacy page return HTTP 200 with valid TLS. Plain HTTP redirects to HTTPS, and `https://www.ruachbreslov.org` redirects to the apex.
+- GitHub Actions deployment run `33866088097` published the gallery/donation release after passing all typechecks, lint, 10 Worker tests, 22 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment. The npm audit registry timed out in CI and emitted the intentional warning; the same release passed `npm audit --audit-level=high` locally.
+- Live release checks confirm HTTP 200 for the homepage, English and Hebrew galleries, the support page, optimized hero/photo/video assets, and API health. The deployed support page contains the expected one-time link, all four monthly links, and customer-portal login.
 
 ## Remaining work — handle one item at a time
 
@@ -96,3 +98,6 @@ Last updated: September 4, 2026
 - `4351620` — verification-ready public content and launch-safe optional integrations
 - `5327ccb` — production launch continuity record
 - `2c1dfae` — confirmed community content, optimized gallery, and live recurring donations
+- `70512e7` — gallery and donation launch continuity record
+- `4f667f6` — bounded CI audit network wait while preserving vulnerability failures
+- `b49e9b9` — removed npm install's duplicate implicit audit call
