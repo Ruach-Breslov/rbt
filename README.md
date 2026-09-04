@@ -83,7 +83,9 @@ YouTube controls the actual stream resolution adaptively. Its IFrame API no long
 
 The workflow supplies the Pages URL and repository base path automatically, supporting both `owner.github.io/repository` and custom domains.
 
-For a custom domain, add `public/CNAME` only after configuring the domain in GitHub Pages.
+For a custom domain, configure it in the repository's GitHub Pages settings before
+changing DNS. This project publishes with GitHub Actions, so `public/CNAME` is
+not required; GitHub stores the custom-domain setting for the Pages site.
 
 ## Service configuration
 

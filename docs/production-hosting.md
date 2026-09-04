@@ -12,7 +12,10 @@ The workflow passes GitHub’s `base_url` and `base_path` into the build so link
 
 ## Custom domain
 
-Configure and verify the domain in GitHub first, then add `public/CNAME` containing only the hostname. Configure DNS according to GitHub’s current documentation and enforce HTTPS after the certificate is ready.
+Configure and verify the domain in GitHub first, then configure DNS according to
+GitHub's current documentation and enforce HTTPS after the certificate is ready.
+Because this site publishes through a custom GitHub Actions workflow, a
+repository `CNAME` file is not required and would be ignored by Pages.
 
 ## Public Actions variables
 
