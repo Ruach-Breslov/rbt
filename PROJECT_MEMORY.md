@@ -7,7 +7,9 @@ Last updated: September 3, 2026
 - This is the active, project-specific repository. Its local folder is `Ruach Breslov Main Site`.
 - The clean source template is the sibling repository `Next JS. Web Temp`. Do not modify it with Ruach Breslov content or configuration.
 - The active branch is `main`.
-- No Git remote is configured yet.
+- Git remote `origin` is configured as `git@github.com:Ruach-Breslov/rbt.git`.
+- A dedicated repository-scoped Ed25519 keypair exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`), and local Git config forces this repository to use it. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
+- `Ruach-Breslov/rbt` exists and is empty. The `gav4you` organization invitation was accepted, but that account currently has read-only repository permission. Push access still requires either write permission for `gav4you` or installation of the dedicated public key as a write-enabled repository deploy key; an organization Actions secret does not grant Git/SSH access.
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
 
 ## Confirmed organization details
@@ -34,6 +36,7 @@ Last updated: September 3, 2026
 - Added persistent locale selection and root-page preference restoration.
 - Added the owner-provided purpose statement, localized homepage messaging, metadata, and footer copy in all four languages.
 - Added automated browser coverage for locale direction, language persistence, public contact information, localized purpose copy, accessibility, forms, dialogs, reduced motion, and WebGPU fallback.
+- Added an ignored master live-services worksheet plus a tracked blank template covering public frontend values, Worker configuration, provider secrets, and provisioning credentials. Secrets remain out of Git and are deployed only to their intended destinations.
 
 ## Verification baseline
 
@@ -51,9 +54,9 @@ Last updated: September 3, 2026
 4. Configure the donation flow and official Stripe-hosted payment link, if donations are offered.
 5. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and contact FAQs.
 6. Replace the starter privacy notice with owner-approved legal content.
-7. Configure production URLs, Turnstile, Resend, allowed origins, and the remaining Worker secrets.
+7. Fill `.env.master.local`, then configure production URLs, Turnstile, Resend, allowed origins, and the remaining Worker secrets in their documented destinations.
 8. Provision project-specific Cloudflare Worker and D1 resources before deployment. The inherited Wrangler configuration must not be treated as the final Ruach Breslov production resource.
-9. Create the GitHub remote, configure deployment variables, connect the final domain, deploy, and run launch-readiness checks.
+9. Grant `gav4you` write permission to `Ruach-Breslov/rbt` or add the dedicated public key as a write-enabled repository deploy key, then push `main`, configure deployment variables, connect the final domain, deploy, and run launch-readiness checks.
 
 ## Recorded commits
 

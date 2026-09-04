@@ -14,9 +14,16 @@ The `.dev.vars` file is ignored by Git. Never put production secrets in `.env.lo
 
 ## Production setup
 
+Use the ignored `.env.master.local` worksheet to collect the authorized owner's
+values before starting. It is an inventory only: copy public values to GitHub
+Actions Variables, put non-secret Worker configuration in `wrangler.jsonc`, and
+install Worker secrets individually. Never pass the whole master file to
+`wrangler secret bulk`, because it also contains frontend and provisioning
+values.
+
 1. Authenticate an authorized Cloudflare account with `npx wrangler login`.
 2. Create the database with `npx wrangler d1 create organization-website`.
-3. Replace the zero UUID in `wrangler.jsonc` with the returned database ID.
+3. Replace the inherited database UUID in `wrangler.jsonc` with the returned project-specific database ID.
 4. Replace the local Worker variables with the exact HTTPS frontend origin, deployed API URL, post-confirmation redirect, organization name, production Turnstile hostnames, and approved RSVP retention period.
 5. Install these Worker secrets with `npx wrangler secret put NAME`:
    - `RATE_LIMIT_SALT` — at least 32 random characters

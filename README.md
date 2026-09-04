@@ -87,6 +87,12 @@ For a custom domain, add `public/CNAME` only after configuring the domain in Git
 
 ## Service configuration
 
+For live-service onboarding, copy `.env.master.example` to
+`.env.master.local` and fill in the ignored local worksheet. It inventories the
+frontend values, Worker configuration, Worker secrets, and optional CLI
+credentials in one place, while labeling the correct destination for each.
+Never source, deploy, or upload the master file as a whole.
+
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical deployed URL; supplied automatically on GitHub Pages |
