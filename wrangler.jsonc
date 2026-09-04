@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "organization-website-api",
+  "account_id": "021dbe9c5c0ac9f63b2532a0a9c86359",
   "main": "worker/src/index.ts",
   "compatibility_date": "2026-09-03",
   "compatibility_flags": ["nodejs_compat"],

@@ -9,7 +9,9 @@ Last updated: September 4, 2026
 - The active branch is `main`.
 - Git remote `origin` is configured as `https://github.com/Ruach-Breslov/rbt.git`; local `main` tracks `origin/main`.
 - The `gav4you` organization invitation was accepted, that account has write permission, and GitHub CLI HTTPS authentication is active for repository operations.
+- Repository visibility and Pages settings still require Admin permission; the current `gav4you` repository role is Write.
 - A dedicated Ed25519 keypair also exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`) but is not needed by the current HTTPS connection. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
+- The production Cloudflare account ID is `021dbe9c5c0ac9f63b2532a0a9c86359`; the active `ruachbreslov.org` zone ID is `0a4fde7c3ae973afc410b5af0d3a2aec`. Global API Key authentication to that account was verified from the ignored master worksheet, and no Cloudflare secret is committed.
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
 
 ## Confirmed organization details
@@ -38,6 +40,7 @@ Last updated: September 4, 2026
 - Added automated browser coverage for locale direction, language persistence, public contact information, localized purpose copy, accessibility, forms, dialogs, reduced motion, and WebGPU fallback.
 - Added an ignored master live-services worksheet plus a tracked blank template covering public frontend values, Worker configuration, provider secrets, and provisioning credentials. Secrets remain out of Git and are deployed only to their intended destinations.
 - Connected the project to `Ruach-Breslov/rbt` and initialized its `main` branch without overwriting any remote history.
+- Connected to the confirmed production Cloudflare account and active `ruachbreslov.org` zone, and bound Wrangler to the non-secret account ID.
 
 ## Verification baseline
 
@@ -56,8 +59,8 @@ Last updated: September 4, 2026
 5. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and contact FAQs.
 6. Replace the starter privacy notice with owner-approved legal content.
 7. Fill `.env.master.local`, then configure production URLs, Turnstile, Resend, allowed origins, and the remaining Worker secrets in their documented destinations.
-8. Provision project-specific Cloudflare Worker and D1 resources before deployment. The inherited Wrangler configuration must not be treated as the final Ruach Breslov production resource.
-9. Configure GitHub deployment variables, connect the final domain, deploy, and run launch-readiness checks.
+8. Provision project-specific Cloudflare Worker and D1 resources in account `021dbe9c5c0ac9f63b2532a0a9c86359` before deployment. The inherited Worker name and D1 binding must not be treated as final Ruach Breslov production resources.
+9. Grant `gav4you` Admin permission (or have an organization owner act), make the repository public, enable GitHub Pages with GitHub Actions, configure deployment variables, connect the final domain DNS, deploy, and run launch-readiness checks.
 
 ## Recorded commits
 
