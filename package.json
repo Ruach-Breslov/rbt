@@ -10,7 +10,7 @@
     "check:static-export": "node scripts/check-static-export.mjs",
     "check:launch": "node scripts/check-launch-readiness.mjs",
     "audit": "npm audit --audit-level=high",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "typecheck:worker": "tsc -p tsconfig.worker.json",
     "typecheck:tests": "tsc -p worker/test/tsconfig.json && tsc -p e2e/tsconfig.json",
     "lint": "eslint .",

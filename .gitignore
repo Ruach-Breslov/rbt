@@ -11,6 +11,7 @@ node_modules/
 dist/
 build/
 .next/
+next-env.d.ts
 out/
 test-results/
 tsconfig.tsbuildinfo

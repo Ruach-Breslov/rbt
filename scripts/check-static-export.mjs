@@ -10,7 +10,7 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://example.co
 const heroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() ?? "";
 const locales = ["en", "he", "es", "fa"];
 const rtlLocales = new Set(["he", "fa"]);
-const localizedPages = ["", "contact", "events", "privacy", "support", "videos"];
+const localizedPages = ["", "contact", "events", "gallery", "privacy", "support", "videos"];
 const requiredRoutes = ["/", ...locales.flatMap((locale) => localizedPages.map((page) => `/${locale}${page ? `/${page}` : ""}`))];
 const requiredFiles = ["404.html", ".nojekyll", "favicon.svg", "robots.txt", "site.webmanifest", "sitemap.xml"];
 const errors = [];
@@ -80,6 +80,17 @@ if (!existsSync(outDir)) {
   }
 
   const rootHtml = routeHtml("/");
+  const galleryHtml = routeHtml("/en/gallery");
+  for (const asset of [
+    "/media/gallery/community-study.webp",
+    "/media/gallery/weekly-gathering.webp",
+    "/media/gallery/community-arriving.mp4",
+    "/media/brand/ruach-breslov-logo.webp"
+  ]) {
+    if (!galleryHtml.includes(asset) && !rootHtml.includes(asset)) fail(`Gallery or homepage is missing media asset reference: ${asset}`);
+    if (!exportPathExists(`${basePath}${asset}`)) fail(`Missing exported media asset: ${asset}`);
+  }
+
   if (!/<html lang="en" dir="ltr"/i.test(rootHtml)) fail("Root page must declare English LTR document direction.");
   if (!rootHtml.includes("webgpu-hero-surface") || !rootHtml.includes("<canvas")) {
     fail("Root page must include the progressive WebGPU hero surface.");

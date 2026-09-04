@@ -64,6 +64,30 @@ test("does not publish unconfirmed events", async ({ page }) => {
   await expect(page.getByRole("button", { name: "RSVP" })).toHaveCount(0);
 });
 
+test("offers an accessible community gallery and lightbox", async ({ page }) => {
+  await page.goto("/en/gallery");
+  await expect(page.getByRole("heading", { name: "Community gallery" })).toBeVisible();
+  await expect(page.locator(".gallery-card")).toHaveCount(12);
+  await expect(page.locator(".gallery-video-card video")).toHaveCount(4);
+
+  await page.locator(".gallery-card").first().click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.getByRole("img", { name: "Learning Torah together around an open text" })).toBeVisible();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("img", { name: "Food and hospitality prepared for the community" })).toBeVisible();
+  await page.getByRole("button", { name: "Close" }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
+});
+
+test("presents one-time and recurring Stripe-hosted donation choices", async ({ page }) => {
+  await page.goto("/en/support");
+  await expect(page.getByRole("heading", { name: "Make a one-time donation" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Become a monthly supporter" })).toBeVisible();
+  await expect(page.locator('.support-layout a[href^="https://donate.stripe.com/"]')).toHaveCount(5);
+  await expect(page.getByRole("link", { name: "Manage monthly support" })).toHaveAttribute("href", /^https:\/\/billing\.stripe\.com\//);
+  await expect(page.getByText("Monthly donations renew automatically each month until canceled.", { exact: false })).toBeVisible();
+});
+
 test("exposes configured forms and bot-challenge fields", async ({ page }) => {
   await page.goto("/en/contact");
   await expect(page.getByRole("button", { name: "Send message" })).toBeEnabled();
@@ -92,7 +116,7 @@ test("honors reduced-motion preferences", async ({ page }) => {
 
 test("has no automatically detectable WCAG A/AA violations on core routes", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  for (const route of ["/en", "/he", "/es/events", "/fa/contact"]) {
+  for (const route of ["/en", "/he", "/es/events", "/fa/contact", "/en/gallery", "/he/support"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
       .exclude(".turnstile-shell")

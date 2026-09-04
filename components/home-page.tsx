@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowUpRight, CalendarCheck, Globe2, MailCheck, PlayCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpenText, Globe2, HandHeart, MailCheck, Mic2, PlayCircle, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
+import { GalleryPreview } from "@/components/gallery-preview";
 import { MotionReveal } from "@/components/motion-reveal";
 import { SubscriptionForm } from "@/components/forms/subscription-form";
 import { WebGpuHero } from "@/components/webgpu/webgpu-surface";
 import { site } from "@/data/site";
 
-const featureIcons = [CalendarCheck, PlayCircle, MailCheck, Globe2] as const;
+const featureIcons = [BookOpenText, HandHeart, UsersRound, Mic2] as const;
 
 export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   return (
@@ -17,7 +18,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
           <h1>{dictionary.home.title}</h1>
           <p className="hero-description">{dictionary.home.description}</p>
           <div className="button-row">
-            <Link href={localeHref(locale, "events")} className="button button-primary">{dictionary.actions.exploreEvents}<ArrowUpRight aria-hidden="true" /></Link>
+            <Link href={localeHref(locale, "gallery")} className="button button-primary">{dictionary.actions.viewGallery}<ArrowUpRight aria-hidden="true" /></Link>
             <Link href={localeHref(locale, "contact")} className="button button-secondary">{dictionary.actions.contactUs}</Link>
           </div>
           <div className="trust-line"><ShieldCheck aria-hidden="true" /><span>{dictionary.system.staticBoundary}</span></div>
@@ -32,7 +33,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
           </div>
           <div className="signal-orbit"><span /><span /><span /></div>
           <div className="signal-card signal-card-secondary"><Globe2 aria-hidden="true" /><strong>4</strong><small>{dictionary.system.languagesReady}</small></div>
-          <div className="signal-card signal-card-tertiary"><PlayCircle aria-hidden="true" /><strong>Faith + Joy</strong><small>{dictionary.system.videoReady}</small></div>
+          <div className="signal-card signal-card-tertiary"><PlayCircle aria-hidden="true" /><strong>Ruach</strong><small>{dictionary.system.videoReady}</small></div>
         </MotionReveal>
       </section>
 
@@ -55,6 +56,26 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
           })}
         </div>
       </section>
+
+      <section className="story-section section-shell">
+        <MotionReveal className="story-photo">
+          <img
+            src={site.media.communityImage}
+            width={1600}
+            height={900}
+            loading="lazy"
+            decoding="async"
+            alt={dictionary.gallery.captions.study}
+          />
+        </MotionReveal>
+        <MotionReveal delay={0.1} className="story-copy">
+          <p className="eyebrow">{dictionary.home.storyEyebrow}</p>
+          <h2>{dictionary.home.storyTitle}</h2>
+          {dictionary.home.storyParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </MotionReveal>
+      </section>
+
+      <GalleryPreview locale={locale} dictionary={dictionary} />
 
       <section className="subscription-section">
         <div className="subscription-inner section-shell">

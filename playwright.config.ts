@@ -33,7 +33,13 @@ export default defineConfig({
       NEXT_PUBLIC_ORGANIZATION_NAME_EN: "Ruach Breslov",
       NEXT_PUBLIC_ORGANIZATION_NAME_HE: "Ruach Breslov",
       NEXT_PUBLIC_ORGANIZATION_NAME_ES: "Ruach Breslov",
-      NEXT_PUBLIC_ORGANIZATION_NAME_FA: "Ruach Breslov"
+      NEXT_PUBLIC_ORGANIZATION_NAME_FA: "Ruach Breslov",
+      NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK: "https://donate.stripe.com/test_one_time",
+      NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18: "https://donate.stripe.com/test_monthly_18",
+      NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36: "https://donate.stripe.com/test_monthly_36",
+      NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_72: "https://donate.stripe.com/test_monthly_72",
+      NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_180: "https://donate.stripe.com/test_monthly_180",
+      NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL: "https://billing.stripe.com/p/login/test_portal"
     }
   }
 });

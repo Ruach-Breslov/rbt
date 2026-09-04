@@ -18,6 +18,9 @@ Last updated: September 4, 2026
 - The production Turnstile widget is restricted to `ruachbreslov.org` and `www.ruachbreslov.org`; its public site key is `0x4AAAAAAEmvXUpwE6Qy8Y81`, and its secret exists only in Cloudflare's Worker secret store.
 - Resend full-access API authentication is verified. The `ruachbreslov.org` sending domain is verified with DKIM and SPF through Cloudflare; the `Newsletter` and `Event announcements` Topics use explicit opt-in defaults. The Worker uses a separate send-only key for transactional mail and the owner-provided full-access key for Contacts administration. The webhook is registered at `https://api.ruachbreslov.org/webhooks/resend`; private keys and its signing secret are not committed.
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
+- Treat `https://ruachbreslov.wixsite.com/ruach-breslev` as a content reference only. Reuse confirmed organization facts and themes, not its layout, sample events, generic blog promises, or unverified testimonials.
+- The owner supplied and approved the local `Pictures` folder for site use. Keep those originals untracked and untouched; publish only selected, optimized derivatives under `public/media`.
+- Stripe live account `acct_1UBfcGJcQUW3PSlA` now provides hosted checkout. The full-access secret remains local provisioning-only and is not installed in GitHub, the frontend, or the Worker.
 
 ## Confirmed organization details
 
@@ -26,6 +29,9 @@ Last updated: September 4, 2026
 - Public phone: 917-740-4509
 - Public address: 71-27 147th St, Flushing, NY 11367
 - Core purpose: “Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection. We create a welcoming space for people of all backgrounds to find hope, deepen their relationship with God, face life’s challenges with strength, and discover greater purpose, goodness, and meaning.”
+- Confirmed offerings: weekly Torah gatherings/classes, one-on-one mentorship, community events and hospitality, guest speakers, and outreach.
+- Confirmed legacy theme: a small gathering grew into a brotherhood built on Torah, honesty, friendship, and the conviction that no one should feel alone.
+- Donation impact language may cover weekly classes, food and hospitality, guest speakers, community events, and outreach.
 
 ## Language behavior
 
@@ -52,14 +58,18 @@ Last updated: September 4, 2026
 - Prepared a verification-ready first public release: removed template/demo claims, withheld unconfirmed events, replaced the inactive payment flow with an honest contact state, and made Stripe and YouTube optional until the owner supplies their official destinations.
 - Replaced the starter privacy copy in all four languages with a plain-language notice reflecting the services and data flows currently in use. Owner or legal review remains advisable as the organization and its services evolve.
 - Published the verification-ready release through GitHub Pages and placed Cloudflare's active Universal SSL certificate in front of the site so the apex and `www` are publicly secure without waiting for GitHub's certificate queue.
+- Reworked the homepage with the confirmed programs and legacy story, actual Ruach Breslov branding, and selected community photography, while preserving the independent site structure and visual system.
+- Added a localized community gallery with 12 optimized photos, four optimized silent clips, keyboard-accessible lightbox navigation, mobile layouts, and gallery links in the primary navigation, homepage, footer, sitemap, and export checks.
+- Provisioned five live Stripe-hosted donation pages: one customer-selected one-time gift (minimum $5, suggested $36, maximum $10,000) and fixed monthly gifts of $18, $36, $72, and $180. Stripe Managed Payments is disabled only on these links because Stripe does not support its donation submit type in Managed Payments mode.
+- Enabled Stripe's hosted customer-portal login with billing history, payment-method updates, and self-service subscription cancellation at the end of the current billing period. The public donation and portal URLs are stored as GitHub Actions variables.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
-- Static export generates all 25 expected routes across four locales.
+- Static export generates all 29 expected routes across four locales.
 - All 10 Cloudflare Worker tests pass.
-- All 18 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
-- The launch-readiness gate passes with the confirmed production public configuration; optional Stripe and YouTube values remain strictly validated whenever they are supplied.
+- All 22 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, the gallery/lightbox, recurring donation choices, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
+- The launch-readiness gate passes with the confirmed production public configuration and complete Stripe one-time/monthly link set; optional YouTube values remain strictly validated whenever supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 - GitHub Actions deployment run `33858694809` passed the dependency audit, all typechecks, lint, Worker tests, 18 browser tests, production build, static-export check, launch gate, artifact upload, and Pages deployment.
 - `https://ruachbreslov.org`, all four canonical language homepages, the events page, and the privacy page return HTTP 200 with valid TLS. Plain HTTP redirects to HTTPS, and `https://www.ruachbreslov.org` redirects to the apex.
@@ -67,12 +77,10 @@ Last updated: September 4, 2026
 ## Remaining work — handle one item at a time
 
 1. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
-2. Replace the purpose-based homepage cards with Ruach Breslov’s confirmed programs and services when those details are available.
-3. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
-4. Add the official YouTube channel and up to three featured video IDs when supplied.
-5. Configure an official Stripe-hosted payment link if online contributions are offered; Stripe secrets remain optional and are not installed.
-6. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
-7. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
+2. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
+3. Add the official YouTube channel and up to three featured video IDs when supplied.
+4. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
+5. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
 ## Recorded commits
 

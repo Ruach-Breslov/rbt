@@ -43,8 +43,27 @@ function optionalHttps(name, allowedHosts = []) {
 
 requireHttps("NEXT_PUBLIC_SITE_URL");
 requireHttps("NEXT_PUBLIC_API_BASE_URL");
-optionalHttps("NEXT_PUBLIC_STRIPE_PAYMENT_LINK", ["buy.stripe.com", "checkout.stripe.com"]);
+const stripeHosts = ["buy.stripe.com", "checkout.stripe.com", "donate.stripe.com"];
+optionalHttps("NEXT_PUBLIC_STRIPE_PAYMENT_LINK", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_72", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_180", stripeHosts);
+optionalHttps("NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL", ["billing.stripe.com"]);
 optionalHttps("NEXT_PUBLIC_YOUTUBE_CHANNEL_URL", ["www.youtube.com", "youtube.com"]);
+
+const donationLinkNames = [
+  "NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK",
+  "NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18",
+  "NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36",
+  "NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_72",
+  "NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_180"
+];
+const configuredDonationLinks = donationLinkNames.filter((name) => process.env[name]?.trim());
+if (configuredDonationLinks.length > 0 && configuredDonationLinks.length !== donationLinkNames.length) {
+  errors.push("Configure the complete one-time and monthly Stripe Payment Link set, or leave all new donation links empty.");
+}
 
 for (const name of [
   "NEXT_PUBLIC_ORGANIZATION_NAME_EN",

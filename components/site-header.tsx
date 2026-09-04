@@ -2,11 +2,13 @@ import Link from "next/link";
 import { Heart, Menu } from "lucide-react";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
 import { LanguageMenu } from "@/components/language-menu";
+import { publicAsset } from "@/data/site";
 
 export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const navigation = [
     { label: dictionary.nav.home, href: localeHref(locale) },
     { label: dictionary.nav.events, href: localeHref(locale, "events") },
+    { label: dictionary.nav.gallery, href: localeHref(locale, "gallery") },
     { label: dictionary.nav.videos, href: localeHref(locale, "videos") },
     { label: dictionary.nav.contact, href: localeHref(locale, "contact") }
   ];
@@ -15,7 +17,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
     <header className="site-header">
       <div className="site-header-inner">
         <Link href={localeHref(locale)} className="brand-lockup" aria-label={`${dictionary.siteName} — ${dictionary.nav.home}`}>
-          <span className="brand-mark" aria-hidden="true"><span /></span>
+          <span className="brand-mark" aria-hidden="true"><img src={publicAsset("/media/brand/ruach-breslov-logo.webp")} alt="" /></span>
           <span className="brand-text">
             <strong>{dictionary.siteName}</strong>
             <small>{dictionary.siteTagline}</small>

@@ -4,7 +4,7 @@ import { absoluteUrl } from "@/data/site";
 
 export const dynamic = "force-static";
 
-const localizedPaths = ["", "events", "videos", "contact", "support", "privacy"];
+const localizedPaths = ["", "events", "gallery", "videos", "contact", "support", "privacy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

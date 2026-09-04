@@ -15,10 +15,14 @@ function optionalPublicUrl(value: string | undefined) {
 
 const configuredSiteUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_SITE_URL) || "https://example.com";
 const apiBaseUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_API_BASE_URL);
-const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() ?? "";
+const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() || "/media/hero/ruach-breslov-hero.webp";
 const heroImage = configuredHeroImage.startsWith("/") && !configuredHeroImage.startsWith("//") && !configuredHeroImage.includes("..")
   ? withBasePath(configuredHeroImage as `/${string}`)
   : "";
+
+const oneTimePaymentLink = optionalPublicUrl(
+  process.env.NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK || process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK
+);
 
 export const site = {
   url: configuredSiteUrl,
@@ -38,7 +42,14 @@ export const site = {
     siteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ""
   },
   payments: {
-    stripePaymentLink: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK),
+    oneTimePaymentLink,
+    customerPortalUrl: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL),
+    monthlyPaymentLinks: [
+      { amount: 18, url: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18) },
+      { amount: 36, url: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36) },
+      { amount: 72, url: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_72) },
+      { amount: 180, url: optionalPublicUrl(process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_180) }
+    ],
     currency: "USD",
     timeZone: "America/New_York"
   },
@@ -46,7 +57,8 @@ export const site = {
     channelUrl: optionalPublicUrl(process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL)
   },
   media: {
-    heroImage
+    heroImage,
+    communityImage: withBasePath("/media/gallery/community-study.webp")
   }
 } as const;
 
