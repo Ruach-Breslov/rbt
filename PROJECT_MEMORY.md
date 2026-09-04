@@ -48,26 +48,27 @@ Last updated: September 4, 2026
 - Made `Ruach-Breslov/rbt` public, enabled GitHub Pages with GitHub Actions, configured `ruachbreslov.org`, and connected its apex and `www` DNS records through Cloudflare without disturbing mail records.
 - Connected and verified the Resend sending domain, created the two required opt-in Topics, and selected `Ruach Breslov <no-reply@ruachbreslov.org>` as the production sender.
 - Provisioned and migrated the production D1 database, deployed the production Worker and cleanup cron at `api.ruachbreslov.org`, installed all required non-Stripe Worker secrets, configured the restricted production Turnstile widget, and registered the signed Resend webhook.
+- Prepared a verification-ready first public release: removed template/demo claims, withheld unconfirmed events, replaced the inactive payment flow with an honest contact state, and made Stripe and YouTube optional until the owner supplies their official destinations.
+- Replaced the starter privacy copy in all four languages with a plain-language notice reflecting the services and data flows currently in use. Owner or legal review remains advisable as the organization and its services evolve.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
 - Static export generates all 25 expected routes across four locales.
 - All 10 Cloudflare Worker tests pass.
-- All 16 desktop/mobile end-to-end tests passed after the identity and language-preference work.
-- The focused localized-purpose browser test passes.
+- All 18 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
+- The launch-readiness gate passes with the confirmed production public configuration; optional Stripe and YouTube values remain strictly validated whenever they are supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 
 ## Remaining work — handle one item at a time
 
-1. Replace generic homepage feature cards with Ruach Breslov’s actual programs and services.
-2. Replace sample events with confirmed events, dates, locations, and RSVP requirements.
-3. Add the official YouTube channel and up to three featured video IDs.
-4. Configure the donation flow and official Stripe-hosted payment link, if donations are offered.
-5. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and contact FAQs.
-6. Replace the starter privacy notice with owner-approved legal content.
-7. Add Stripe configuration if donations are offered; Stripe secrets remain optional and are not installed.
-8. Fill the remaining GitHub deployment variables, replace launch-blocking placeholder/demo content, complete a successful Pages deployment, enable HTTPS after certificate issuance, and run launch-readiness checks.
+1. Complete the first successful GitHub Pages deployment, enable HTTPS after certificate issuance, and verify the custom domain publicly.
+2. Replace the purpose-based homepage cards with Ruach Breslov’s confirmed programs and services when those details are available.
+3. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
+4. Add the official YouTube channel and up to three featured video IDs when supplied.
+5. Configure an official Stripe-hosted payment link if online contributions are offered; Stripe secrets remain optional and are not installed.
+6. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
+7. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
 ## Recorded commits
 
@@ -79,3 +80,4 @@ Last updated: September 4, 2026
 - `43ae48f` — production Cloudflare account connection and safe Global API Key field support
 - `dd38443` — public repository, GitHub Pages, custom domain, and Cloudflare DNS
 - `6ad4a5b` — verified Resend connection and HTTPS canonical URL normalization for Pages
+- `18b4082` — production Worker services, D1, Turnstile, Resend Topics, and signed webhook

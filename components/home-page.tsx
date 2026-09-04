@@ -32,7 +32,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
           </div>
           <div className="signal-orbit"><span /><span /><span /></div>
           <div className="signal-card signal-card-secondary"><Globe2 aria-hidden="true" /><strong>4</strong><small>{dictionary.system.languagesReady}</small></div>
-          <div className="signal-card signal-card-tertiary"><PlayCircle aria-hidden="true" /><strong>4K + HDR</strong><small>{dictionary.system.videoReady}</small></div>
+          <div className="signal-card signal-card-tertiary"><PlayCircle aria-hidden="true" /><strong>Faith + Joy</strong><small>{dictionary.system.videoReady}</small></div>
         </MotionReveal>
       </section>
 

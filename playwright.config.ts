@@ -30,10 +30,10 @@ export default defineConfig({
       NEXT_PUBLIC_SITE_URL: baseURL,
       NEXT_PUBLIC_API_BASE_URL: "https://api.example.test",
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA",
-      NEXT_PUBLIC_ORGANIZATION_NAME_EN: "Example Community",
-      NEXT_PUBLIC_ORGANIZATION_NAME_HE: "קהילה לדוגמה",
-      NEXT_PUBLIC_ORGANIZATION_NAME_ES: "Comunidad de ejemplo",
-      NEXT_PUBLIC_ORGANIZATION_NAME_FA: "جامعه نمونه"
+      NEXT_PUBLIC_ORGANIZATION_NAME_EN: "Ruach Breslov",
+      NEXT_PUBLIC_ORGANIZATION_NAME_HE: "Ruach Breslov",
+      NEXT_PUBLIC_ORGANIZATION_NAME_ES: "Ruach Breslov",
+      NEXT_PUBLIC_ORGANIZATION_NAME_FA: "Ruach Breslov"
     }
   }
 });

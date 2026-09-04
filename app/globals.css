@@ -82,11 +82,13 @@ img, svg { display: block; }
 .button { min-height: 3.2rem; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; border: 1px solid transparent; border-radius: 999px; padding: .8rem 1.25rem; cursor: pointer; font-weight: 850; line-height: 1; transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease; }
 .button:hover:not(:disabled) { transform: translateY(-2px); }
 .button svg { width: 1.1rem; height: 1.1rem; }
-.button:disabled { cursor: not-allowed; opacity: .48; }
+.button:disabled { cursor: not-allowed; opacity: 1; }
 .button-primary { background: linear-gradient(115deg, var(--primary), #6366f1 55%, #3b82f6); color: white; box-shadow: 0 16px 42px rgba(99, 102, 241, .28); }
 .button-primary:hover:not(:disabled) { box-shadow: 0 20px 52px rgba(99, 102, 241, .38); }
+.button-primary:disabled { background: #4338ca; color: white; }
 .button-secondary { border-color: var(--line-strong); background: rgba(255,255,255,.06); color: white; }
 .button-light { background: white; color: #0b1020; }
+.button-light:disabled { background: #e5e7eb; color: #111827; }
 .button-small { min-height: 2.75rem; padding: .65rem 1rem; font-size: .86rem; }
 .button-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-block-start: 2rem; }
 

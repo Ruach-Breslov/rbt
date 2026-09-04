@@ -58,9 +58,10 @@ export type Dictionary = {
     eyebrow: string;
     title: string;
     description: string;
+    emptyTitle: string;
+    emptyCopy: string;
     dateLabel: string;
     locationLabel: string;
-    demoLabel: string;
     items: Record<string, { title: string; summary: string; location: string }>;
   };
   videos: {
@@ -135,11 +136,11 @@ const en: Dictionary = {
   languageLabel: "Language",
   system: {
     skipToContent: "Skip to content",
-    liveFoundation: "Live foundation",
-    fastFocusedGlobal: "Fast, focused, global",
-    languagesReady: "languages ready",
-    videoReady: "video-ready",
-    staticBoundary: "Static-first · Multilingual · Secure service boundary",
+    liveFoundation: "Ruach Breslov",
+    fastFocusedGlobal: "Faith, joy, and purpose",
+    languagesReady: "languages",
+    videoReady: "at the heart",
+    staticBoundary: "Faith · Joy · Personal growth · Meaningful connection",
     chooseTopic: "Select at least one option.",
     recommendedDefault: "Recommended default",
     backendRequired: "Secure backend required."
@@ -160,13 +161,13 @@ const en: Dictionary = {
     eyebrow: "The timeless wisdom of Rebbe Nachman",
     title: "Find hope. Grow with faith. Live with purpose.",
     description: "Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection. We create a welcoming space for people of all backgrounds to find hope, deepen their relationship with God, face life’s challenges with strength, and discover greater purpose, goodness, and meaning.",
-    featureTitle: "Everything important, working together",
-    featureCopy: "Start with a fast static website and connect only the services your organization needs.",
+    featureTitle: "A welcoming path to faith, joy, and connection",
+    featureCopy: "Explore the values at the heart of Ruach Breslov and stay connected with our growing community.",
     features: [
-      { title: "Events and RSVP", copy: "Publish upcoming programs and collect structured attendance requests." },
-      { title: "Stories in motion", copy: "Build a privacy-aware YouTube library ready for 4K and HDR masters." },
-      { title: "Meaningful contact", copy: "Route inquiries and subscription preferences through a secure email service." },
-      { title: "Global by design", copy: "Serve English, Hebrew, Spanish, and Persian with proper reading direction." }
+      { title: "Rebbe Nachman’s wisdom", copy: "Discover timeless teachings that bring hope, faith, and practical strength into everyday life." },
+      { title: "Faith and personal growth", copy: "Deepen your relationship with God and meet life’s challenges with courage and purpose." },
+      { title: "Meaningful connection", copy: "Find a welcoming space where people of every background can learn, grow, and connect." },
+      { title: "Open across languages", copy: "Connect with Ruach Breslov in English, Hebrew, Spanish, or Persian." }
     ],
     subscriptionTitle: "Stay connected",
     subscriptionCopy: "Choose newsletters, event announcements, or both. You remain in control of your preferences."
@@ -174,22 +175,19 @@ const en: Dictionary = {
   events: {
     eyebrow: "Gather and participate",
     title: "Upcoming events",
-    description: "A reusable event calendar with a focused RSVP experience for every program.",
+    description: "Confirmed Ruach Breslov gatherings and programs will be shared here.",
+    emptyTitle: "No events are currently scheduled",
+    emptyCopy: "Subscribe to event announcements or contact us to hear when the next gathering is announced.",
     dateLabel: "Date and time",
     locationLabel: "Location",
-    demoLabel: "Sample event",
-    items: {
-      "community-open-house": { title: "Community open house", summary: "Meet the team, explore the space, and learn what is coming next.", location: "Main venue" },
-      "live-workshop": { title: "Live workshop", summary: "A practical, participatory session built around a shared topic.", location: "Studio room" },
-      "annual-gathering": { title: "Annual gathering", summary: "An evening of conversation, stories, and community connection.", location: "Central hall" }
-    }
+    items: {}
   },
   videos: {
-    eyebrow: "A library built to scale",
-    title: "Video stories",
-    description: "YouTube selects playback quality adaptively. When the source and device support it, viewers can use the player controls to select the highest available stream—up to 4K and HDR.",
-    emptyTitle: "Your video library is ready",
-    emptyCopy: "Add up to three YouTube video IDs in the environment configuration to populate this starter collection.",
+    eyebrow: "Teachings and inspiration",
+    title: "Ruach Breslov videos",
+    description: "Official video teachings and stories from Ruach Breslov will be collected here.",
+    emptyTitle: "Videos are coming soon",
+    emptyCopy: "Stay connected for new teachings, conversations, and community stories.",
     quality: "Highest available · up to 4K",
     hdr: "HDR-ready",
     items: [
@@ -201,28 +199,28 @@ const en: Dictionary = {
   contact: {
     eyebrow: "Start a conversation",
     title: "Contact us",
-    description: "Give visitors clear ways to reach the right person, ask a question, or begin a partnership.",
+    description: "Ask a question, learn more about Ruach Breslov, or begin a conversation with our team.",
     detailsTitle: "Contact details",
-    hoursTitle: "Office hours",
-    hours: "Sunday–Thursday, 9:00–17:00",
+    hoursTitle: "Visiting",
+    hours: "Please contact us before planning an in-person visit.",
     responseTitle: "What happens next",
-    responseCopy: "Messages are routed securely to the configured team inbox. Set a realistic response-time expectation here.",
+    responseCopy: "Messages are sent securely to the Ruach Breslov team. We will respond as soon as we can.",
     faqTitle: "Frequently asked questions",
     faqs: [
-      { question: "How quickly will I hear back?", answer: "Replace this answer with your normal response time and urgent-contact guidance." },
-      { question: "Can I visit in person?", answer: "Add your appointment policy, accessibility details, parking, and transit information here." },
-      { question: "Who receives this form?", answer: "The secure form service sends each inquiry to the destination configured by the site owner." }
+      { question: "How quickly will I hear back?", answer: "We review messages and respond as soon as we can. For a direct inquiry, email info@ruachbreslov.org or call 917-740-4509." },
+      { question: "Can I visit in person?", answer: "Please contact us in advance so we can confirm availability and share current visiting information." },
+      { question: "Who receives this form?", answer: "Your inquiry is delivered securely to the Ruach Breslov team at info@ruachbreslov.org." }
     ]
   },
   support: {
-    eyebrow: "Secure, provider-hosted payments",
+    eyebrow: "Help Ruach Breslov grow",
     title: "Support our work",
-    description: "Keep card data away from the website by sending supporters to Stripe’s hosted checkout experience.",
-    hostedTitle: "Stripe Payment Link",
-    hostedCopy: "The recommended default for a static site: simple, reusable, and hosted entirely on Stripe’s payment page.",
-    customTitle: "Custom Checkout Session",
-    customCopy: "Optional for dynamic prices, inventory, or fulfillment. This mode requires a secure backend and verified webhooks.",
-    unavailable: "Add a Stripe Payment Link to enable this option.",
+    description: "Your encouragement and support help Ruach Breslov share faith, joy, and the wisdom of Rebbe Nachman.",
+    hostedTitle: "Online contributions",
+    hostedCopy: "When online contributions are available, payment is completed on our provider’s secure hosted page.",
+    customTitle: "Contact Ruach Breslov",
+    customCopy: "Reach out to our team if you would like to discuss supporting our work.",
+    unavailable: "Online contributions are not currently available. Please contact us if you would like to support Ruach Breslov.",
     secureNote: "This website never asks for or stores payment-card details.",
     processingContext: "Payments are configured in {currency}; operational times use {timeZone} (U.S. Eastern Time)."
   },
@@ -248,12 +246,13 @@ const en: Dictionary = {
   },
   privacy: {
     title: "Privacy notice",
-    intro: "Replace this template notice with legal text reviewed for your organization, services, audience, and jurisdiction.",
+    intro: "Last updated September 4, 2026. This notice explains how Ruach Breslov handles information submitted through this website.",
     sections: [
-      { title: "Information you provide", copy: "Contact, subscription, and RSVP forms may collect the fields shown at the time of submission." },
-      { title: "How information is used", copy: "Use submitted information only to respond, manage attendance, and send communications the visitor requested." },
-      { title: "Service providers", copy: "The configured email, payment, video, security, and hosting providers process limited data to deliver their services." },
-      { title: "Your choices", copy: "Provide a working contact method for access, correction, deletion, and communication-preference requests." }
+      { title: "Information you provide", copy: "The contact form collects your name, email address, message, and any optional details you choose to provide. Subscription forms collect your name, email address, and selected communication topics." },
+      { title: "How we use information", copy: "We use submitted information to answer inquiries, protect the forms from abuse, confirm subscription requests, and send only the communications you requested." },
+      { title: "Service providers", copy: "GitHub Pages hosts the website. Cloudflare provides DNS, API hosting, database services, and Turnstile security. Resend delivers email and manages confirmed subscriptions. These providers process information only as needed to provide those services." },
+      { title: "Retention and security", copy: "Contact messages are delivered by email and are not stored in the website database. Unconfirmed subscription requests expire after 24 hours. Confirmed subscription details remain with Resend until you unsubscribe or request deletion. Limited security records are retained to prevent abuse." },
+      { title: "Your choices", copy: "You can unsubscribe using links in our emails. To request access, correction, or deletion of information you submitted, contact info@ruachbreslov.org." }
     ]
   },
   footer: {
@@ -269,11 +268,11 @@ const he: Dictionary = {
   languageLabel: "שפה",
   system: {
     skipToContent: "דילוג לתוכן",
-    liveFoundation: "תשתית פעילה",
-    fastFocusedGlobal: "מהיר, ממוקד, גלובלי",
-    languagesReady: "שפות מוכנות",
-    videoReady: "מוכן לווידאו",
-    staticBoundary: "סטטי תחילה · רב־לשוני · גבול שירות מאובטח",
+    liveFoundation: "Ruach Breslov",
+    fastFocusedGlobal: "אמונה, שמחה ותכלית",
+    languagesReady: "שפות",
+    videoReady: "בלב העשייה",
+    staticBoundary: "אמונה · שמחה · צמיחה אישית · חיבור משמעותי",
     chooseTopic: "יש לבחור אפשרות אחת לפחות.",
     recommendedDefault: "ברירת מחדל מומלצת",
     backendRequired: "נדרש שרת מאובטח."
@@ -294,13 +293,13 @@ const he: Dictionary = {
     eyebrow: "חכמתו הנצחית של רבי נחמן",
     title: "מוצאים תקווה. צומחים באמונה. חיים עם תכלית.",
     description: "Ruach Breslov מביאה לחיים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה אישית וחיבור משמעותי. אנו יוצרים מרחב מזמין לאנשים מכל רקע כדי למצוא תקווה, להעמיק את הקשר שלהם עם ה׳, להתמודד בכוח עם אתגרי החיים ולגלות תכלית, טוב ומשמעות עמוקים יותר.",
-    featureTitle: "כל מה שחשוב, מחובר יחד",
-    featureCopy: "מתחילים באתר סטטי מהיר ומחברים רק את השירותים שהארגון צריך.",
+    featureTitle: "דרך מזמינה לאמונה, שמחה וחיבור",
+    featureCopy: "הכירו את הערכים שבלב Ruach Breslov והישארו מחוברים לקהילה הצומחת שלנו.",
     features: [
-      { title: "אירועים ואישור הגעה", copy: "פרסום תוכניות קרובות ואיסוף בקשות השתתפות מסודרות." },
-      { title: "סיפורים בתנועה", copy: "ספריית YouTube מודעת לפרטיות ומוכנה לתכני 4K ו‑HDR." },
-      { title: "קשר משמעותי", copy: "ניתוב פניות והעדפות הרשמה דרך שירות דוא״ל מאובטח." },
-      { title: "גלובלי מהיסוד", copy: "עברית, אנגלית, ספרדית ופרסית עם כיוון קריאה נכון." }
+      { title: "חכמתו של רבי נחמן", copy: "גלו לימוד נצחי שמביא תקווה, אמונה וכוח מעשי לחיי היום־יום." },
+      { title: "אמונה וצמיחה אישית", copy: "העמיקו את הקשר עם ה׳ ופגשו את אתגרי החיים באומץ ובתכלית." },
+      { title: "חיבור משמעותי", copy: "מצאו מרחב מזמין שבו אנשים מכל רקע יכולים ללמוד, לצמוח ולהתחבר." },
+      { title: "פתוח בארבע שפות", copy: "התחברו ל‑Ruach Breslov בעברית, אנגלית, ספרדית או פרסית." }
     ],
     subscriptionTitle: "נשארים מחוברים",
     subscriptionCopy: "בחרו עדכונים, הודעות על אירועים או את שניהם. השליטה בהעדפות נשארת בידיכם."
@@ -308,22 +307,19 @@ const he: Dictionary = {
   events: {
     eyebrow: "נפגשים ומשתתפים",
     title: "אירועים קרובים",
-    description: "לוח אירועים רב־שימושי עם חוויית הרשמה ממוקדת לכל תוכנית.",
+    description: "מפגשים ותוכניות מאושרים של Ruach Breslov יתפרסמו כאן.",
+    emptyTitle: "אין אירועים מתוכננים כרגע",
+    emptyCopy: "הירשמו להודעות על אירועים או צרו איתנו קשר כדי לשמוע על המפגש הבא.",
     dateLabel: "תאריך ושעה",
     locationLabel: "מיקום",
-    demoLabel: "אירוע לדוגמה",
-    items: {
-      "community-open-house": { title: "בית פתוח לקהילה", summary: "פגשו את הצוות, הכירו את המקום ושמעו מה צפוי בהמשך.", location: "האולם הראשי" },
-      "live-workshop": { title: "סדנה חיה", summary: "מפגש מעשי ומשתף סביב נושא משותף.", location: "חדר הסטודיו" },
-      "annual-gathering": { title: "המפגש השנתי", summary: "ערב של שיחה, סיפורים וחיבור קהילתי.", location: "האולם המרכזי" }
-    }
+    items: {}
   },
   videos: {
-    eyebrow: "ספרייה שנועדה לצמוח",
-    title: "סיפורים בווידאו",
-    description: "YouTube בוחר את איכות הניגון באופן מסתגל. כאשר המקור והמכשיר תומכים בכך, ניתן לבחור בהגדרות הנגן את האיכות הגבוהה ביותר הזמינה — עד 4K ו‑HDR.",
-    emptyTitle: "ספריית הווידאו מוכנה",
-    emptyCopy: "הוסיפו עד שלושה מזהי YouTube בהגדרות הסביבה כדי למלא את האוסף הראשוני.",
+    eyebrow: "לימוד והשראה",
+    title: "סרטוני Ruach Breslov",
+    description: "לימודי וידאו וסיפורים רשמיים של Ruach Breslov ירוכזו כאן.",
+    emptyTitle: "סרטונים יעלו בקרוב",
+    emptyCopy: "הישארו מחוברים ללימודים, שיחות וסיפורים חדשים מן הקהילה.",
     quality: "האיכות הגבוהה ביותר · עד 4K",
     hdr: "מוכן ל‑HDR",
     items: [
@@ -335,28 +331,28 @@ const he: Dictionary = {
   contact: {
     eyebrow: "מתחילים בשיחה",
     title: "יצירת קשר",
-    description: "הציעו למבקרים דרך ברורה להגיע לאדם הנכון, לשאול שאלה או להתחיל שותפות.",
+    description: "שאלו שאלה, למדו עוד על Ruach Breslov או התחילו שיחה עם הצוות שלנו.",
     detailsTitle: "פרטי קשר",
-    hoursTitle: "שעות פעילות",
-    hours: "ראשון–חמישי, 9:00–17:00",
+    hoursTitle: "ביקור במקום",
+    hours: "אנא צרו איתנו קשר לפני תכנון ביקור במקום.",
     responseTitle: "מה קורה לאחר השליחה",
-    responseCopy: "ההודעות מנותבות באופן מאובטח לתיבת הצוות שהוגדרה. ציינו כאן זמן תגובה מציאותי.",
+    responseCopy: "ההודעות נשלחות באופן מאובטח לצוות Ruach Breslov. נשיב בהקדם האפשרי.",
     faqTitle: "שאלות נפוצות",
     faqs: [
-      { question: "תוך כמה זמן אקבל תשובה?", answer: "החליפו תשובה זו בזמן התגובה הרגיל ובהנחיות לפנייה דחופה." },
-      { question: "אפשר להגיע לביקור?", answer: "הוסיפו מדיניות תיאום, מידע על נגישות, חניה ותחבורה." },
-      { question: "מי מקבל את הטופס?", answer: "שירות הטפסים המאובטח שולח כל פנייה ליעד שהגדיר בעל האתר." }
+      { question: "תוך כמה זמן אקבל תשובה?", answer: "אנו בודקים את ההודעות ומשיבים בהקדם האפשרי. לפנייה ישירה כתבו ל‑info@ruachbreslov.org או התקשרו ל‑917-740-4509." },
+      { question: "אפשר להגיע לביקור?", answer: "אנא צרו איתנו קשר מראש כדי שנוכל לאשר זמינות ולמסור מידע עדכני על הביקור." },
+      { question: "מי מקבל את הטופס?", answer: "הפנייה נמסרת באופן מאובטח לצוות Ruach Breslov בכתובת info@ruachbreslov.org." }
     ]
   },
   support: {
-    eyebrow: "תשלומים מאובטחים בעמוד הספק",
+    eyebrow: "עוזרים ל‑Ruach Breslov לצמוח",
     title: "תמכו בעשייה שלנו",
-    description: "פרטי הכרטיס נשארים מחוץ לאתר באמצעות מעבר לחוויית התשלום המאובטחת של Stripe.",
-    hostedTitle: "קישור תשלום של Stripe",
-    hostedCopy: "ברירת המחדל המומלצת לאתר סטטי: פשוטה, רב־פעמית ומתארחת כולה בעמוד התשלום של Stripe.",
-    customTitle: "Checkout מותאם",
-    customCopy: "אפשרות למחירים דינמיים, מלאי או אספקה. מצב זה דורש שרת מאובטח ו‑webhooks מאומתים.",
-    unavailable: "הוסיפו קישור תשלום של Stripe כדי להפעיל אפשרות זו.",
+    description: "העידוד והתמיכה שלכם עוזרים ל‑Ruach Breslov להפיץ אמונה, שמחה ואת חכמתו של רבי נחמן.",
+    hostedTitle: "תרומות מקוונות",
+    hostedCopy: "כאשר תרומות מקוונות יהיו זמינות, התשלום יתבצע בעמוד המאובטח של ספק התשלום שלנו.",
+    customTitle: "יצירת קשר עם Ruach Breslov",
+    customCopy: "צרו קשר עם הצוות שלנו אם תרצו לשוחח על תמיכה בעשייה.",
+    unavailable: "תרומות מקוונות אינן זמינות כרגע. צרו איתנו קשר אם תרצו לתמוך ב‑Ruach Breslov.",
     secureNote: "האתר אינו מבקש ואינו שומר פרטי כרטיס.",
     processingContext: "התשלומים מוגדרים ב־{currency}; זמני התפעול משתמשים באזור {timeZone} (שעון מזרח ארה״ב)."
   },
@@ -382,12 +378,13 @@ const he: Dictionary = {
   },
   privacy: {
     title: "הודעת פרטיות",
-    intro: "יש להחליף הודעה זו בנוסח משפטי שנבדק עבור הארגון, השירותים, הקהל ותחומי השיפוט שלכם.",
+    intro: "עודכן לאחרונה ב־4 בספטמבר 2026. הודעה זו מסבירה כיצד Ruach Breslov מטפלת במידע שנמסר דרך האתר.",
     sections: [
-      { title: "מידע שנמסר", copy: "טפסי קשר, הרשמה ואישור הגעה עשויים לאסוף את השדות המוצגים בעת השליחה." },
-      { title: "שימוש במידע", copy: "יש להשתמש במידע רק למענה, לניהול השתתפות ולשליחת תקשורת שהתבקשה." },
-      { title: "ספקי שירות", copy: "ספקי דוא״ל, תשלום, וידאו, אבטחה ואחסון מעבדים מידע מוגבל לצורך אספקת השירות." },
-      { title: "הבחירות שלכם", copy: "יש לספק דרך פעילה לבקשות גישה, תיקון, מחיקה ושינוי העדפות תקשורת." }
+      { title: "מידע שאתם מוסרים", copy: "טופס יצירת הקשר אוסף שם, כתובת דוא״ל, הודעה ופרטים אופציונליים שתבחרו למסור. טופס ההרשמה אוסף שם, כתובת דוא״ל ונושאי תקשורת שבחרתם." },
+      { title: "כיצד אנו משתמשים במידע", copy: "אנו משתמשים במידע כדי לענות לפניות, להגן על הטפסים מפני שימוש לרעה, לאשר בקשות הרשמה ולשלוח רק את התקשורת שביקשתם." },
+      { title: "ספקי שירות", copy: "GitHub Pages מאחסן את האתר. Cloudflare מספקת DNS, אחסון API, מסד נתונים ואבטחת Turnstile. Resend שולחת דוא״ל ומנהלת הרשמות מאושרות. ספקים אלה מעבדים מידע רק ככל שנדרש להפעלת השירותים." },
+      { title: "שמירה ואבטחה", copy: "הודעות קשר נמסרות בדוא״ל ואינן נשמרות במסד הנתונים של האתר. בקשות הרשמה שלא אושרו פגות לאחר 24 שעות. פרטי הרשמה מאושרים נשמרים ב‑Resend עד להסרה או לבקשת מחיקה. רשומות אבטחה מוגבלות נשמרות למניעת שימוש לרעה." },
+      { title: "הבחירות שלכם", copy: "אפשר להסיר הרשמה באמצעות הקישורים בהודעות שלנו. לבקשת גישה, תיקון או מחיקה של מידע שמסרתם, כתבו ל‑info@ruachbreslov.org." }
     ]
   },
   footer: {
@@ -403,11 +400,11 @@ const es: Dictionary = {
   languageLabel: "Idioma",
   system: {
     skipToContent: "Saltar al contenido",
-    liveFoundation: "Base activa",
-    fastFocusedGlobal: "Rápida, enfocada y global",
-    languagesReady: "idiomas preparados",
-    videoReady: "lista para video",
-    staticBoundary: "Estática primero · Multilingüe · Servicios seguros",
+    liveFoundation: "Ruach Breslov",
+    fastFocusedGlobal: "Fe, alegría y propósito",
+    languagesReady: "idiomas",
+    videoReady: "en el centro",
+    staticBoundary: "Fe · Alegría · Crecimiento personal · Vínculos significativos",
     chooseTopic: "Selecciona al menos una opción.",
     recommendedDefault: "Opción recomendada",
     backendRequired: "Se requiere un servidor seguro."
@@ -428,13 +425,13 @@ const es: Dictionary = {
     eyebrow: "La sabiduría atemporal del Rebe Najmán",
     title: "Encuentra esperanza. Crece con fe. Vive con propósito.",
     description: "Ruach Breslov da vida a la sabiduría atemporal del Rebe Najmán por medio de la fe, la alegría, el crecimiento personal y vínculos significativos. Creamos un espacio acogedor para que personas de todos los orígenes encuentren esperanza, profundicen su relación con Dios, afronten con fortaleza los desafíos de la vida y descubran un mayor propósito, bondad y sentido.",
-    featureTitle: "Todo lo importante, trabajando en conjunto",
-    featureCopy: "Comienza con un sitio estático rápido y conecta solo los servicios que tu organización necesita.",
+    featureTitle: "Un camino acogedor hacia la fe, la alegría y la conexión",
+    featureCopy: "Conoce los valores que están en el corazón de Ruach Breslov y mantente cerca de nuestra comunidad en crecimiento.",
     features: [
-      { title: "Eventos y asistencia", copy: "Publica programas y recopila solicitudes de asistencia estructuradas." },
-      { title: "Historias en movimiento", copy: "Crea una videoteca de YouTube preparada para fuentes 4K y HDR." },
-      { title: "Contacto significativo", copy: "Canaliza consultas y preferencias mediante un servicio de correo seguro." },
-      { title: "Global desde el inicio", copy: "Ofrece inglés, hebreo, español y persa con la dirección de lectura adecuada." }
+      { title: "La sabiduría del Rebe Najmán", copy: "Descubre enseñanzas atemporales que llevan esperanza, fe y fortaleza práctica a la vida diaria." },
+      { title: "Fe y crecimiento personal", copy: "Profundiza tu relación con Dios y afronta los desafíos de la vida con valentía y propósito." },
+      { title: "Vínculos significativos", copy: "Encuentra un espacio acogedor donde personas de todo origen puedan aprender, crecer y conectarse." },
+      { title: "Abierto en cuatro idiomas", copy: "Conéctate con Ruach Breslov en inglés, hebreo, español o persa." }
     ],
     subscriptionTitle: "Mantente al día",
     subscriptionCopy: "Elige boletines, anuncios de eventos o ambos. Tú mantienes el control de tus preferencias."
@@ -442,22 +439,19 @@ const es: Dictionary = {
   events: {
     eyebrow: "Reúnete y participa",
     title: "Próximos eventos",
-    description: "Un calendario reutilizable con una experiencia de confirmación clara para cada programa.",
+    description: "Aquí publicaremos las reuniones y los programas confirmados de Ruach Breslov.",
+    emptyTitle: "No hay eventos programados por el momento",
+    emptyCopy: "Suscríbete a los anuncios de eventos o contáctanos para conocer la próxima reunión.",
     dateLabel: "Fecha y hora",
     locationLabel: "Lugar",
-    demoLabel: "Evento de muestra",
-    items: {
-      "community-open-house": { title: "Jornada de puertas abiertas", summary: "Conoce al equipo, recorre el espacio y descubre lo que viene.", location: "Sede principal" },
-      "live-workshop": { title: "Taller en vivo", summary: "Una sesión práctica y participativa en torno a un tema común.", location: "Sala de estudio" },
-      "annual-gathering": { title: "Encuentro anual", summary: "Una noche de conversación, historias y conexión comunitaria.", location: "Salón central" }
-    }
+    items: {}
   },
   videos: {
-    eyebrow: "Una videoteca preparada para crecer",
-    title: "Historias en video",
-    description: "YouTube selecciona la calidad de forma adaptativa. Cuando la fuente y el dispositivo lo permiten, el público puede elegir en el reproductor la máxima calidad disponible, hasta 4K y HDR.",
-    emptyTitle: "Tu videoteca está lista",
-    emptyCopy: "Añade hasta tres identificadores de YouTube en la configuración del entorno para completar esta colección inicial.",
+    eyebrow: "Enseñanzas e inspiración",
+    title: "Videos de Ruach Breslov",
+    description: "Aquí reuniremos enseñanzas en video e historias oficiales de Ruach Breslov.",
+    emptyTitle: "Próximamente publicaremos videos",
+    emptyCopy: "Mantente en contacto para recibir nuevas enseñanzas, conversaciones e historias de la comunidad.",
     quality: "Máxima disponible · hasta 4K",
     hdr: "Preparado para HDR",
     items: [
@@ -469,28 +463,28 @@ const es: Dictionary = {
   contact: {
     eyebrow: "Inicia una conversación",
     title: "Contáctanos",
-    description: "Ofrece formas claras de llegar a la persona adecuada, hacer una pregunta o iniciar una colaboración.",
+    description: "Haz una pregunta, conoce más sobre Ruach Breslov o inicia una conversación con nuestro equipo.",
     detailsTitle: "Datos de contacto",
-    hoursTitle: "Horario de atención",
-    hours: "Domingo–jueves, 9:00–17:00",
+    hoursTitle: "Visitas",
+    hours: "Contáctanos antes de planificar una visita en persona.",
     responseTitle: "Qué sucede después",
-    responseCopy: "Los mensajes se envían de forma segura al buzón configurado. Indica aquí un plazo de respuesta realista.",
+    responseCopy: "Los mensajes se envían de forma segura al equipo de Ruach Breslov. Responderemos tan pronto como podamos.",
     faqTitle: "Preguntas frecuentes",
     faqs: [
-      { question: "¿Cuándo recibiré una respuesta?", answer: "Sustituye esta respuesta por el plazo habitual y las instrucciones para asuntos urgentes." },
-      { question: "¿Puedo visitar en persona?", answer: "Añade la política de citas, accesibilidad, estacionamiento y transporte." },
-      { question: "¿Quién recibe este formulario?", answer: "El servicio seguro envía cada consulta al destino configurado por el propietario del sitio." }
+      { question: "¿Cuándo recibiré una respuesta?", answer: "Revisamos los mensajes y respondemos tan pronto como podemos. Para una consulta directa, escribe a info@ruachbreslov.org o llama al 917-740-4509." },
+      { question: "¿Puedo visitar en persona?", answer: "Contáctanos con anticipación para que podamos confirmar disponibilidad y compartir información actualizada para tu visita." },
+      { question: "¿Quién recibe este formulario?", answer: "Tu consulta se entrega de forma segura al equipo de Ruach Breslov en info@ruachbreslov.org." }
     ]
   },
   support: {
-    eyebrow: "Pagos seguros alojados por el proveedor",
+    eyebrow: "Ayuda a crecer a Ruach Breslov",
     title: "Apoya nuestro trabajo",
-    description: "Mantén los datos de tarjeta fuera del sitio enviando a las personas a la experiencia alojada de Stripe.",
-    hostedTitle: "Enlace de pago de Stripe",
-    hostedCopy: "La opción predeterminada recomendada para un sitio estático: simple, reutilizable y alojada por Stripe.",
-    customTitle: "Sesión de Checkout personalizada",
-    customCopy: "Opcional para precios dinámicos, inventario o entregas. Requiere un servidor seguro y webhooks verificados.",
-    unavailable: "Añade un enlace de pago de Stripe para activar esta opción.",
+    description: "Tu aliento y apoyo ayudan a Ruach Breslov a compartir la fe, la alegría y la sabiduría del Rebe Najmán.",
+    hostedTitle: "Contribuciones en línea",
+    hostedCopy: "Cuando estén disponibles, las contribuciones se completarán en la página segura de nuestro proveedor de pagos.",
+    customTitle: "Contacta a Ruach Breslov",
+    customCopy: "Comunícate con nuestro equipo si deseas conversar sobre cómo apoyar nuestro trabajo.",
+    unavailable: "Las contribuciones en línea aún no están disponibles. Contáctanos si deseas apoyar a Ruach Breslov.",
     secureNote: "Este sitio nunca solicita ni almacena datos de tarjetas.",
     processingContext: "Los pagos se configuran en {currency}; los horarios operativos usan {timeZone} (hora del este de EE. UU.)."
   },
@@ -516,12 +510,13 @@ const es: Dictionary = {
   },
   privacy: {
     title: "Aviso de privacidad",
-    intro: "Sustituye este aviso por un texto legal revisado para tu organización, servicios, público y jurisdicción.",
+    intro: "Última actualización: 4 de septiembre de 2026. Este aviso explica cómo Ruach Breslov trata la información enviada mediante este sitio web.",
     sections: [
-      { title: "Información que proporcionas", copy: "Los formularios pueden recopilar los campos mostrados al momento del envío." },
-      { title: "Cómo se utiliza", copy: "Utiliza la información solo para responder, gestionar asistencia y enviar comunicaciones solicitadas." },
-      { title: "Proveedores", copy: "Los proveedores de correo, pagos, video, seguridad y alojamiento procesan datos limitados para prestar sus servicios." },
-      { title: "Tus opciones", copy: "Ofrece un medio operativo para solicitudes de acceso, corrección, eliminación y preferencias." }
+      { title: "Información que proporcionas", copy: "El formulario de contacto recopila tu nombre, correo electrónico, mensaje y los datos opcionales que decidas proporcionar. El formulario de suscripción recopila tu nombre, correo electrónico y los temas de comunicación seleccionados." },
+      { title: "Cómo usamos la información", copy: "Usamos la información para responder consultas, proteger los formularios contra abusos, confirmar solicitudes de suscripción y enviar únicamente las comunicaciones que pediste." },
+      { title: "Proveedores de servicios", copy: "GitHub Pages aloja el sitio. Cloudflare proporciona DNS, alojamiento de la API, base de datos y seguridad Turnstile. Resend entrega correos y administra suscripciones confirmadas. Estos proveedores procesan información solo cuando es necesario para prestar esos servicios." },
+      { title: "Conservación y seguridad", copy: "Los mensajes de contacto se entregan por correo y no se guardan en la base de datos del sitio. Las solicitudes de suscripción no confirmadas vencen después de 24 horas. Los datos de suscripciones confirmadas permanecen en Resend hasta que canceles la suscripción o solicites su eliminación. Conservamos registros de seguridad limitados para prevenir abusos." },
+      { title: "Tus opciones", copy: "Puedes cancelar la suscripción mediante los enlaces incluidos en nuestros correos. Para solicitar acceso, corrección o eliminación de información que enviaste, escribe a info@ruachbreslov.org." }
     ]
   },
   footer: {
@@ -537,11 +532,11 @@ const fa: Dictionary = {
   languageLabel: "زبان",
   system: {
     skipToContent: "رفتن به محتوا",
-    liveFoundation: "زیرساخت فعال",
-    fastFocusedGlobal: "سریع، متمرکز و جهانی",
-    languagesReady: "زبان آماده",
-    videoReady: "آماده ویدیو",
-    staticBoundary: "ایستا در اولویت · چندزبانه · مرز خدمات امن",
+    liveFoundation: "Ruach Breslov",
+    fastFocusedGlobal: "ایمان، شادی و هدف",
+    languagesReady: "زبان",
+    videoReady: "در قلب کار",
+    staticBoundary: "ایمان · شادی · رشد فردی · پیوند معنادار",
     chooseTopic: "حداقل یک گزینه را انتخاب کنید.",
     recommendedDefault: "گزینه پیشنهادی",
     backendRequired: "سرور امن لازم است."
@@ -562,13 +557,13 @@ const fa: Dictionary = {
     eyebrow: "حکمت جاودانۀ ربی نحمان",
     title: "امید را بیابید. با ایمان رشد کنید. هدفمند زندگی کنید.",
     description: "Ruach Breslov حکمت جاودانۀ ربی نحمان را از راه ایمان، شادی، رشد فردی و پیوندی معنادار زنده می‌کند. ما فضایی پذیرا برای افراد با هر پیشینه‌ای فراهم می‌کنیم تا امید بیابند، رابطۀ خود با خدا را عمیق‌تر کنند، با قدرت با چالش‌های زندگی روبه‌رو شوند و هدف، نیکی و معنای بیشتری کشف کنند.",
-    featureTitle: "همه چیز مهم، در کنار هم",
-    featureCopy: "با یک وب‌سایت ایستای سریع آغاز کنید و فقط خدمات مورد نیاز را متصل کنید.",
+    featureTitle: "راهی پذیرا به سوی ایمان، شادی و پیوند",
+    featureCopy: "با ارزش‌های بنیادین Ruach Breslov آشنا شوید و با جامعۀ رو به رشد ما در ارتباط بمانید.",
     features: [
-      { title: "رویداد و ثبت حضور", copy: "برنامه‌های آینده را منتشر و درخواست‌های حضور را منظم جمع‌آوری کنید." },
-      { title: "روایت‌های تصویری", copy: "کتابخانه YouTube سازگار با حریم خصوصی و آماده محتوای 4K و HDR بسازید." },
-      { title: "ارتباط معنادار", copy: "پیام‌ها و ترجیحات عضویت را از راه یک سرویس ایمیل امن هدایت کنید." },
-      { title: "جهانی از ابتدا", copy: "انگلیسی، عبری، اسپانیایی و فارسی با جهت نوشتار درست." }
+      { title: "حکمت ربی نحمان", copy: "آموزه‌های جاودانه‌ای را بیابید که امید، ایمان و نیروی عملی را به زندگی روزمره می‌آورند." },
+      { title: "ایمان و رشد فردی", copy: "رابطۀ خود با خدا را عمیق‌تر کنید و با شجاعت و هدف با چالش‌های زندگی روبه‌رو شوید." },
+      { title: "پیوند معنادار", copy: "فضایی پذیرا بیابید که افراد با هر پیشینه‌ای بتوانند در آن بیاموزند، رشد کنند و پیوند برقرار کنند." },
+      { title: "در چهار زبان", copy: "با Ruach Breslov به انگلیسی، عبری، اسپانیایی یا فارسی در ارتباط باشید." }
     ],
     subscriptionTitle: "در ارتباط بمانید",
     subscriptionCopy: "خبرنامه، اطلاعیه رویدادها یا هر دو را انتخاب کنید. کنترل ترجیحات در اختیار شماست."
@@ -576,22 +571,19 @@ const fa: Dictionary = {
   events: {
     eyebrow: "گردهمایی و مشارکت",
     title: "رویدادهای پیش رو",
-    description: "تقویم رویداد قابل استفاده مجدد با تجربه ثبت حضور روشن برای هر برنامه.",
+    description: "گردهمایی‌ها و برنامه‌های تأییدشدۀ Ruach Breslov در اینجا منتشر می‌شوند.",
+    emptyTitle: "در حال حاضر رویدادی برنامه‌ریزی نشده است",
+    emptyCopy: "برای آگاهی از گردهمایی بعدی، عضو اطلاعیه‌های رویداد شوید یا با ما تماس بگیرید.",
     dateLabel: "تاریخ و زمان",
     locationLabel: "مکان",
-    demoLabel: "رویداد نمونه",
-    items: {
-      "community-open-house": { title: "روز باز جامعه", summary: "با تیم آشنا شوید، فضا را ببینید و از برنامه‌های آینده باخبر شوید.", location: "محل اصلی" },
-      "live-workshop": { title: "کارگاه زنده", summary: "جلسه‌ای عملی و مشارکتی پیرامون یک موضوع مشترک.", location: "اتاق کارگاه" },
-      "annual-gathering": { title: "گردهمایی سالانه", summary: "شبی برای گفت‌وگو، داستان و پیوند اجتماعی.", location: "تالار مرکزی" }
-    }
+    items: {}
   },
   videos: {
-    eyebrow: "کتابخانه‌ای برای رشد",
-    title: "داستان‌های ویدیویی",
-    description: "YouTube کیفیت پخش را به‌صورت تطبیقی انتخاب می‌کند. اگر منبع و دستگاه پشتیبانی کنند، بیننده می‌تواند بالاترین کیفیت موجود، تا 4K و HDR، را از تنظیمات پخش‌کننده انتخاب کند.",
-    emptyTitle: "کتابخانه ویدیویی آماده است",
-    emptyCopy: "برای تکمیل مجموعه آغازین، حداکثر سه شناسه YouTube را در تنظیمات محیط وارد کنید.",
+    eyebrow: "آموزه‌ها و الهام",
+    title: "ویدیوهای Ruach Breslov",
+    description: "آموزه‌های ویدیویی و روایت‌های رسمی Ruach Breslov در اینجا گردآوری می‌شوند.",
+    emptyTitle: "ویدیوها به‌زودی منتشر می‌شوند",
+    emptyCopy: "برای دریافت آموزه‌ها، گفت‌وگوها و روایت‌های تازه از جامعه با ما در ارتباط بمانید.",
     quality: "بالاترین کیفیت موجود · تا 4K",
     hdr: "آماده HDR",
     items: [
@@ -603,28 +595,28 @@ const fa: Dictionary = {
   contact: {
     eyebrow: "گفت‌وگو را آغاز کنید",
     title: "تماس با ما",
-    description: "راهی روشن برای پرسش، ارتباط با فرد مناسب یا آغاز همکاری فراهم کنید.",
+    description: "پرسش خود را مطرح کنید، با Ruach Breslov بیشتر آشنا شوید یا با تیم ما گفت‌وگو را آغاز کنید.",
     detailsTitle: "اطلاعات تماس",
-    hoursTitle: "ساعات کاری",
-    hours: "یکشنبه تا پنج‌شنبه، ۹:۰۰ تا ۱۷:۰۰",
+    hoursTitle: "مراجعه حضوری",
+    hours: "پیش از برنامه‌ریزی برای مراجعه حضوری با ما تماس بگیرید.",
     responseTitle: "پس از ارسال چه می‌شود",
-    responseCopy: "پیام‌ها به‌صورت امن به صندوق تیم پیکربندی‌شده می‌رسند. زمان پاسخ واقعی را اینجا بنویسید.",
+    responseCopy: "پیام‌ها به‌صورت امن به تیم Ruach Breslov می‌رسند. در اولین فرصت پاسخ خواهیم داد.",
     faqTitle: "پرسش‌های متداول",
     faqs: [
-      { question: "چه زمانی پاسخ می‌گیرم؟", answer: "این پاسخ را با زمان معمول و راهنمای تماس فوری جایگزین کنید." },
-      { question: "آیا می‌توانم حضوری مراجعه کنم؟", answer: "سیاست وقت قبلی، دسترس‌پذیری، پارکینگ و حمل‌ونقل را اضافه کنید." },
-      { question: "چه کسی فرم را دریافت می‌کند؟", answer: "سرویس امن، هر پیام را به مقصد تعیین‌شده توسط مالک سایت می‌فرستد." }
+      { question: "چه زمانی پاسخ می‌گیرم؟", answer: "پیام‌ها را بررسی می‌کنیم و در اولین فرصت پاسخ می‌دهیم. برای تماس مستقیم به info@ruachbreslov.org ایمیل بزنید یا با 917-740-4509 تماس بگیرید." },
+      { question: "آیا می‌توانم حضوری مراجعه کنم؟", answer: "از پیش با ما تماس بگیرید تا زمان مناسب و اطلاعات به‌روز مراجعه را در اختیارتان بگذاریم." },
+      { question: "چه کسی فرم را دریافت می‌کند؟", answer: "پیام شما به‌صورت امن به تیم Ruach Breslov در info@ruachbreslov.org تحویل می‌شود." }
     ]
   },
   support: {
-    eyebrow: "پرداخت امن در صفحه میزبان",
+    eyebrow: "به رشد Ruach Breslov کمک کنید",
     title: "از کار ما حمایت کنید",
-    description: "با هدایت حامیان به صفحه پرداخت Stripe، اطلاعات کارت را از وب‌سایت دور نگه دارید.",
-    hostedTitle: "لینک پرداخت Stripe",
-    hostedCopy: "گزینه پیش‌فرض پیشنهادی برای سایت ایستا: ساده، قابل استفاده مجدد و میزبانی‌شده توسط Stripe.",
-    customTitle: "نشست Checkout سفارشی",
-    customCopy: "برای قیمت پویا، موجودی یا تحویل. این حالت به سرور امن و webhook تأییدشده نیاز دارد.",
-    unavailable: "برای فعال‌سازی، لینک پرداخت Stripe را اضافه کنید.",
+    description: "دلگرمی و حمایت شما به Ruach Breslov کمک می‌کند ایمان، شادی و حکمت ربی نحمان را به اشتراک بگذارد.",
+    hostedTitle: "کمک‌های آنلاین",
+    hostedCopy: "هنگامی که کمک آنلاین فعال شود، پرداخت در صفحۀ امن ارائه‌دهندۀ پرداخت ما انجام خواهد شد.",
+    customTitle: "تماس با Ruach Breslov",
+    customCopy: "اگر مایلید دربارۀ حمایت از کار ما گفت‌وگو کنید، با تیم ما تماس بگیرید.",
+    unavailable: "کمک آنلاین در حال حاضر فعال نیست. اگر مایل به حمایت از Ruach Breslov هستید با ما تماس بگیرید.",
     secureNote: "این وب‌سایت هرگز اطلاعات کارت را درخواست یا ذخیره نمی‌کند.",
     processingContext: "پرداخت‌ها با {currency} تنظیم شده‌اند؛ زمان‌های عملیاتی از {timeZone} (وقت شرقی آمریکا) استفاده می‌کنند."
   },
@@ -650,12 +642,13 @@ const fa: Dictionary = {
   },
   privacy: {
     title: "اطلاعیه حریم خصوصی",
-    intro: "این متن نمونه را با متن حقوقی متناسب با سازمان، خدمات، مخاطبان و حوزه قضایی خود جایگزین کنید.",
+    intro: "آخرین به‌روزرسانی: ۴ سپتامبر ۲۰۲۶. این اطلاعیه توضیح می‌دهد Ruach Breslov چگونه اطلاعات ارسال‌شده از طریق این وب‌سایت را مدیریت می‌کند.",
     sections: [
-      { title: "اطلاعات ارسالی", copy: "فرم‌های تماس، عضویت و ثبت حضور ممکن است فیلدهای نمایش‌داده‌شده را جمع‌آوری کنند." },
-      { title: "نحوه استفاده", copy: "از اطلاعات فقط برای پاسخ، مدیریت حضور و ارسال ارتباطات درخواستی استفاده کنید." },
-      { title: "ارائه‌دهندگان خدمات", copy: "ارائه‌دهندگان ایمیل، پرداخت، ویدیو، امنیت و میزبانی داده محدودی را پردازش می‌کنند." },
-      { title: "انتخاب‌های شما", copy: "راه ارتباطی فعالی برای دسترسی، اصلاح، حذف و تغییر ترجیحات ارائه دهید." }
+      { title: "اطلاعاتی که ارائه می‌کنید", copy: "فرم تماس نام، نشانی ایمیل، پیام و هر اطلاعات اختیاری را که وارد کنید دریافت می‌کند. فرم عضویت نام، نشانی ایمیل و موضوعات ارتباطی انتخاب‌شده را دریافت می‌کند." },
+      { title: "نحوۀ استفاده از اطلاعات", copy: "از اطلاعات برای پاسخ به پرسش‌ها، محافظت از فرم‌ها در برابر سوءاستفاده، تأیید درخواست عضویت و ارسال تنها پیام‌هایی که خواسته‌اید استفاده می‌کنیم." },
+      { title: "ارائه‌دهندگان خدمات", copy: "GitHub Pages میزبان وب‌سایت است. Cloudflare خدمات DNS، میزبانی API، پایگاه داده و امنیت Turnstile را ارائه می‌دهد. Resend ایمیل‌ها و عضویت‌های تأییدشده را مدیریت می‌کند. این ارائه‌دهندگان فقط به میزان لازم برای ارائۀ خدمات اطلاعات را پردازش می‌کنند." },
+      { title: "نگهداری و امنیت", copy: "پیام‌های تماس از طریق ایمیل تحویل می‌شوند و در پایگاه دادۀ وب‌سایت ذخیره نمی‌شوند. درخواست‌های عضویت تأییدنشده پس از ۲۴ ساعت منقضی می‌شوند. اطلاعات عضویت تأییدشده تا لغو عضویت یا درخواست حذف در Resend باقی می‌ماند. سوابق امنیتی محدود برای جلوگیری از سوءاستفاده نگهداری می‌شوند." },
+      { title: "انتخاب‌های شما", copy: "می‌توانید از پیوندهای موجود در ایمیل‌ها عضویت را لغو کنید. برای درخواست دسترسی، اصلاح یا حذف اطلاعاتی که فرستاده‌اید به info@ruachbreslov.org ایمیل بزنید." }
     ]
   },
   footer: {

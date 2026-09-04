@@ -26,10 +26,25 @@ function requireHttps(name, allowedHosts = []) {
   }
 }
 
+function optionalHttps(name, allowedHosts = []) {
+  const value = process.env[name]?.trim() ?? "";
+  if (!value) return;
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:") errors.push(`${name} must use HTTPS.`);
+    if (allowedHosts.length && !allowedHosts.includes(url.hostname)) {
+      errors.push(`${name} must use one of: ${allowedHosts.join(", ")}.`);
+    }
+    if (url.hostname.includes("example")) errors.push(`${name} still uses an example hostname.`);
+  } catch {
+    errors.push(`${name} must be a valid URL.`);
+  }
+}
+
 requireHttps("NEXT_PUBLIC_SITE_URL");
 requireHttps("NEXT_PUBLIC_API_BASE_URL");
-requireHttps("NEXT_PUBLIC_STRIPE_PAYMENT_LINK", ["buy.stripe.com", "checkout.stripe.com"]);
-requireHttps("NEXT_PUBLIC_YOUTUBE_CHANNEL_URL", ["www.youtube.com", "youtube.com"]);
+optionalHttps("NEXT_PUBLIC_STRIPE_PAYMENT_LINK", ["buy.stripe.com", "checkout.stripe.com"]);
+optionalHttps("NEXT_PUBLIC_YOUTUBE_CHANNEL_URL", ["www.youtube.com", "youtube.com"]);
 
 for (const name of [
   "NEXT_PUBLIC_ORGANIZATION_NAME_EN",
@@ -39,8 +54,7 @@ for (const name of [
   "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
   "NEXT_PUBLIC_CONTACT_EMAIL",
   "NEXT_PUBLIC_CONTACT_PHONE",
-  "NEXT_PUBLIC_CONTACT_ADDRESS",
-  "NEXT_PUBLIC_YOUTUBE_VIDEO_IDS"
+  "NEXT_PUBLIC_CONTACT_ADDRESS"
 ]) required(name);
 
 const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ?? "";

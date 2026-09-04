@@ -58,14 +58,10 @@ test("presents Ruach Breslov's purpose in every supported language", async ({ pa
   }
 });
 
-test("opens and closes an RSVP dialog with the keyboard", async ({ page }) => {
+test("does not publish unconfirmed events", async ({ page }) => {
   await page.goto("/en/events");
-  await page.getByRole("button", { name: "RSVP" }).first().click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await expect.poll(() => dialog.evaluate((element) => element.contains(document.activeElement))).toBe(true);
-  await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("heading", { name: "No events are currently scheduled" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "RSVP" })).toHaveCount(0);
 });
 
 test("exposes configured forms and bot-challenge fields", async ({ page }) => {
@@ -95,6 +91,7 @@ test("honors reduced-motion preferences", async ({ page }) => {
 });
 
 test("has no automatically detectable WCAG A/AA violations on core routes", async ({ page }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   for (const route of ["/en", "/he", "/es/events", "/fa/contact"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })

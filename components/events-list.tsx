@@ -5,6 +5,16 @@ import { RsvpDialog } from "@/components/forms/rsvp-dialog";
 import { MotionReveal } from "@/components/motion-reveal";
 
 export function EventsList({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
+  if (!events.length) {
+    return (
+      <div className="empty-state">
+        <span className="icon-tile"><CalendarDays aria-hidden="true" /></span>
+        <h2>{dictionary.events.emptyTitle}</h2>
+        <p>{dictionary.events.emptyCopy}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="events-grid">
       {events.map((event, index) => {
@@ -13,7 +23,6 @@ export function EventsList({ locale, dictionary }: { locale: Locale; dictionary:
           <MotionReveal key={event.id} delay={index * 0.07} className="event-card">
             <div className="event-card-top">
               <span className="icon-tile"><CalendarDays aria-hidden="true" /></span>
-              {event.demo ? <span className="demo-badge">{dictionary.events.demoLabel}</span> : null}
             </div>
             <h2>{content.title}</h2>
             <p>{content.summary}</p>
