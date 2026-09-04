@@ -1,15 +1,15 @@
 # Ruach Breslov Main Site — Project Memory
 
-Last updated: September 3, 2026
+Last updated: September 4, 2026
 
 ## Working boundary
 
 - This is the active, project-specific repository. Its local folder is `Ruach Breslov Main Site`.
 - The clean source template is the sibling repository `Next JS. Web Temp`. Do not modify it with Ruach Breslov content or configuration.
 - The active branch is `main`.
-- Git remote `origin` is configured as `git@github.com:Ruach-Breslov/rbt.git`.
-- A dedicated repository-scoped Ed25519 keypair exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`), and local Git config forces this repository to use it. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
-- `Ruach-Breslov/rbt` exists and is empty. The `gav4you` organization invitation was accepted, but that account currently has read-only repository permission. Push access still requires either write permission for `gav4you` or installation of the dedicated public key as a write-enabled repository deploy key; an organization Actions secret does not grant Git/SSH access.
+- Git remote `origin` is configured as `https://github.com/Ruach-Breslov/rbt.git`; local `main` tracks `origin/main`.
+- The `gav4you` organization invitation was accepted, that account has write permission, and GitHub CLI HTTPS authentication is active for repository operations.
+- A dedicated Ed25519 keypair also exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`) but is not needed by the current HTTPS connection. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
 
 ## Confirmed organization details
@@ -37,6 +37,7 @@ Last updated: September 3, 2026
 - Added the owner-provided purpose statement, localized homepage messaging, metadata, and footer copy in all four languages.
 - Added automated browser coverage for locale direction, language persistence, public contact information, localized purpose copy, accessibility, forms, dialogs, reduced motion, and WebGPU fallback.
 - Added an ignored master live-services worksheet plus a tracked blank template covering public frontend values, Worker configuration, provider secrets, and provisioning credentials. Secrets remain out of Git and are deployed only to their intended destinations.
+- Connected the project to `Ruach-Breslov/rbt` and initialized its `main` branch without overwriting any remote history.
 
 ## Verification baseline
 
@@ -56,10 +57,11 @@ Last updated: September 3, 2026
 6. Replace the starter privacy notice with owner-approved legal content.
 7. Fill `.env.master.local`, then configure production URLs, Turnstile, Resend, allowed origins, and the remaining Worker secrets in their documented destinations.
 8. Provision project-specific Cloudflare Worker and D1 resources before deployment. The inherited Wrangler configuration must not be treated as the final Ruach Breslov production resource.
-9. Grant `gav4you` write permission to `Ruach-Breslov/rbt` or add the dedicated public key as a write-enabled repository deploy key, then push `main`, configure deployment variables, connect the final domain, deploy, and run launch-readiness checks.
+9. Configure GitHub deployment variables, connect the final domain, deploy, and run launch-readiness checks.
 
 ## Recorded commits
 
 - `6b3694b` — independent template baseline
 - `487f05e` — Ruach Breslov identity, public contact details, and persistent language preference
 - `5b698c9` — localized Ruach Breslov purpose and homepage messaging
+- `960deae` — master live-services environment inventory and credential-handling documentation
