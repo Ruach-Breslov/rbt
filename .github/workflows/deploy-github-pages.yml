@@ -34,6 +34,18 @@ jobs:
         id: pages
         uses: actions/configure-pages@v6
 
+      - name: Normalize canonical site URL
+        id: site
+        shell: bash
+        env:
+          RAW_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          canonical_url="${RAW_BASE_URL}"
+          if [[ "${canonical_url}" == http://* ]]; then
+            canonical_url="https://${canonical_url#http://}"
+          fi
+          echo "base_url=${canonical_url}" >> "${GITHUB_OUTPUT}"
+
       - name: Install dependencies
         run: npm ci
 
@@ -65,7 +77,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.base_url }}
           NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
           NEXT_PUBLIC_ORGANIZATION_NAME_EN: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_EN }}
           NEXT_PUBLIC_ORGANIZATION_NAME_HE: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_HE }}
@@ -84,12 +96,12 @@ jobs:
         run: npm run check:static-export
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.base_url }}
 
       - name: Check launch configuration
         run: npm run check:launch
         env:
-          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.site.outputs.base_url }}
           NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
           NEXT_PUBLIC_ORGANIZATION_NAME_EN: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_EN }}
           NEXT_PUBLIC_ORGANIZATION_NAME_HE: ${{ vars.NEXT_PUBLIC_ORGANIZATION_NAME_HE }}

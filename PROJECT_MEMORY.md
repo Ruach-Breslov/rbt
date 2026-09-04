@@ -13,6 +13,7 @@ Last updated: September 4, 2026
 - A dedicated Ed25519 keypair also exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`) but is not needed by the current HTTPS connection. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
 - The production Cloudflare account ID is `021dbe9c5c0ac9f63b2532a0a9c86359`; the active `ruachbreslov.org` zone ID is `0a4fde7c3ae973afc410b5af0d3a2aec`. Global API Key authentication to that account was verified from the ignored master worksheet, and no Cloudflare secret is committed.
 - Cloudflare DNS preserves the existing Google MX/TXT records and adds DNS-only GitHub Pages records: four apex A records, four apex AAAA records, and `www` as a CNAME to `ruach-breslov.github.io`.
+- Resend full-access API authentication is verified. The `ruachbreslov.org` sending domain is verified with DKIM and SPF through Cloudflare; the `Newsletter` and `Event announcements` Topics use explicit opt-in defaults. The full-access key stays only in the ignored worksheet.
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
 
 ## Confirmed organization details
@@ -43,6 +44,7 @@ Last updated: September 4, 2026
 - Connected the project to `Ruach-Breslov/rbt` and initialized its `main` branch without overwriting any remote history.
 - Connected to the confirmed production Cloudflare account and active `ruachbreslov.org` zone, and bound Wrangler to the non-secret account ID.
 - Made `Ruach-Breslov/rbt` public, enabled GitHub Pages with GitHub Actions, configured `ruachbreslov.org`, and connected its apex and `www` DNS records through Cloudflare without disturbing mail records.
+- Connected and verified the Resend sending domain, created the two required opt-in Topics, and selected `Ruach Breslov <no-reply@ruachbreslov.org>` as the production sender.
 
 ## Verification baseline
 
