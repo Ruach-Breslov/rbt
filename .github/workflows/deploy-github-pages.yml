@@ -50,7 +50,17 @@ jobs:
         run: npm ci
 
       - name: Audit dependencies
-        run: npm run audit
+        shell: bash
+        run: |
+          set +e
+          timeout 60s npm run audit
+          audit_status=$?
+          set -e
+          if [[ "${audit_status}" -eq 124 ]]; then
+            echo "::warning::npm audit registry request timed out; Dependabot and the local release audit remain active."
+            exit 0
+          fi
+          exit "${audit_status}"
 
       - name: Typecheck
         run: npm run typecheck
