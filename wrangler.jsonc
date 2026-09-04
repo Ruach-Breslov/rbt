@@ -1,25 +1,44 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "organization-website-api",
+  "name": "ruach-breslov-api",
   "account_id": "021dbe9c5c0ac9f63b2532a0a9c86359",
   "main": "worker/src/index.ts",
   "compatibility_date": "2026-09-03",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "api.ruachbreslov.org",
+      "custom_domain": true
+    }
+  ],
   "vars": {
-    "ALLOWED_ORIGINS": "http://localhost:3000",
-    "PUBLIC_API_URL": "http://localhost:8787",
-    "SUBSCRIPTION_CONFIRMATION_REDIRECT_URL": "http://localhost:3000/en",
-    "ORGANIZATION_NAME": "Organization Name",
-    "TURNSTILE_EXPECTED_HOSTNAMES": "localhost",
+    "ALLOWED_ORIGINS": "https://ruachbreslov.org,https://www.ruachbreslov.org",
+    "PUBLIC_API_URL": "https://api.ruachbreslov.org",
+    "SUBSCRIPTION_CONFIRMATION_REDIRECT_URL": "https://ruachbreslov.org/en",
+    "ORGANIZATION_NAME": "Ruach Breslov",
+    "TURNSTILE_EXPECTED_HOSTNAMES": "ruachbreslov.org,www.ruachbreslov.org",
     "RSVP_RETENTION_DAYS": "365"
+  },
+  "secrets": {
+    "required": [
+      "RATE_LIMIT_SALT",
+      "TURNSTILE_SECRET_KEY",
+      "RESEND_TRANSACTIONAL_API_KEY",
+      "RESEND_CONTACTS_API_KEY",
+      "RESEND_FROM_EMAIL",
+      "CONTACT_TO_EMAIL",
+      "RESEND_NEWSLETTER_TOPIC_ID",
+      "RESEND_EVENTS_TOPIC_ID",
+      "RESEND_WEBHOOK_SECRET"
+    ]
   },
   "triggers": { "crons": ["17 3 * * *"] },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "organization-website",
-      "database_id": "4e5f0932-6d9c-42f5-bf5c-71d36aca30be",
+      "database_name": "ruach-breslov-production",
+      "database_id": "21eb66cf-2a77-49c5-91c3-e606a24713ab",
       "migrations_dir": "worker/migrations"
     }
   ]

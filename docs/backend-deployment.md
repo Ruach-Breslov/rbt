@@ -22,7 +22,7 @@ install Worker secrets individually. Never pass the whole master file to
 values.
 
 1. Authenticate an authorized Cloudflare account with `npx wrangler login`.
-2. Create the database with `npx wrangler d1 create organization-website`.
+2. Create the production database with `npx wrangler d1 create ruach-breslov-production`.
 3. Replace the inherited database UUID in `wrangler.jsonc` with the returned project-specific database ID.
 4. Replace the local Worker variables with the exact HTTPS frontend origin, deployed API URL, post-confirmation redirect, organization name, production Turnstile hostnames, and approved RSVP retention period.
 5. Install these Worker secrets with `npx wrangler secret put NAME`:
@@ -41,15 +41,24 @@ values.
 8. Run `npm run check`, `npm run test:e2e`, and `npm run check:launch` with production public variables.
 9. Deploy with `npm run worker:deploy` and verify `GET /health` returns `{ "ok": true }`.
 
+The Ruach Breslov production deployment uses Worker `ruach-breslov-api`, D1
+database `ruach-breslov-production`, and the Worker Custom Domain
+`https://api.ruachbreslov.org`. `wrangler.jsonc` declares the required secret
+names so later deployments fail safely if a binding is missing; values remain in
+Cloudflare's encrypted secret store and never in this repository.
+
 ## Turnstile
 
 Create separate development and production widgets. Restrict the production widget to the final frontend hostnames. Put the site key in `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and the secret in the Worker secret store. The Worker checks the expected hostname and per-form action and rejects expired, replayed, or invalid tokens.
 
 ## Resend
 
-Verify the sending domain and publish SPF, DKIM, and DMARC. Create separate restricted keys for transactional email and Contacts administration. Create `Newsletter` and `Event announcements` Topics and install their IDs as Worker secrets.
+Verify the sending domain and publish SPF, DKIM, and DMARC. Use a separate
+sending-only key for transactional email and a full-access administration key
+for Contacts operations. Create `Newsletter` and `Event announcements` Topics
+and install their IDs as Worker secrets.
 
-Register a webhook at `https://YOUR_API_HOST/webhooks/resend` and install its signing secret. The subscription endpoint sends a single-use, 24-hour confirmation link before activating Topics.
+Register a webhook at `https://api.ruachbreslov.org/webhooks/resend` and install its signing secret. The subscription endpoint sends a single-use, 24-hour confirmation link before activating Topics.
 
 ## Stripe
 
