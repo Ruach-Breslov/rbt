@@ -89,6 +89,8 @@ Last updated: September 6, 2026
 - GitHub Actions deployment run `34034582543` published the warm editorial redesign after passing the dependency audit, all typechecks, lint, 10 Worker tests, 26 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
 - Live browser checks confirm the Cloudflare-served homepage uses the cream background and burgundy text, loads `/media/gallery/full-room.webp` as the authentic hero, exposes six curated “Inside the Community” images, contains no generated WebGPU hero surface, and opens the shared cinematic lightbox successfully.
 - The approved rescue build compiles successfully, passes the launch-readiness and 29-route/four-locale static-export checks, and passes all 28 desktop/mobile browser tests, including the new channel tools, click-to-open/close player, selected cinematic hero, enlarged navigation, multilingual behavior, reduced motion, and automated WCAG A/AA checks.
+- GitHub Actions deployment run `34042251111` published commit `34c5446` after passing the dependency audit, all typechecks, lint, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
+- Live Cloudflare-facing checks confirm HTTP 200 for the homepage, support page, video page, and new hero asset; the homepage uses the selected hero and 88%-opaque enlarged header without horizontal overflow; production exposes five hosted Stripe donation choices plus portal access; and the 13-video/three-Short library opens and closes its privacy-enhanced player while removing the iframe on exit.
 
 ## Remaining work — handle one item at a time
 
@@ -116,3 +118,4 @@ Last updated: September 6, 2026
 - `b49e9b9` — removed npm install's duplicate implicit audit call
 - `2de812c` — official YouTube channel and featured video integration
 - `44370db` — client-selected warm palette, authentic-photo hero, and shared cinematic gallery
+- `34c5446` — approved cinematic rescue facelift, enlarged navigation, and full channel-style video library
