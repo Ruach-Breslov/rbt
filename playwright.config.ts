@@ -34,6 +34,7 @@ export default defineConfig({
       NEXT_PUBLIC_ORGANIZATION_NAME_HE: "Ruach Breslov",
       NEXT_PUBLIC_ORGANIZATION_NAME_ES: "Ruach Breslov",
       NEXT_PUBLIC_ORGANIZATION_NAME_FA: "Ruach Breslov",
+      NEXT_PUBLIC_HERO_IMAGE: "/media/gallery/full-room.webp",
       NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK: "https://donate.stripe.com/test_one_time",
       NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18: "https://donate.stripe.com/test_monthly_18",
       NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36: "https://donate.stripe.com/test_monthly_36",

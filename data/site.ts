@@ -15,7 +15,7 @@ function optionalPublicUrl(value: string | undefined) {
 
 const configuredSiteUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_SITE_URL) || "https://example.com";
 const apiBaseUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_API_BASE_URL);
-const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() || "/media/hero/ruach-breslov-hero.webp";
+const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() || "/media/gallery/full-room.webp";
 const heroImage = configuredHeroImage.startsWith("/") && !configuredHeroImage.startsWith("//") && !configuredHeroImage.includes("..")
   ? withBasePath(configuredHeroImage as `/${string}`)
   : "";
@@ -58,7 +58,7 @@ export const site = {
   },
   media: {
     heroImage,
-    communityImage: withBasePath("/media/gallery/community-study.webp")
+    communityImage: withBasePath("/media/gallery/study-partners.webp")
   }
 } as const;
 

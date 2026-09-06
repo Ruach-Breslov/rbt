@@ -20,6 +20,7 @@ Last updated: September 6, 2026
 - Keep secrets out of Git. Only public configuration belongs in `NEXT_PUBLIC_*` variables.
 - Treat `https://ruachbreslov.wixsite.com/ruach-breslev` as a content reference only. Reuse confirmed organization facts and themes, not its layout, sample events, generic blog promises, or unverified testimonials.
 - The owner supplied and approved the local `Pictures` folder for site use. Keep those originals untracked and untouched; publish only selected, optimized derivatives under `public/media`.
+- The client-selected visual palette is the warm Wix palette: cream `#FCF8F2`, burgundy `#4A0E0E`, muted burgundy `#6E4E4E`, and gold `#D4AF37`. Apply it as an editorial Ruach Breslov identity rather than copying the Wix layout.
 - Stripe live account `acct_1UBfcGJcQUW3PSlA` now provides hosted checkout. The full-access secret remains local provisioning-only and is not installed in GitHub, the frontend, or the Worker.
 
 ## Confirmed organization details
@@ -64,13 +65,14 @@ Last updated: September 6, 2026
 - Provisioned five live Stripe-hosted donation pages: one customer-selected one-time gift (minimum $5, suggested $36, maximum $10,000) and fixed monthly gifts of $18, $36, $72, and $180. Stripe Managed Payments is disabled only on these links because Stripe does not support its donation submit type in Managed Payments mode.
 - Enabled Stripe's hosted customer-portal login with billing history, payment-method updates, and self-service subscription cancellation at the end of the current billing period. The public donation and portal URLs are stored as GitHub Actions variables.
 - Connected the official Ruach Breslov YouTube channel and featured three verified uploads: “The Power of RUACH,” Likkutei Moharan Torah 7, and Likkutei Moharan Torah 4. Embeds use YouTube's privacy-enhanced domain and load only after an explicit play click; the localized privacy notice describes that request.
+- Replaced the dark technology-template presentation with the client's cream, burgundy, muted burgundy, and gold palette; serif editorial typography; authentic community photography; and paper-like surfaces. The homepage hero now uses a real gathering photo, and “Inside the Community” uses the same reusable cinematic lightbox as the full gallery with a deliberately curated six-photo edit.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
 - Static export generates all 29 expected routes across four locales.
 - All 10 Cloudflare Worker tests pass.
-- All 24 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, the gallery/lightbox, recurring donation choices, official YouTube video configuration, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
+- All 26 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, both cinematic gallery/lightbox entry points, recurring donation choices, official YouTube video configuration, the authentic community-photo hero, reduced motion, and automated WCAG A/AA checks on core routes.
 - The launch-readiness gate passes with the confirmed production public configuration and complete Stripe one-time/monthly link set; optional YouTube values remain strictly validated whenever supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 - GitHub Actions deployment run `33858694809` passed the dependency audit, all typechecks, lint, Worker tests, 18 browser tests, production build, static-export check, launch gate, artifact upload, and Pages deployment.

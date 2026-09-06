@@ -1,6 +1,6 @@
 # WebGPU Visual and Photo Layer
 
-The WebGPU layer is progressive enhancement. The website, navigation, content, forms, and payments never depend on it. Browsers without WebGPU retain the CSS visual underneath, while supported devices receive the interactive GPU scene.
+The WebGPU layer is an optional progressive enhancement for future visual experiments. The public homepage intentionally uses a direct, authentic community photograph instead of the GPU scene. Website navigation, content, forms, and payments never depend on WebGPU.
 
 ## Quality policy
 
@@ -11,14 +11,15 @@ The WebGPU layer is progressive enhancement. The website, navigation, content, f
 - Animation stops outside the viewport and while the page is hidden. Reduced-motion users receive a still GPU frame.
 - Device loss triggers a controlled renderer restart; failure always returns to the CSS or image fallback.
 
-## Supplying a hero photo
+## Supplying the public hero photo
 
 1. Put the master in `public/media/`, for example `public/media/hero.avif`.
 2. Set `NEXT_PUBLIC_HERO_IMAGE=/media/hero.avif`.
-3. Keep the original master outside the repository. Export a web delivery copy at least as large as its maximum rendered pixel dimensions.
-4. Prefer a high-quality AVIF or WebP delivery asset and verify color appearance in both Display-P3 and sRGB environments.
+3. The homepage renders that image directly so the real photograph remains the visual focus in every browser.
+4. Keep the original master outside the repository. Export a web delivery copy at least as large as its maximum rendered pixel dimensions.
+5. Prefer a high-quality AVIF or WebP delivery asset and verify color appearance in both Display-P3 and sRGB environments.
 
-The environment value deliberately accepts only a root-relative local path. This keeps the Content Security Policy narrow, avoids cross-origin texture failures, and makes GitHub Pages repository subpaths work correctly.
+The environment value deliberately accepts only a root-relative local path. This keeps the Content Security Policy narrow and makes GitHub Pages repository subpaths work correctly.
 
 ## Reusing the photo widget
 

@@ -27,14 +27,14 @@ export type GalleryItem = GalleryImage | GalleryVideo;
 export const galleryImages: GalleryImage[] = [
   { id: "community-study", type: "image", src: "/media/gallery/community-study.webp", width: 1600, height: 900, category: "study", featured: true },
   { id: "hospitality", type: "image", src: "/media/gallery/hospitality.webp", width: 1200, height: 1600, category: "hospitality", featured: true },
-  { id: "learning-together", type: "image", src: "/media/gallery/learning-together.webp", width: 1536, height: 864, category: "study", featured: true },
+  { id: "learning-together", type: "image", src: "/media/gallery/learning-together.webp", width: 1536, height: 864, category: "study" },
   { id: "weekly-gathering", type: "image", src: "/media/gallery/weekly-gathering.webp", width: 1600, height: 1200, category: "gathering", featured: true },
-  { id: "shared-table", type: "image", src: "/media/gallery/shared-table.webp", width: 1600, height: 900, category: "hospitality" },
-  { id: "study-partners", type: "image", src: "/media/gallery/study-partners.webp", width: 1600, height: 900, category: "study", featured: true },
-  { id: "teaching-circle", type: "image", src: "/media/gallery/teaching-circle.webp", width: 1600, height: 900, category: "teaching" },
-  { id: "full-room", type: "image", src: "/media/gallery/full-room.webp", width: 1600, height: 1200, category: "gathering", featured: true },
+  { id: "shared-table", type: "image", src: "/media/gallery/shared-table.webp", width: 1600, height: 900, category: "hospitality", featured: true },
+  { id: "study-partners", type: "image", src: "/media/gallery/study-partners.webp", width: 1600, height: 900, category: "study" },
+  { id: "teaching-circle", type: "image", src: "/media/gallery/teaching-circle.webp", width: 1600, height: 900, category: "teaching", featured: true },
+  { id: "full-room", type: "image", src: "/media/gallery/full-room.webp", width: 1600, height: 1200, category: "gathering" },
   { id: "torah-class", type: "image", src: "/media/gallery/torah-class.webp", width: 1600, height: 1200, category: "teaching" },
-  { id: "gathering-wide", type: "image", src: "/media/gallery/gathering-wide.webp", width: 1600, height: 900, category: "gathering" },
+  { id: "gathering-wide", type: "image", src: "/media/gallery/gathering-wide.webp", width: 1600, height: 900, category: "gathering", featured: true },
   { id: "evening-class", type: "image", src: "/media/gallery/evening-class.webp", width: 1600, height: 1200, category: "teaching" },
   { id: "community-in-session", type: "image", src: "/media/gallery/community-in-session.webp", width: 1600, height: 1200, category: "gathering" }
 ];

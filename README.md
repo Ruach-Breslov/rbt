@@ -13,9 +13,9 @@ The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pa
 - Newsletter and event-announcement preference form
 - Event cards and reusable RSVP dialog
 - Click-to-load, privacy-enhanced YouTube video library
-- Highest-available YouTube playback with 4K/HDR capability labels for appropriately mastered videos
-- WebGPU-powered, wide-gamut interactive visuals with automatic CSS fallback
-- Optional full-resolution, GPU-enhanced hero photography
+- Official Ruach Breslov channel link and curated featured teachings
+- Authentic Ruach Breslov community photography throughout the public experience
+- Reusable cinematic gallery with accessible keyboard and mobile lightbox controls
 - Full contact page with inquiry form, details, hours, response expectations, and FAQs
 - Stripe-hosted Payment Link as the recommended payment default
 - Optional custom Stripe Checkout Session frontend
@@ -106,7 +106,7 @@ Never source, deploy, or upload the master file as a whole.
 | `NEXT_PUBLIC_STRIPE_PAYMENT_LINK` | Stripe-hosted Payment Link; recommended payment mode |
 | `NEXT_PUBLIC_YOUTUBE_VIDEO_IDS` | Up to three comma-separated YouTube IDs |
 | `NEXT_PUBLIC_YOUTUBE_CHANNEL_URL` | Optional public YouTube channel URL |
-| `NEXT_PUBLIC_HERO_IMAGE` | Optional local `/media/...` hero image enhanced by WebGPU |
+| `NEXT_PUBLIC_HERO_IMAGE` | Optional local `/media/...` community hero photograph |
 
 Never use a `NEXT_PUBLIC_*` variable for a Resend API key, Stripe secret/restricted key, webhook secret, database credential, CAPTCHA secret, or any other confidential value.
 

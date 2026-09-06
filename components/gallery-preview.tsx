@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CinematicGallery } from "@/components/cinematic-gallery";
 import { featuredGalleryImages } from "@/data/gallery";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
-import { publicAsset } from "@/data/site";
 
 export function GalleryPreview({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   return (
@@ -17,21 +17,7 @@ export function GalleryPreview({ locale, dictionary }: { locale: Locale; diction
           {dictionary.actions.viewGallery}<ArrowUpRight aria-hidden="true" />
         </Link>
       </div>
-      <div className="gallery-preview-grid">
-        {featuredGalleryImages.map((item) => (
-          <Link key={item.id} href={localeHref(locale, "gallery")} className={`gallery-preview-item gallery-${item.category}`}>
-            <img
-              src={publicAsset(item.src)}
-              width={item.width}
-              height={item.height}
-              loading="lazy"
-              decoding="async"
-              alt={dictionary.gallery.captions[item.category]}
-            />
-            <span>{dictionary.gallery.captions[item.category]}</span>
-          </Link>
-        ))}
-      </div>
+      <CinematicGallery closeLabel={dictionary.actions.close} galleryDictionary={dictionary.gallery} images={featuredGalleryImages} variant="preview" />
     </section>
   );
 }

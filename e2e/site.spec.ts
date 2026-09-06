@@ -79,6 +79,18 @@ test("offers an accessible community gallery and lightbox", async ({ page }) => 
   await expect(page.getByRole("dialog")).toBeHidden();
 });
 
+test("opens the cinematic gallery directly from Inside the Community", async ({ page }) => {
+  await page.goto("/en");
+  const communityGallery = page.locator(".gallery-preview-section");
+  await expect(communityGallery.getByRole("heading", { name: "Learning, friendship, and joy in the room" })).toBeVisible();
+  await expect(communityGallery.locator(".gallery-preview-item")).toHaveCount(6);
+
+  await communityGallery.locator(".gallery-preview-item").first().click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.getByRole("img", { name: "Learning Torah together around an open text" })).toBeVisible();
+  await page.getByRole("button", { name: "Close" }).click();
+});
+
 test("presents one-time and recurring Stripe-hosted donation choices", async ({ page }) => {
   await page.goto("/en/support");
   await expect(page.getByRole("heading", { name: "Make a one-time donation" })).toBeVisible();
@@ -108,12 +120,10 @@ test("exposes configured forms and bot-challenge fields", async ({ page }) => {
   await expect(page.getByLabel("Email")).toBeVisible();
 });
 
-test("keeps a usable CSS fallback when WebGPU is unavailable", async ({ page }) => {
-  await page.addInitScript(() => {
-    Object.defineProperty(Navigator.prototype, "gpu", { configurable: true, get: () => undefined });
-  });
+test("uses authentic community photography instead of a generated hero surface", async ({ page }) => {
   await page.goto("/en");
-  await expect(page.locator('[data-webgpu-state="fallback"]')).toBeVisible();
+  await expect(page.locator(".hero-community-photo img")).toBeVisible();
+  await expect(page.locator(".webgpu-hero-surface")).toHaveCount(0);
   await expect(page.locator(".ambient-background")).toBeAttached();
 });
 

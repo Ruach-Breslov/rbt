@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight, BookOpenText, Globe2, HandHeart, MailCheck, Mic2, PlayCircle, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
+import { ArrowUpRight, BookOpenText, HandHeart, MailCheck, Mic2, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
 import { GalleryPreview } from "@/components/gallery-preview";
 import { MotionReveal } from "@/components/motion-reveal";
 import { SubscriptionForm } from "@/components/forms/subscription-form";
-import { WebGpuHero } from "@/components/webgpu/webgpu-surface";
 import { site } from "@/data/site";
 
 const featureIcons = [BookOpenText, HandHeart, UsersRound, Mic2] as const;
@@ -25,15 +24,19 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
         </MotionReveal>
 
         <MotionReveal delay={0.12} className="hero-visual">
-          <WebGpuHero imageUrl={site.media.heroImage} />
-          <div className="signal-card signal-card-primary">
-            <span className="signal-dot" />
-            <small>{dictionary.system.liveFoundation}</small>
-            <strong>{dictionary.system.fastFocusedGlobal}</strong>
-          </div>
-          <div className="signal-orbit"><span /><span /><span /></div>
-          <div className="signal-card signal-card-secondary"><Globe2 aria-hidden="true" /><strong>4</strong><small>{dictionary.system.languagesReady}</small></div>
-          <div className="signal-card signal-card-tertiary"><PlayCircle aria-hidden="true" /><strong>Ruach</strong><small>{dictionary.system.videoReady}</small></div>
+          <figure className="hero-community-photo">
+            <img
+              src={site.media.heroImage}
+              width={1600}
+              height={1200}
+              decoding="async"
+              alt={dictionary.gallery.captions.gathering}
+            />
+            <figcaption>
+              <span>{dictionary.system.liveFoundation}</span>
+              <strong>{dictionary.gallery.captions.gathering}</strong>
+            </figcaption>
+          </figure>
         </MotionReveal>
       </section>
 

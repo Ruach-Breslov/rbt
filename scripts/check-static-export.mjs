@@ -92,8 +92,9 @@ if (!existsSync(outDir)) {
   }
 
   if (!/<html lang="en" dir="ltr"/i.test(rootHtml)) fail("Root page must declare English LTR document direction.");
-  if (!rootHtml.includes("webgpu-hero-surface") || !rootHtml.includes("<canvas")) {
-    fail("Root page must include the progressive WebGPU hero surface.");
+  const expectedHeroImage = heroImage || "/media/gallery/full-room.webp";
+  if (!rootHtml.includes("hero-community-photo") || !rootHtml.includes(expectedHeroImage)) {
+    fail("Root page must include the authentic community-photo hero.");
   }
   if (heroImage) {
     if (!heroImage.startsWith("/") || heroImage.startsWith("//") || heroImage.includes("..")) {
