@@ -88,6 +88,16 @@ test("presents one-time and recurring Stripe-hosted donation choices", async ({ 
   await expect(page.getByText("Monthly donations renew automatically each month until canceled.", { exact: false })).toBeVisible();
 });
 
+test("presents official Ruach Breslov YouTube videos behind click-to-play controls", async ({ page }) => {
+  await page.goto("/en/videos");
+  await expect(page.locator(".video-card")).toHaveCount(3);
+  await expect(page.getByRole("heading", { name: "The Power of RUACH" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Likkutei Moharan: Torah 7" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Likkutei Moharan: Torah 4" })).toBeVisible();
+  await expect(page.locator(".video-card iframe")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Visit our YouTube channel" })).toHaveAttribute("href", "https://www.youtube.com/@RuachBreslov");
+});
+
 test("exposes configured forms and bot-challenge fields", async ({ page }) => {
   await page.goto("/en/contact");
   await expect(page.getByRole("button", { name: "Send message" })).toBeEnabled();
@@ -116,7 +126,7 @@ test("honors reduced-motion preferences", async ({ page }) => {
 
 test("has no automatically detectable WCAG A/AA violations on core routes", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  for (const route of ["/en", "/he", "/es/events", "/fa/contact", "/en/gallery", "/he/support"]) {
+  for (const route of ["/en", "/he", "/es/events", "/fa/contact", "/en/gallery", "/he/support", "/en/videos"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
       .exclude(".turnstile-shell")

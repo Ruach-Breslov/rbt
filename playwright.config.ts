@@ -39,7 +39,9 @@ export default defineConfig({
       NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_36: "https://donate.stripe.com/test_monthly_36",
       NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_72: "https://donate.stripe.com/test_monthly_72",
       NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_180: "https://donate.stripe.com/test_monthly_180",
-      NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL: "https://billing.stripe.com/p/login/test_portal"
+      NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL: "https://billing.stripe.com/p/login/test_portal",
+      NEXT_PUBLIC_YOUTUBE_CHANNEL_URL: "https://www.youtube.com/@RuachBreslov",
+      NEXT_PUBLIC_YOUTUBE_VIDEO_IDS: "77ibzlmzv2E,7qr4fb3tZVg,4788Ho8xMyM"
     }
   }
 });

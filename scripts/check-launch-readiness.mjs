@@ -85,6 +85,9 @@ const videoIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "").split(",").ma
 if (videoIds.some((value) => !/^[A-Za-z0-9_-]{11}$/.test(value)) || videoIds.length > 3) {
   errors.push("NEXT_PUBLIC_YOUTUBE_VIDEO_IDS must contain one to three valid comma-separated YouTube IDs.");
 }
+if (videoIds.length > 0 && !process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL?.trim()) {
+  errors.push("NEXT_PUBLIC_YOUTUBE_CHANNEL_URL is required when featured YouTube videos are configured.");
+}
 
 const contentFiles = ["data/locales.ts", "data/events.ts", "data/site.ts"];
 const placeholderPatterns = [

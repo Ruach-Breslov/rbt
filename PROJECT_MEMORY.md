@@ -1,6 +1,6 @@
 # Ruach Breslov Main Site — Project Memory
 
-Last updated: September 4, 2026
+Last updated: September 6, 2026
 
 ## Working boundary
 
@@ -13,7 +13,7 @@ Last updated: September 4, 2026
 - A dedicated Ed25519 keypair also exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`) but is not needed by the current HTTPS connection. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
 - The production Cloudflare account ID is `021dbe9c5c0ac9f63b2532a0a9c86359`; the active `ruachbreslov.org` zone ID is `0a4fde7c3ae973afc410b5af0d3a2aec`. Global API Key authentication to that account was verified from the ignored master worksheet, and no Cloudflare secret is committed.
 - Cloudflare DNS preserves the existing Google MX/TXT records and routes the website to GitHub Pages using four apex A records, four apex AAAA records, and `www` as a CNAME to `ruach-breslov.github.io`. Those nine website records are proxied through Cloudflare; Universal SSL is active, the zone uses Full origin encryption, and Always Use HTTPS is enabled. GitHub Pages remains the origin.
-- Public HTTPS is currently terminated and enforced by Cloudflare while GitHub provisions its own Pages certificate. GitHub's domain-health API reports the apex and `www` as valid, served by Pages, HTTPS-eligible, and free of CAA errors; native Pages `https_enforced` remains off until that certificate exists.
+- Public HTTPS is currently terminated and enforced by Cloudflare while GitHub's native Pages certificate remains unissued. Because the website records are proxied, GitHub's domain-health API currently identifies Cloudflare IPs and reports the apex and `www` as not HTTPS-eligible; native Pages `https_enforced` remains off.
 - The production API is Worker `ruach-breslov-api` at `https://api.ruachbreslov.org`, backed by D1 database `ruach-breslov-production` (`21eb66cf-2a77-49c5-91c3-e606a24713ab`). The initial schema and daily cleanup cron are deployed, and required secret names are enforced by Wrangler.
 - The production Turnstile widget is restricted to `ruachbreslov.org` and `www.ruachbreslov.org`; its public site key is `0x4AAAAAAEmvXUpwE6Qy8Y81`, and its secret exists only in Cloudflare's Worker secret store.
 - Resend full-access API authentication is verified. The `ruachbreslov.org` sending domain is verified with DKIM and SPF through Cloudflare; the `Newsletter` and `Event announcements` Topics use explicit opt-in defaults. The Worker uses a separate send-only key for transactional mail and the owner-provided full-access key for Contacts administration. The webhook is registered at `https://api.ruachbreslov.org/webhooks/resend`; private keys and its signing secret are not committed.
@@ -32,6 +32,7 @@ Last updated: September 4, 2026
 - Confirmed offerings: weekly Torah gatherings/classes, one-on-one mentorship, community events and hospitality, guest speakers, and outreach.
 - Confirmed legacy theme: a small gathering grew into a brotherhood built on Torah, honesty, friendship, and the conviction that no one should feel alone.
 - Donation impact language may cover weekly classes, food and hospitality, guest speakers, community events, and outreach.
+- Official YouTube channel: `https://www.youtube.com/@RuachBreslov` (handle `@ruachbreslov`, channel ID `UCOhxrylucgg0_WdPRFU1d_w`).
 
 ## Language behavior
 
@@ -62,13 +63,14 @@ Last updated: September 4, 2026
 - Added a localized community gallery with 12 optimized photos, four optimized silent clips, keyboard-accessible lightbox navigation, mobile layouts, and gallery links in the primary navigation, homepage, footer, sitemap, and export checks.
 - Provisioned five live Stripe-hosted donation pages: one customer-selected one-time gift (minimum $5, suggested $36, maximum $10,000) and fixed monthly gifts of $18, $36, $72, and $180. Stripe Managed Payments is disabled only on these links because Stripe does not support its donation submit type in Managed Payments mode.
 - Enabled Stripe's hosted customer-portal login with billing history, payment-method updates, and self-service subscription cancellation at the end of the current billing period. The public donation and portal URLs are stored as GitHub Actions variables.
+- Connected the official Ruach Breslov YouTube channel and featured three verified uploads: “The Power of RUACH,” Likkutei Moharan Torah 7, and Likkutei Moharan Torah 4. Embeds use YouTube's privacy-enhanced domain and load only after an explicit play click; the localized privacy notice describes that request.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
 - Static export generates all 29 expected routes across four locales.
 - All 10 Cloudflare Worker tests pass.
-- All 22 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, the gallery/lightbox, recurring donation choices, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
+- All 24 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, the gallery/lightbox, recurring donation choices, official YouTube video configuration, reduced motion, WebGPU fallback, and automated WCAG A/AA checks on core routes.
 - The launch-readiness gate passes with the confirmed production public configuration and complete Stripe one-time/monthly link set; optional YouTube values remain strictly validated whenever supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 - GitHub Actions deployment run `33858694809` passed the dependency audit, all typechecks, lint, Worker tests, 18 browser tests, production build, static-export check, launch gate, artifact upload, and Pages deployment.
@@ -80,9 +82,8 @@ Last updated: September 4, 2026
 
 1. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
 2. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
-3. Add the official YouTube channel and up to three featured video IDs when supplied.
-4. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
-5. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
+3. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
+4. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
 ## Recorded commits
 

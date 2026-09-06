@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, MonitorPlay, Play, Sparkles } from "lucide-react";
+import { ExternalLink, MonitorPlay, Play } from "lucide-react";
 import type { Dictionary } from "@/data/locales";
 import type { VideoRecord } from "@/data/videos";
 import { site } from "@/data/site";
@@ -29,10 +29,6 @@ function VideoCard({ video, dictionary }: { video: VideoRecord; dictionary: Dict
         )}
       </div>
       <div className="video-card-copy">
-        <div className="quality-badges">
-          {video.supports4K ? <span><MonitorPlay aria-hidden="true" />{dictionary.videos.quality}</span> : null}
-          {video.supportsHdr ? <span><Sparkles aria-hidden="true" />{dictionary.videos.hdr}</span> : null}
-        </div>
         <h2>{video.title}</h2>
         <p>{video.description}</p>
       </div>
@@ -52,5 +48,16 @@ export function VideoLibrary({ videos, dictionary }: { videos: VideoRecord[]; di
     );
   }
 
-  return <div className="video-grid">{videos.map((video) => <VideoCard key={video.youtubeId} video={video} dictionary={dictionary} />)}</div>;
+  return (
+    <div className="video-library">
+      {site.youtube.channelUrl ? (
+        <div className="video-library-actions">
+          <a className="button button-secondary" href={site.youtube.channelUrl} target="_blank" rel="noreferrer">
+            {dictionary.videos.channelCta}<ExternalLink aria-hidden="true" />
+          </a>
+        </div>
+      ) : null}
+      <div className="video-grid">{videos.map((video) => <VideoCard key={video.youtubeId} video={video} dictionary={dictionary} />)}</div>
+    </div>
+  );
 }

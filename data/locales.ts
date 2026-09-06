@@ -78,8 +78,7 @@ export type Dictionary = {
     description: string;
     emptyTitle: string;
     emptyCopy: string;
-    quality: string;
-    hdr: string;
+    channelCta: string;
     items: Array<{ title: string; description: string }>;
   };
   gallery: {
@@ -223,15 +222,14 @@ const en: Dictionary = {
   videos: {
     eyebrow: "Teachings and inspiration",
     title: "Ruach Breslov videos",
-    description: "Official video teachings and stories from Ruach Breslov will be collected here.",
+    description: "Watch official teachings and stories from the Ruach Breslov YouTube channel.",
     emptyTitle: "Videos are coming soon",
     emptyCopy: "Stay connected for new teachings, conversations, and community stories.",
-    quality: "Highest available · up to 4K",
-    hdr: "HDR-ready",
+    channelCta: "Visit our YouTube channel",
     items: [
-      { title: "Featured story", description: "Use this position for the strongest introduction to your work." },
-      { title: "From the community", description: "Share a conversation, profile, or recent program." },
-      { title: "Ideas in depth", description: "Create a home for talks, classes, and long-form video." }
+      { title: "The Power of RUACH", description: "Rabbi David Yisrael Kalmus explores the power of ruach in this official Ruach Breslov teaching." },
+      { title: "Likkutei Moharan: Torah 7", description: "An official Ruach Breslov lesson in Likkutei Moharan, Torah 7." },
+      { title: "Likkutei Moharan: Torah 4", description: "An official Ruach Breslov lesson in Likkutei Moharan, Torah 4." }
     ]
   },
   gallery: {
@@ -314,7 +312,7 @@ const en: Dictionary = {
     sections: [
       { title: "Information you provide", copy: "The contact form collects your name, email address, message, and any optional details you choose to provide. Subscription forms collect your name, email address, and selected communication topics." },
       { title: "How we use information", copy: "We use submitted information to answer inquiries, protect the forms from abuse, confirm subscription requests, and send only the communications you requested." },
-      { title: "Service providers", copy: "GitHub Pages hosts the website. Cloudflare provides DNS, API hosting, database services, and Turnstile security. Resend delivers email and manages confirmed subscriptions. Stripe securely processes donations and recurring payment details on its hosted pages. These providers process information only as needed to provide those services." },
+      { title: "Service providers", copy: "GitHub Pages hosts the website. Cloudflare provides DNS, API hosting, database services, and Turnstile security. Resend delivers email and manages confirmed subscriptions. Stripe securely processes donations and recurring payment details on its hosted pages. When you choose to play an embedded video, YouTube receives the request and processes it under its policies. These providers process information only as needed to provide those services." },
       { title: "Retention and security", copy: "Contact messages are delivered by email and are not stored in the website database. Unconfirmed subscription requests expire after 24 hours. Confirmed subscription details remain with Resend until you unsubscribe or request deletion. Limited security records are retained to prevent abuse." },
       { title: "Your choices", copy: "You can unsubscribe using links in our emails. To request access, correction, or deletion of information you submitted, contact info@ruachbreslov.org." }
     ]
@@ -391,15 +389,14 @@ const he: Dictionary = {
   videos: {
     eyebrow: "לימוד והשראה",
     title: "סרטוני Ruach Breslov",
-    description: "לימודי וידאו וסיפורים רשמיים של Ruach Breslov ירוכזו כאן.",
+    description: "צפו בשיעורים ובסיפורים רשמיים מערוץ ה‑YouTube של Ruach Breslov.",
     emptyTitle: "סרטונים יעלו בקרוב",
     emptyCopy: "הישארו מחוברים ללימודים, שיחות וסיפורים חדשים מן הקהילה.",
-    quality: "האיכות הגבוהה ביותר · עד 4K",
-    hdr: "מוכן ל‑HDR",
+    channelCta: "לערוץ ה‑YouTube שלנו",
     items: [
-      { title: "סיפור מרכזי", description: "המקום להצגה החזקה ביותר של העשייה שלכם." },
-      { title: "מתוך הקהילה", description: "שתפו שיחה, פרופיל או תוכנית מהזמן האחרון." },
-      { title: "רעיונות לעומק", description: "בית להרצאות, שיעורים ווידאו ארוך." }
+      { title: "כוחה של הרוח", description: "הרב דוד ישראל קלמוס עוסק בכוחה של הרוח בשיעור רשמי של Ruach Breslov." },
+      { title: "ליקוטי מוהר״ן: תורה ז׳", description: "שיעור רשמי של Ruach Breslov בליקוטי מוהר״ן, תורה ז׳." },
+      { title: "ליקוטי מוהר״ן: תורה ד׳", description: "שיעור רשמי של Ruach Breslov בליקוטי מוהר״ן, תורה ד׳." }
     ]
   },
   gallery: {
@@ -482,7 +479,7 @@ const he: Dictionary = {
     sections: [
       { title: "מידע שאתם מוסרים", copy: "טופס יצירת הקשר אוסף שם, כתובת דוא״ל, הודעה ופרטים אופציונליים שתבחרו למסור. טופס ההרשמה אוסף שם, כתובת דוא״ל ונושאי תקשורת שבחרתם." },
       { title: "כיצד אנו משתמשים במידע", copy: "אנו משתמשים במידע כדי לענות לפניות, להגן על הטפסים מפני שימוש לרעה, לאשר בקשות הרשמה ולשלוח רק את התקשורת שביקשתם." },
-      { title: "ספקי שירות", copy: "GitHub Pages מאחסן את האתר. Cloudflare מספקת DNS, אחסון API, מסד נתונים ואבטחת Turnstile. Resend שולחת דוא״ל ומנהלת הרשמות מאושרות. Stripe מעבדת באופן מאובטח תרומות ופרטי תשלומים חוזרים בעמודים המאוחסנים אצלה. ספקים אלה מעבדים מידע רק ככל שנדרש להפעלת השירותים." },
+      { title: "ספקי שירות", copy: "GitHub Pages מאחסן את האתר. Cloudflare מספקת DNS, אחסון API, מסד נתונים ואבטחת Turnstile. Resend שולחת דוא״ל ומנהלת הרשמות מאושרות. Stripe מעבדת באופן מאובטח תרומות ופרטי תשלומים חוזרים בעמודים המאוחסנים אצלה. כאשר בוחרים להפעיל סרטון מוטמע, YouTube מקבלת את הבקשה ומעבדת אותה בהתאם למדיניות שלה. ספקים אלה מעבדים מידע רק ככל שנדרש להפעלת השירותים." },
       { title: "שמירה ואבטחה", copy: "הודעות קשר נמסרות בדוא״ל ואינן נשמרות במסד הנתונים של האתר. בקשות הרשמה שלא אושרו פגות לאחר 24 שעות. פרטי הרשמה מאושרים נשמרים ב‑Resend עד להסרה או לבקשת מחיקה. רשומות אבטחה מוגבלות נשמרות למניעת שימוש לרעה." },
       { title: "הבחירות שלכם", copy: "אפשר להסיר הרשמה באמצעות הקישורים בהודעות שלנו. לבקשת גישה, תיקון או מחיקה של מידע שמסרתם, כתבו ל‑info@ruachbreslov.org." }
     ]
@@ -559,15 +556,14 @@ const es: Dictionary = {
   videos: {
     eyebrow: "Enseñanzas e inspiración",
     title: "Videos de Ruach Breslov",
-    description: "Aquí reuniremos enseñanzas en video e historias oficiales de Ruach Breslov.",
+    description: "Mira enseñanzas e historias oficiales del canal de YouTube de Ruach Breslov.",
     emptyTitle: "Próximamente publicaremos videos",
     emptyCopy: "Mantente en contacto para recibir nuevas enseñanzas, conversaciones e historias de la comunidad.",
-    quality: "Máxima disponible · hasta 4K",
-    hdr: "Preparado para HDR",
+    channelCta: "Visita nuestro canal de YouTube",
     items: [
-      { title: "Historia destacada", description: "Utiliza este espacio para presentar tu trabajo con mayor fuerza." },
-      { title: "Desde la comunidad", description: "Comparte una conversación, un perfil o un programa reciente." },
-      { title: "Ideas en profundidad", description: "Un hogar para charlas, clases y videos de larga duración." }
+      { title: "El poder del rúaj", description: "El rabino David Yisrael Kalmus explora el poder del rúaj en esta enseñanza oficial de Ruach Breslov." },
+      { title: "Likkutei Moharan: Torá 7", description: "Una clase oficial de Ruach Breslov sobre Likkutei Moharan, Torá 7." },
+      { title: "Likkutei Moharan: Torá 4", description: "Una clase oficial de Ruach Breslov sobre Likkutei Moharan, Torá 4." }
     ]
   },
   gallery: {
@@ -650,7 +646,7 @@ const es: Dictionary = {
     sections: [
       { title: "Información que proporcionas", copy: "El formulario de contacto recopila tu nombre, correo electrónico, mensaje y los datos opcionales que decidas proporcionar. El formulario de suscripción recopila tu nombre, correo electrónico y los temas de comunicación seleccionados." },
       { title: "Cómo usamos la información", copy: "Usamos la información para responder consultas, proteger los formularios contra abusos, confirmar solicitudes de suscripción y enviar únicamente las comunicaciones que pediste." },
-      { title: "Proveedores de servicios", copy: "GitHub Pages aloja el sitio. Cloudflare proporciona DNS, alojamiento de la API, base de datos y seguridad Turnstile. Resend entrega correos y administra suscripciones confirmadas. Stripe procesa de forma segura las donaciones y los datos de pagos recurrentes en sus páginas alojadas. Estos proveedores procesan información solo cuando es necesario para prestar esos servicios." },
+      { title: "Proveedores de servicios", copy: "GitHub Pages aloja el sitio. Cloudflare proporciona DNS, alojamiento de la API, base de datos y seguridad Turnstile. Resend entrega correos y administra suscripciones confirmadas. Stripe procesa de forma segura las donaciones y los datos de pagos recurrentes en sus páginas alojadas. Cuando eliges reproducir un video incorporado, YouTube recibe la solicitud y la procesa conforme a sus políticas. Estos proveedores procesan información solo cuando es necesario para prestar esos servicios." },
       { title: "Conservación y seguridad", copy: "Los mensajes de contacto se entregan por correo y no se guardan en la base de datos del sitio. Las solicitudes de suscripción no confirmadas vencen después de 24 horas. Los datos de suscripciones confirmadas permanecen en Resend hasta que canceles la suscripción o solicites su eliminación. Conservamos registros de seguridad limitados para prevenir abusos." },
       { title: "Tus opciones", copy: "Puedes cancelar la suscripción mediante los enlaces incluidos en nuestros correos. Para solicitar acceso, corrección o eliminación de información que enviaste, escribe a info@ruachbreslov.org." }
     ]
@@ -727,15 +723,14 @@ const fa: Dictionary = {
   videos: {
     eyebrow: "آموزه‌ها و الهام",
     title: "ویدیوهای Ruach Breslov",
-    description: "آموزه‌های ویدیویی و روایت‌های رسمی Ruach Breslov در اینجا گردآوری می‌شوند.",
+    description: "آموزه‌ها و روایت‌های رسمی کانال YouTube متعلق به Ruach Breslov را تماشا کنید.",
     emptyTitle: "ویدیوها به‌زودی منتشر می‌شوند",
     emptyCopy: "برای دریافت آموزه‌ها، گفت‌وگوها و روایت‌های تازه از جامعه با ما در ارتباط بمانید.",
-    quality: "بالاترین کیفیت موجود · تا 4K",
-    hdr: "آماده HDR",
+    channelCta: "مشاهدۀ کانال YouTube ما",
     items: [
-      { title: "داستان ویژه", description: "این بخش را به بهترین معرفی از فعالیت خود اختصاص دهید." },
-      { title: "از دل جامعه", description: "یک گفت‌وگو، معرفی یا برنامه تازه را به اشتراک بگذارید." },
-      { title: "ایده‌های عمیق", description: "جایی برای سخنرانی، کلاس و ویدیوهای بلند." }
+      { title: "قدرت روح", description: "ربی دیوید اسرائیل کالموس در این آموزش رسمی Ruach Breslov از قدرت روح می‌گوید." },
+      { title: "لیکوتی موهران: تورات ۷", description: "درسی رسمی از Ruach Breslov دربارۀ لیکوتی موهران، تورات ۷." },
+      { title: "لیکوتی موهران: تورات ۴", description: "درسی رسمی از Ruach Breslov دربارۀ لیکوتی موهران، تورات ۴." }
     ]
   },
   gallery: {
@@ -818,7 +813,7 @@ const fa: Dictionary = {
     sections: [
       { title: "اطلاعاتی که ارائه می‌کنید", copy: "فرم تماس نام، نشانی ایمیل، پیام و هر اطلاعات اختیاری را که وارد کنید دریافت می‌کند. فرم عضویت نام، نشانی ایمیل و موضوعات ارتباطی انتخاب‌شده را دریافت می‌کند." },
       { title: "نحوۀ استفاده از اطلاعات", copy: "از اطلاعات برای پاسخ به پرسش‌ها، محافظت از فرم‌ها در برابر سوءاستفاده، تأیید درخواست عضویت و ارسال تنها پیام‌هایی که خواسته‌اید استفاده می‌کنیم." },
-      { title: "ارائه‌دهندگان خدمات", copy: "GitHub Pages میزبان وب‌سایت است. Cloudflare خدمات DNS، میزبانی API، پایگاه داده و امنیت Turnstile را ارائه می‌دهد. Resend ایمیل‌ها و عضویت‌های تأییدشده را مدیریت می‌کند. Stripe کمک‌ها و اطلاعات پرداخت‌های دوره‌ای را به‌صورت امن در صفحه‌های میزبانی‌شدۀ خود پردازش می‌کند. این ارائه‌دهندگان فقط به میزان لازم برای ارائۀ خدمات اطلاعات را پردازش می‌کنند." },
+      { title: "ارائه‌دهندگان خدمات", copy: "GitHub Pages میزبان وب‌سایت است. Cloudflare خدمات DNS، میزبانی API، پایگاه داده و امنیت Turnstile را ارائه می‌دهد. Resend ایمیل‌ها و عضویت‌های تأییدشده را مدیریت می‌کند. Stripe کمک‌ها و اطلاعات پرداخت‌های دوره‌ای را به‌صورت امن در صفحه‌های میزبانی‌شدۀ خود پردازش می‌کند. وقتی پخش یک ویدیوی جاسازی‌شده را انتخاب می‌کنید، YouTube درخواست را دریافت و طبق سیاست‌های خود پردازش می‌کند. این ارائه‌دهندگان فقط به میزان لازم برای ارائۀ خدمات اطلاعات را پردازش می‌کنند." },
       { title: "نگهداری و امنیت", copy: "پیام‌های تماس از طریق ایمیل تحویل می‌شوند و در پایگاه دادۀ وب‌سایت ذخیره نمی‌شوند. درخواست‌های عضویت تأییدنشده پس از ۲۴ ساعت منقضی می‌شوند. اطلاعات عضویت تأییدشده تا لغو عضویت یا درخواست حذف در Resend باقی می‌ماند. سوابق امنیتی محدود برای جلوگیری از سوءاستفاده نگهداری می‌شوند." },
       { title: "انتخاب‌های شما", copy: "می‌توانید از پیوندهای موجود در ایمیل‌ها عضویت را لغو کنید. برای درخواست دسترسی، اصلاح یا حذف اطلاعاتی که فرستاده‌اید به info@ruachbreslov.org ایمیل بزنید." }
     ]

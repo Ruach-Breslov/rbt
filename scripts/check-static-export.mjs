@@ -145,6 +145,14 @@ if (!existsSync(outDir)) {
     fail("CSP must allow the configured YouTube and Stripe hosted experiences.");
   }
 
+  const configuredVideoIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "").split(",").map((value) => value.trim()).filter(Boolean);
+  const videosHtml = routeHtml("/en/videos");
+  for (const videoId of configuredVideoIds) {
+    if (!videosHtml.includes(videoId)) fail(`Videos page is missing configured YouTube video: ${videoId}`);
+  }
+  const channelUrl = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL?.trim() ?? "";
+  if (channelUrl && !videosHtml.includes(channelUrl)) fail("Videos page is missing the configured YouTube channel link.");
+
   const allFiles = walkFiles(outDir);
   const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
   for (const file of htmlFiles) {
