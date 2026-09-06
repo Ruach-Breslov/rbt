@@ -81,6 +81,8 @@ Last updated: September 6, 2026
 - Live release checks confirm HTTP 200 for the homepage, English and Hebrew galleries, the support page, optimized hero/photo/video assets, and API health. The deployed support page contains the expected one-time link, all four monthly links, and customer-portal login.
 - GitHub Actions deployment run `34032857560` published the official YouTube integration after passing the dependency audit, all typechecks, lint, 10 Worker tests, 24 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
 - Live release checks confirm HTTP 200 for the English video page and the official YouTube channel. The deployed page contains the canonical channel link, all three selected video IDs, and the verified “The Power of RUACH” title.
+- GitHub Actions deployment run `34034582543` published the warm editorial redesign after passing the dependency audit, all typechecks, lint, 10 Worker tests, 26 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
+- Live browser checks confirm the Cloudflare-served homepage uses the cream background and burgundy text, loads `/media/gallery/full-room.webp` as the authentic hero, exposes six curated “Inside the Community” images, contains no generated WebGPU hero surface, and opens the shared cinematic lightbox successfully.
 
 ## Remaining work — handle one item at a time
 
@@ -107,3 +109,4 @@ Last updated: September 6, 2026
 - `4f667f6` — bounded CI audit network wait while preserving vulnerability failures
 - `b49e9b9` — removed npm install's duplicate implicit audit call
 - `2de812c` — official YouTube channel and featured video integration
+- `44370db` — client-selected warm palette, authentic-photo hero, and shared cinematic gallery
