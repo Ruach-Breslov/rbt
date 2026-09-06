@@ -15,7 +15,7 @@ function optionalPublicUrl(value: string | undefined) {
 
 const configuredSiteUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_SITE_URL) || "https://example.com";
 const apiBaseUrl = optionalPublicUrl(process.env.NEXT_PUBLIC_API_BASE_URL);
-const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() || "/media/gallery/full-room.webp";
+const configuredHeroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() || "/media/hero/home-hero-client.webp";
 const heroImage = configuredHeroImage.startsWith("/") && !configuredHeroImage.startsWith("//") && !configuredHeroImage.includes("..")
   ? withBasePath(configuredHeroImage as `/${string}`)
   : "";
@@ -54,11 +54,12 @@ export const site = {
     timeZone: "America/New_York"
   },
   youtube: {
-    channelUrl: optionalPublicUrl(process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL)
+    channelUrl: optionalPublicUrl(process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_URL) || "https://www.youtube.com/@RuachBreslov"
   },
   media: {
     heroImage,
-    communityImage: withBasePath("/media/gallery/study-partners.webp")
+    communityImage: withBasePath("/media/gallery/study-partners.webp"),
+    gatheringImage: withBasePath("/media/gallery/full-room.webp")
   }
 } as const;
 

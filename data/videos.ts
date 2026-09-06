@@ -1,21 +1,85 @@
-import type { Dictionary } from "@/data/locales";
+import { withBasePath } from "@/lib/paths";
+
+export type VideoKind = "video" | "short";
 
 export type VideoRecord = {
   youtubeId: string;
   title: string;
-  description: string;
+  kind: VideoKind;
+  publishedAt: string;
+  duration?: string;
+  views: number;
+  thumbnail: string;
 };
 
-const configuredIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "")
-  .split(",")
-  .map((value) => value.trim())
-  .filter((value) => /^[A-Za-z0-9_-]{11}$/.test(value))
-  .slice(0, 3);
+const catalog: Array<Omit<VideoRecord, "thumbnail">> = [
+  {
+    youtubeId: "77ibzlmzv2E",
+    title: "The Power of RUACH • Ruach Breslov • Rabbi David Yisrael Kalmus",
+    kind: "video",
+    publishedAt: "2026-07-31T02:25:05Z",
+    duration: "1:56:27",
+    views: 175
+  },
+  { youtubeId: "6dATRcNyE8c", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T20:01:49Z", duration: "1:05:35", views: 11 },
+  { youtubeId: "EPle4aTFuFM", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:53:09Z", duration: "56:04", views: 7 },
+  { youtubeId: "eaLIVgpzJWg", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:48:28Z", duration: "58:51", views: 3 },
+  { youtubeId: "hFS5Z1bKLgg", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:47:25Z", duration: "53:55", views: 4 },
+  { youtubeId: "LnzdBCbXJ_g", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:34:46Z", duration: "54:41", views: 1 },
+  { youtubeId: "c-m4seMMj7E", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:34:28Z", duration: "52:00", views: 2 },
+  { youtubeId: "kOSLplNLjhU", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:28:50Z", duration: "56:13", views: 1 },
+  { youtubeId: "UGJIoEqi3s8", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T19:28:20Z", duration: "31:47", views: 7 },
+  { youtubeId: "fbX4UbDADDY", title: "March 9, 2026", kind: "video", publishedAt: "2026-03-09T18:07:54Z", duration: "1:00:47", views: 9 },
+  {
+    youtubeId: "7qr4fb3tZVg",
+    title: "Ruach Breslov — Likkutei Moharan Torah 7 📖",
+    kind: "video",
+    publishedAt: "2026-02-26T19:58:53Z",
+    duration: "1:17:16",
+    views: 13
+  },
+  {
+    youtubeId: "4788Ho8xMyM",
+    title: "Ruach Breslov — Likkutei Moharan Torah #4",
+    kind: "video",
+    publishedAt: "2026-02-24T22:07:07Z",
+    duration: "1:06:44",
+    views: 62
+  },
+  {
+    youtubeId: "YssJrAX2VCk",
+    title: "Ruach Breslov | Likkutei Moharan 6 — Eliyahu Pereira",
+    kind: "video",
+    publishedAt: "2026-01-31T12:00:00Z",
+    duration: "31:30",
+    views: 42
+  },
+  {
+    youtubeId: "XrXJ2975RqE",
+    title: "Stories motivation likutey mooran",
+    kind: "short",
+    publishedAt: "2026-02-19T23:41:38Z",
+    views: 27
+  },
+  {
+    youtubeId: "itbtswWFYyc",
+    title: "Everyone thinks freedom means having no master—that’s the mistake. Only freedom comes from Hashem.",
+    kind: "short",
+    publishedAt: "2026-02-12T23:31:26Z",
+    views: 96
+  },
+  {
+    youtubeId: "YQQ0PAsusRU",
+    title: "The power of words: close your eyes, pour out everything. Open your eyes and see how close Hashem is.",
+    kind: "short",
+    publishedAt: "2026-02-12T05:30:45Z",
+    views: 139
+  }
+];
 
-export function getVideos(dictionary: Dictionary): VideoRecord[] {
-  return configuredIds.map((youtubeId, index) => ({
-    youtubeId,
-    title: dictionary.videos.items[index]?.title ?? dictionary.videos.items[0].title,
-    description: dictionary.videos.items[index]?.description ?? dictionary.videos.items[0].description
+export function getVideos(): VideoRecord[] {
+  return catalog.map((video) => ({
+    ...video,
+    thumbnail: withBasePath(`/media/videos/${video.youtubeId}.webp`)
   }));
 }

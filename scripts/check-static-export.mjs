@@ -12,7 +12,7 @@ const locales = ["en", "he", "es", "fa"];
 const rtlLocales = new Set(["he", "fa"]);
 const localizedPages = ["", "contact", "events", "gallery", "privacy", "support", "videos"];
 const requiredRoutes = ["/", ...locales.flatMap((locale) => localizedPages.map((page) => `/${locale}${page ? `/${page}` : ""}`))];
-const requiredFiles = ["404.html", ".nojekyll", "favicon.svg", "robots.txt", "site.webmanifest", "sitemap.xml"];
+const requiredFiles = ["404.html", ".nojekyll", "media/brand/ruach-icon-192.png", "media/brand/ruach-icon-512.png", "robots.txt", "site.webmanifest", "sitemap.xml"];
 const errors = [];
 
 function fail(message) {
@@ -81,7 +81,9 @@ if (!existsSync(outDir)) {
 
   const rootHtml = routeHtml("/");
   const galleryHtml = routeHtml("/en/gallery");
+  const videosHtml = routeHtml("/en/videos");
   for (const asset of [
+    "/media/hero/home-hero-client.webp",
     "/media/gallery/community-study.webp",
     "/media/gallery/weekly-gathering.webp",
     "/media/gallery/community-arriving.mp4",
@@ -90,11 +92,13 @@ if (!existsSync(outDir)) {
     if (!galleryHtml.includes(asset) && !rootHtml.includes(asset)) fail(`Gallery or homepage is missing media asset reference: ${asset}`);
     if (!exportPathExists(`${basePath}${asset}`)) fail(`Missing exported media asset: ${asset}`);
   }
+  if (!videosHtml.includes("/media/videos/77ibzlmzv2E.webp")) fail("Videos page is missing the local official-video thumbnail.");
+  if (!exportPathExists(`${basePath}/media/videos/77ibzlmzv2E.webp`)) fail("Missing exported official-video thumbnail.");
 
   if (!/<html lang="en" dir="ltr"/i.test(rootHtml)) fail("Root page must declare English LTR document direction.");
-  const expectedHeroImage = heroImage || "/media/gallery/full-room.webp";
-  if (!rootHtml.includes("hero-community-photo") || !rootHtml.includes(expectedHeroImage)) {
-    fail("Root page must include the authentic community-photo hero.");
+  const expectedHeroImage = heroImage || "/media/hero/home-hero-client.webp";
+  if (!rootHtml.includes("hero-artwork") || !rootHtml.includes(expectedHeroImage)) {
+    fail("Root page must include the client-selected cinematic hero artwork.");
   }
   if (heroImage) {
     if (!heroImage.startsWith("/") || heroImage.startsWith("//") || heroImage.includes("..")) {
@@ -147,7 +151,6 @@ if (!existsSync(outDir)) {
   }
 
   const configuredVideoIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "").split(",").map((value) => value.trim()).filter(Boolean);
-  const videosHtml = routeHtml("/en/videos");
   for (const videoId of configuredVideoIds) {
     if (!videosHtml.includes(videoId)) fail(`Videos page is missing configured YouTube video: ${videoId}`);
   }

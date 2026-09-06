@@ -11,6 +11,7 @@ const basePath = configuredBasePath
 const nextConfig = {
   output: "export",
   basePath,
+  allowedDevOrigins: ["localhost", "127.0.0.1"],
   images: {
     unoptimized: true
   },

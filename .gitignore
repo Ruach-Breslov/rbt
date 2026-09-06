@@ -18,6 +18,7 @@ tsconfig.tsbuildinfo
 .tmp/
 coverage/
 playwright-report/
+Pictures/
 *.pem
 *.key
 *.p12

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: { default: dictionary.siteName, template: `%s · ${dictionary.siteName}` },
     description: dictionary.siteTagline,
     referrer: "strict-origin-when-cross-origin",
-    icons: { icon: publicAsset("/favicon.svg") },
+    icons: { icon: publicAsset("/media/brand/ruach-icon-192.png"), apple: publicAsset("/media/brand/ruach-icon-192.png") },
     manifest: publicAsset("/site.webmanifest")
   };
 }
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#090b14",
-  colorScheme: "dark"
+  themeColor: "#17110e",
+  colorScheme: "light"
 };
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {

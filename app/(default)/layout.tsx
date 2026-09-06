@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: { default: dictionary.siteName, template: `%s · ${dictionary.siteName}` },
   description: dictionary.siteTagline,
   referrer: "strict-origin-when-cross-origin",
-  icons: { icon: publicAsset("/favicon.svg") },
+  icons: { icon: publicAsset("/media/brand/ruach-icon-192.png"), apple: publicAsset("/media/brand/ruach-icon-192.png") },
   manifest: publicAsset("/site.webmanifest"),
   alternates: { canonical: absoluteUrl("/") }
 };
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#090b14",
-  colorScheme: "dark"
+  themeColor: "#17110e",
+  colorScheme: "light"
 };
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {

@@ -23,6 +23,37 @@ test("sets language and direction for every locale", async ({ page }) => {
   }
 });
 
+test("keeps the enlarged navigation accessible and unclipped", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page.getByRole("link", { name: "Ruach Breslov — Home" })).toBeVisible();
+
+  const navigationPresentation = await page.locator(".site-header").evaluate((header) => {
+    const mark = header.querySelector<HTMLElement>(".brand-mark");
+    const image = mark?.querySelector<HTMLImageElement>("img");
+    const visibleTargets = Array.from(header.querySelectorAll<HTMLElement>("a, summary"))
+      .map((element) => element.getBoundingClientRect())
+      .filter((bounds) => bounds.width > 0 && bounds.height > 0);
+    const background = getComputedStyle(header).backgroundColor;
+
+    return {
+      background,
+      documentWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+      markWidth: mark?.getBoundingClientRect().width ?? 0,
+      imageFit: image ? getComputedStyle(image).objectFit : "",
+      imageTransform: image ? getComputedStyle(image).transform : "",
+      minimumTargetHeight: Math.min(...visibleTargets.map((bounds) => bounds.height))
+    };
+  });
+
+  expect(navigationPresentation.background).toBe("rgba(23, 17, 14, 0.88)");
+  expect(navigationPresentation.documentWidth).toBeLessThanOrEqual(navigationPresentation.viewportWidth);
+  expect(navigationPresentation.markWidth).toBeGreaterThanOrEqual(68);
+  expect(navigationPresentation.imageFit).toBe("contain");
+  expect(navigationPresentation.imageTransform).toBe("none");
+  expect(navigationPresentation.minimumTargetHeight).toBeGreaterThanOrEqual(44);
+});
+
 test("remembers the selected language and restores it on the root page", async ({ page }) => {
   await page.goto("/en/contact");
   await page.locator(".language-menu summary").click();
@@ -46,10 +77,10 @@ test("shows Ruach Breslov's public contact details", async ({ page }) => {
 
 test("presents Ruach Breslov's purpose in every supported language", async ({ page }) => {
   const localizedPurpose = {
-    en: "Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life",
-    he: "Ruach Breslov מביאה לחיים את חכמתו הנצחית של רבי נחמן",
-    es: "Ruach Breslov da vida a la sabiduría atemporal del Rebe Najmán",
-    fa: "Ruach Breslov حکمت جاودانۀ ربی نحمان را از راه ایمان"
+    en: "Ruach Breslov is a growing Queens community",
+    he: "Ruach Breslov היא קהילה צומחת בקווינס",
+    es: "Ruach Breslov es una comunidad creciente de Queens",
+    fa: "Ruach Breslov جامعه‌ای رو به رشد در کویینز"
   } as const;
 
   for (const [locale, purpose] of Object.entries(localizedPurpose)) {
@@ -82,7 +113,7 @@ test("offers an accessible community gallery and lightbox", async ({ page }) => 
 test("opens the cinematic gallery directly from Inside the Community", async ({ page }) => {
   await page.goto("/en");
   const communityGallery = page.locator(".gallery-preview-section");
-  await expect(communityGallery.getByRole("heading", { name: "Learning, friendship, and joy in the room" })).toBeVisible();
+  await expect(communityGallery.getByRole("heading", { name: "See what it feels like in the room." })).toBeVisible();
   await expect(communityGallery.locator(".gallery-preview-item")).toHaveCount(6);
 
   await communityGallery.locator(".gallery-preview-item").first().click();
@@ -100,14 +131,30 @@ test("presents one-time and recurring Stripe-hosted donation choices", async ({ 
   await expect(page.getByText("Monthly donations renew automatically each month until canceled.", { exact: false })).toBeVisible();
 });
 
-test("presents official Ruach Breslov YouTube videos behind click-to-play controls", async ({ page }) => {
+test("mirrors the Ruach Breslov channel library and opens a closable player", async ({ page }) => {
   await page.goto("/en/videos");
-  await expect(page.locator(".video-card")).toHaveCount(3);
-  await expect(page.getByRole("heading", { name: "The Power of RUACH" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Likkutei Moharan: Torah 7" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Likkutei Moharan: Torah 4" })).toBeVisible();
-  await expect(page.locator(".video-card iframe")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Ruach Breslov" })).toBeVisible();
+  await expect(page.getByText("@RuachBreslov", { exact: true })).toBeVisible();
+  await expect(page.locator(".video-card")).toHaveCount(13);
+  await expect(page.getByRole("button", { name: "Videos", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator(".video-player-frame iframe")).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Visit our YouTube channel" })).toHaveAttribute("href", "https://www.youtube.com/@RuachBreslov");
+
+  await page.getByRole("button", { name: "Shorts", exact: true }).click();
+  await expect(page.locator(".video-card")).toHaveCount(3);
+  await page.getByRole("button", { name: "Videos", exact: true }).click();
+
+  await page.getByRole("button", { name: "Search this channel" }).click();
+  await page.getByPlaceholder("Search videos").fill("Power of RUACH");
+  await expect(page.locator(".video-card")).toHaveCount(1);
+  await page.getByRole("button", { name: "Clear search" }).click();
+
+  await page.getByRole("button", { name: /Play video: The Power of RUACH/ }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.locator(".video-player-frame iframe")).toHaveAttribute("src", /youtube-nocookie\.com\/embed\/77ibzlmzv2E/);
+  await page.getByRole("button", { name: "Close video player" }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page.locator(".video-player-frame iframe")).toHaveCount(0);
 });
 
 test("exposes configured forms and bot-challenge fields", async ({ page }) => {
@@ -120,9 +167,30 @@ test("exposes configured forms and bot-challenge fields", async ({ page }) => {
   await expect(page.getByLabel("Email")).toBeVisible();
 });
 
-test("uses authentic community photography instead of a generated hero surface", async ({ page }) => {
+test("uses the client-selected Ruach Breslov artwork as the cinematic home greeting", async ({ page }) => {
   await page.goto("/en");
-  await expect(page.locator(".hero-community-photo img")).toBeVisible();
+  await expect(page.locator(".hero-artwork img")).toBeVisible();
+  await expect(page.locator(".hero-artwork img")).toHaveAttribute("src", /\/media\/hero\/home-hero-client\.webp$/);
+  const heroPresentation = await page.locator(".hero-artwork img").evaluate((image) => {
+    const bounds = image.getBoundingClientRect();
+    const header = document.querySelector(".site-header")?.getBoundingClientRect();
+    return { ratio: bounds.width / bounds.height, fit: getComputedStyle(image).objectFit, topGap: header ? bounds.top - header.bottom : null };
+  });
+  expect(heroPresentation.ratio).toBeCloseTo(1.5, 2);
+  expect(heroPresentation.fit).toBe("contain");
+  expect(heroPresentation.topGap).not.toBeNull();
+  expect(Math.abs(heroPresentation.topGap ?? 1)).toBeLessThan(1);
+  const artworkContent = page.locator(".hero-artwork-content");
+  await expect(artworkContent).toContainText("Ruach Breslov is a growing Queens community");
+  await expect(artworkContent.getByRole("link", { name: "Donate" })).toHaveAttribute("href", "/en/support");
+  await expect(artworkContent.getByRole("link", { name: "Contact us" })).toHaveAttribute("href", "/en/contact");
+  const introduction = page.locator(".hero-introduction");
+  await expect(introduction.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(introduction.locator(".subhero-community-photo img")).toHaveAttribute("src", /\/media\/gallery\/full-room\.webp$/);
+  await expect(introduction.locator(".subhero-community-photo figcaption")).toHaveText("A full room gathered for Torah and connection");
+  await expect(introduction).toContainText("This room is more than a backdrop.");
+  await expect(introduction.getByRole("link", { name: "View the gallery" })).toHaveAttribute("href", "/en/gallery");
+  await expect(introduction.getByRole("link", { name: "Watch & learn" })).toHaveAttribute("href", "/en/videos");
   await expect(page.locator(".webgpu-hero-surface")).toHaveCount(0);
   await expect(page.locator(".ambient-background")).toBeAttached();
 });

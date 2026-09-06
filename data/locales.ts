@@ -37,6 +37,7 @@ export type Dictionary = {
   actions: {
     exploreEvents: string;
     contactUs: string;
+    donate: string;
     watchVideos: string;
     rsvp: string;
     supportUs: string;
@@ -50,6 +51,8 @@ export type Dictionary = {
     eyebrow: string;
     title: string;
     description: string;
+    gatheringCopy: string;
+    featureEyebrow: string;
     featureTitle: string;
     featureCopy: string;
     features: Array<{ title: string; copy: string }>;
@@ -79,7 +82,20 @@ export type Dictionary = {
     emptyTitle: string;
     emptyCopy: string;
     channelCta: string;
-    items: Array<{ title: string; description: string }>;
+    channelDescription: string;
+    videoCount: string;
+    videosTab: string;
+    shortsTab: string;
+    latest: string;
+    popular: string;
+    oldest: string;
+    searchLabel: string;
+    searchPlaceholder: string;
+    clearSearch: string;
+    closePlayer: string;
+    playVideo: string;
+    views: string;
+    noResults: string;
   };
   gallery: {
     eyebrow: string;
@@ -159,7 +175,7 @@ export type Dictionary = {
 
 const en: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "Bringing Rebbe Nachman’s timeless wisdom to life through faith, joy, personal growth, and meaningful connection.",
+  siteTagline: "Torah, friendship, emunah, and joy in Queens.",
   languageLabel: "Language",
   system: {
     skipToContent: "Skip to content",
@@ -176,7 +192,8 @@ const en: Dictionary = {
   actions: {
     exploreEvents: "Explore events",
     contactUs: "Contact us",
-    watchVideos: "Watch videos",
+    donate: "Donate",
+    watchVideos: "Watch & learn",
     rsvp: "RSVP",
     supportUs: "Support us",
     submit: "Send message",
@@ -186,26 +203,28 @@ const en: Dictionary = {
     openMenu: "Open menu"
   },
   home: {
-    eyebrow: "The timeless wisdom of Rebbe Nachman",
-    title: "Find hope. Grow with faith. Live with purpose.",
-    description: "Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection. We create a welcoming space for people of all backgrounds to find hope, deepen their relationship with God, face life’s challenges with strength, and discover greater purpose, goodness, and meaning.",
-    featureTitle: "More than a class—a community that grows together",
-    featureCopy: "Our gatherings bring Torah to life through emunah, joy, honesty, friendship, and real connection.",
+    eyebrow: "Torah, friendship, and a little more light",
+    title: "Come as you are. There’s a place for you here.",
+    description: "Ruach Breslov is a growing Queens community where Rebbe Nachman’s teachings meet real life. We learn, eat, ask honest questions, and help one another move forward—with emunah and joy.",
+    gatheringCopy: "This room is more than a backdrop. It is where Torah becomes conversation, strangers become friends, and people find the strength to take their next step.",
+    featureEyebrow: "What happens here",
+    featureTitle: "More than a class. A room full of people who show up.",
+    featureCopy: "No performance and no perfect background required—just practical Torah, warmth, and honest conversation.",
     features: [
-      { title: "Weekly Torah classes", copy: "Inspiring gatherings centered on Rebbe Nachman’s teachings, personal growth, connection, and simcha." },
-      { title: "One-on-one mentorship", copy: "Personal guidance and encouragement for anyone seeking direction or someone to walk alongside." },
-      { title: "Community events", copy: "Food, music, learning, and friendship come together to create a meaningful Jewish experience." },
-      { title: "Guest speakers and outreach", copy: "Fresh Torah perspectives and a welcoming hand for people seeking connection and encouragement." }
+      { title: "Weekly Torah around the table", copy: "Open a sefer, ask what is really on your mind, and leave with something you can carry into the week." },
+      { title: "One honest conversation", copy: "Personal mentorship for the moments when a little direction—or simply someone listening—can make a difference." },
+      { title: "Food, music, and being together", copy: "Community nights where people share a meal, laugh, learn, and stop feeling like they have to do life alone." },
+      { title: "A door that stays open", copy: "Guest teachers, outreach, and a warm welcome for anyone looking for connection, encouragement, or a way back in." }
     ],
-    storyEyebrow: "Our legacy of light",
-    storyTitle: "A place to belong, exactly as you are.",
+    storyEyebrow: "How it began",
+    storyTitle: "A few people around a table became a brotherhood.",
     storyParagraphs: [
-      "What began as a small gathering has grown into a real brotherhood built on Torah, honesty, friendship, and the belief that no one should feel alone in their struggle.",
-      "Inspired by Rebbe Nachman, we believe every soul carries immeasurable light—even when that light feels hidden. Sometimes the right Torah, friend, or conversation can remind a person who they truly are."
+      "Ruach Breslov began simply: people learning together, speaking honestly, and making room for one another. That small gathering grew because nobody had to pretend they had everything figured out.",
+      "We believe every soul carries immeasurable light, even when it feels hidden. Sometimes a piece of Torah, a good friend, or one real conversation is enough to help someone see it again."
     ],
     galleryEyebrow: "Inside the community",
-    galleryTitle: "Learning, friendship, and joy in the room",
-    galleryCopy: "See Ruach Breslov as it happens: people learning together, sharing a table, and building lasting connection.",
+    galleryTitle: "See what it feels like in the room.",
+    galleryCopy: "Not stock photos and not a staged idea of community—these are the tables, faces, learning, and shared moments that make Ruach Breslov real.",
     subscriptionTitle: "Stay connected",
     subscriptionCopy: "Choose newsletters, event announcements, or both. You remain in control of your preferences."
   },
@@ -226,11 +245,20 @@ const en: Dictionary = {
     emptyTitle: "Videos are coming soon",
     emptyCopy: "Stay connected for new teachings, conversations, and community stories.",
     channelCta: "Visit our YouTube channel",
-    items: [
-      { title: "The Power of RUACH", description: "Rabbi David Yisrael Kalmus explores the power of ruach in this official Ruach Breslov teaching." },
-      { title: "Likkutei Moharan: Torah 7", description: "An official Ruach Breslov lesson in Likkutei Moharan, Torah 7." },
-      { title: "Likkutei Moharan: Torah 4", description: "An official Ruach Breslov lesson in Likkutei Moharan, Torah 4." }
-    ]
+    channelDescription: "A growing community bringing Rebbe Nachman’s teachings into real life—with clarity, joy, depth, and connection.",
+    videoCount: "{count} videos",
+    videosTab: "Videos",
+    shortsTab: "Shorts",
+    latest: "Latest",
+    popular: "Popular",
+    oldest: "Oldest",
+    searchLabel: "Search this channel",
+    searchPlaceholder: "Search videos",
+    clearSearch: "Clear search",
+    closePlayer: "Close video player",
+    playVideo: "Play video",
+    views: "views",
+    noResults: "No videos match that search."
   },
   gallery: {
     eyebrow: "Life at Ruach Breslov",
@@ -318,7 +346,7 @@ const en: Dictionary = {
     ]
   },
   footer: {
-    description: "Sharing Rebbe Nachman’s timeless wisdom through faith, joy, growth, and meaningful connection.",
+    description: "A place in Queens to learn, share a table, and move forward together.",
     privacy: "Privacy",
     rights: "All rights reserved."
   }
@@ -326,7 +354,7 @@ const en: Dictionary = {
 
 const he: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "מביאים לחיים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה אישית וחיבור משמעותי.",
+  siteTagline: "תורה, חברות, אמונה ושמחה בקווינס.",
   languageLabel: "שפה",
   system: {
     skipToContent: "דילוג לתוכן",
@@ -343,7 +371,8 @@ const he: Dictionary = {
   actions: {
     exploreEvents: "לאירועים",
     contactUs: "צרו קשר",
-    watchVideos: "לצפייה בסרטונים",
+    donate: "לתרומה",
+    watchVideos: "צפו ולמדו",
     rsvp: "אישור השתתפות",
     supportUs: "תמכו בנו",
     submit: "שליחת הודעה",
@@ -353,26 +382,28 @@ const he: Dictionary = {
     openMenu: "פתיחת תפריט"
   },
   home: {
-    eyebrow: "חכמתו הנצחית של רבי נחמן",
-    title: "מוצאים תקווה. צומחים באמונה. חיים עם תכלית.",
-    description: "Ruach Breslov מביאה לחיים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה אישית וחיבור משמעותי. אנו יוצרים מרחב מזמין לאנשים מכל רקע כדי למצוא תקווה, להעמיק את הקשר שלהם עם ה׳, להתמודד בכוח עם אתגרי החיים ולגלות תכלית, טוב ומשמעות עמוקים יותר.",
-    featureTitle: "יותר משיעור — קהילה שצומחת יחד",
-    featureCopy: "המפגשים שלנו מחיים את התורה באמונה, שמחה, כנות, חברות וחיבור אמיתי.",
+    eyebrow: "תורה, חברות וקצת יותר אור",
+    title: "בואו כמו שאתם. יש לכם מקום כאן.",
+    description: "Ruach Breslov היא קהילה צומחת בקווינס שבה תורת רבי נחמן פוגשת את החיים עצמם. לומדים, אוכלים, שואלים בכנות ועוזרים זה לזה להתקדם — באמונה ובשמחה.",
+    gatheringCopy: "החדר הזה הוא יותר מתפאורה. כאן התורה הופכת לשיחה, זרים הופכים לחברים ואנשים מוצאים את הכוח לצעד הבא שלהם.",
+    featureEyebrow: "מה קורה כאן",
+    featureTitle: "יותר משיעור. חדר מלא באנשים שבאמת מגיעים.",
+    featureCopy: "בלי הצגות ובלי צורך ברקע מושלם — רק תורה מעשית, חום ושיחה כנה.",
     features: [
-      { title: "שיעורי תורה שבועיים", copy: "מפגשים מעוררי השראה סביב תורת רבי נחמן, צמיחה אישית, חיבור ושמחה." },
-      { title: "ליווי אישי", copy: "הכוונה ועידוד אישיים למי שמחפש דרך, תמיכה או מישהו שיצעד לצדו." },
-      { title: "אירועי קהילה", copy: "אוכל, מוזיקה, לימוד וחברות מתחברים לחוויה יהודית משמעותית." },
-      { title: "מרצים אורחים וקירוב", copy: "נקודות מבט חדשות בתורה ויד מושטת למי שמחפש חיבור ועידוד." }
+      { title: "תורה שבועית סביב השולחן", copy: "פותחים ספר, שואלים את מה שבאמת יושב על הלב ויוצאים עם משהו לקחת אל השבוע." },
+      { title: "שיחה אחת כנה", copy: "ליווי אישי לרגעים שבהם מעט כיוון — או פשוט מישהו שמקשיב — יכול לעשות הבדל." },
+      { title: "אוכל, מוזיקה ולהיות יחד", copy: "ערבי קהילה שבהם אוכלים, צוחקים, לומדים ומפסיקים להרגיש שצריך לעבור את החיים לבד." },
+      { title: "דלת שנשארת פתוחה", copy: "מורים אורחים, קירוב וקבלת פנים חמה למי שמחפש חיבור, עידוד או דרך לחזור פנימה." }
     ],
-    storyEyebrow: "מורשת של אור",
-    storyTitle: "מקום להשתייך אליו, בדיוק כפי שאתם.",
+    storyEyebrow: "איך זה התחיל",
+    storyTitle: "כמה אנשים סביב שולחן הפכו לאחווה.",
     storyParagraphs: [
       "מה שהתחיל כמפגש קטן צמח לאחווה אמיתית הבנויה על תורה, כנות, חברות והאמונה שאיש אינו צריך להרגיש לבד במאבק שלו.",
       "בהשראת רבי נחמן אנו מאמינים שבכל נשמה יש אור שאין לו שיעור, גם כשהוא נסתר. לפעמים התורה הנכונה, החבר הנכון או שיחה אמיתית מזכירים לאדם מי הוא באמת."
     ],
     galleryEyebrow: "בתוך הקהילה",
-    galleryTitle: "לימוד, חברות ושמחה בחדר אחד",
-    galleryCopy: "הצצה ל‑Ruach Breslov ברגעים החיים: לומדים יחד, חולקים שולחן ובונים קשרים שנשארים.",
+    galleryTitle: "כך זה מרגיש בתוך החדר.",
+    galleryCopy: "לא תמונות מאגר ולא רעיון מבוים של קהילה — אלה השולחנות, הפנים, הלימוד והרגעים המשותפים שהופכים את Ruach Breslov לאמיתית.",
     subscriptionTitle: "נשארים מחוברים",
     subscriptionCopy: "בחרו עדכונים, הודעות על אירועים או את שניהם. השליטה בהעדפות נשארת בידיכם."
   },
@@ -393,11 +424,20 @@ const he: Dictionary = {
     emptyTitle: "סרטונים יעלו בקרוב",
     emptyCopy: "הישארו מחוברים ללימודים, שיחות וסיפורים חדשים מן הקהילה.",
     channelCta: "לערוץ ה‑YouTube שלנו",
-    items: [
-      { title: "כוחה של הרוח", description: "הרב דוד ישראל קלמוס עוסק בכוחה של הרוח בשיעור רשמי של Ruach Breslov." },
-      { title: "ליקוטי מוהר״ן: תורה ז׳", description: "שיעור רשמי של Ruach Breslov בליקוטי מוהר״ן, תורה ז׳." },
-      { title: "ליקוטי מוהר״ן: תורה ד׳", description: "שיעור רשמי של Ruach Breslov בליקוטי מוהר״ן, תורה ד׳." }
-    ]
+    channelDescription: "קהילה צומחת שמביאה את תורת רבי נחמן לחיים עצמם — בבהירות, שמחה, עומק וחיבור.",
+    videoCount: "{count} סרטונים",
+    videosTab: "סרטונים",
+    shortsTab: "Shorts",
+    latest: "החדשים ביותר",
+    popular: "פופולריים",
+    oldest: "הישנים ביותר",
+    searchLabel: "חיפוש בערוץ",
+    searchPlaceholder: "חיפוש סרטונים",
+    clearSearch: "ניקוי החיפוש",
+    closePlayer: "סגירת נגן הווידאו",
+    playVideo: "הפעלת הסרטון",
+    views: "צפיות",
+    noResults: "לא נמצאו סרטונים התואמים לחיפוש."
   },
   gallery: {
     eyebrow: "החיים ב‑Ruach Breslov",
@@ -485,7 +525,7 @@ const he: Dictionary = {
     ]
   },
   footer: {
-    description: "משתפים את חכמתו הנצחית של רבי נחמן באמצעות אמונה, שמחה, צמיחה וחיבור משמעותי.",
+    description: "מקום בקווינס ללמוד, לחלוק שולחן ולהתקדם יחד.",
     privacy: "פרטיות",
     rights: "כל הזכויות שמורות."
   }
@@ -493,7 +533,7 @@ const he: Dictionary = {
 
 const es: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "Damos vida a la sabiduría atemporal del Rebe Najmán por medio de la fe, la alegría, el crecimiento personal y vínculos significativos.",
+  siteTagline: "Torá, amistad, emuná y alegría en Queens.",
   languageLabel: "Idioma",
   system: {
     skipToContent: "Saltar al contenido",
@@ -510,7 +550,8 @@ const es: Dictionary = {
   actions: {
     exploreEvents: "Explorar eventos",
     contactUs: "Contáctanos",
-    watchVideos: "Ver videos",
+    donate: "Donar",
+    watchVideos: "Mira y aprende",
     rsvp: "Confirmar asistencia",
     supportUs: "Apóyanos",
     submit: "Enviar mensaje",
@@ -520,26 +561,28 @@ const es: Dictionary = {
     openMenu: "Abrir menú"
   },
   home: {
-    eyebrow: "La sabiduría atemporal del Rebe Najmán",
-    title: "Encuentra esperanza. Crece con fe. Vive con propósito.",
-    description: "Ruach Breslov da vida a la sabiduría atemporal del Rebe Najmán por medio de la fe, la alegría, el crecimiento personal y vínculos significativos. Creamos un espacio acogedor para que personas de todos los orígenes encuentren esperanza, profundicen su relación con Dios, afronten con fortaleza los desafíos de la vida y descubran un mayor propósito, bondad y sentido.",
-    featureTitle: "Más que una clase: una comunidad que crece unida",
-    featureCopy: "Nuestros encuentros dan vida a la Torá con emuná, alegría, honestidad, amistad y una conexión real.",
+    eyebrow: "Torá, amistad y un poco más de luz",
+    title: "Ven tal como eres. Aquí hay un lugar para ti.",
+    description: "Ruach Breslov es una comunidad creciente de Queens donde las enseñanzas del Rebe Najmán se encuentran con la vida real. Aprendemos, comemos, hacemos preguntas sinceras y nos ayudamos a avanzar, con emuná y alegría.",
+    gatheringCopy: "La sala es mucho más que un escenario. Aquí la Torá se vuelve conversación, los desconocidos se vuelven amigos y cada persona encuentra fuerzas para dar su próximo paso.",
+    featureEyebrow: "Lo que sucede aquí",
+    featureTitle: "Más que una clase. Una sala llena de personas que se hacen presentes.",
+    featureCopy: "Sin apariencias y sin exigir una historia perfecta: Torá práctica, calidez y conversación sincera.",
     features: [
       { title: "Clases semanales de Torá", copy: "Encuentros inspiradores centrados en las enseñanzas del Rebe Najmán, el crecimiento, la conexión y la simjá." },
       { title: "Acompañamiento personal", copy: "Orientación y aliento para quien busca dirección, apoyo o alguien que camine a su lado." },
       { title: "Eventos comunitarios", copy: "Comida, música, aprendizaje y amistad se unen para crear una experiencia judía significativa." },
       { title: "Oradores invitados y alcance", copy: "Nuevas perspectivas de Torá y una mano abierta para quienes buscan conexión y aliento." }
     ],
-    storyEyebrow: "Nuestro legado de luz",
-    storyTitle: "Un lugar al que pertenecer, tal como eres.",
+    storyEyebrow: "Cómo comenzó",
+    storyTitle: "Unas personas alrededor de una mesa se convirtieron en una hermandad.",
     storyParagraphs: [
       "Lo que comenzó como un pequeño encuentro se ha convertido en una hermandad real, construida sobre la Torá, la honestidad, la amistad y la convicción de que nadie debería afrontar sus luchas en soledad.",
       "Inspirados por el Rebe Najmán, creemos que cada alma lleva una luz inconmensurable, aun cuando parezca oculta. A veces, la Torá adecuada, un buen amigo o una conversación sincera nos recuerdan quiénes somos de verdad."
     ],
     galleryEyebrow: "Dentro de la comunidad",
-    galleryTitle: "Aprendizaje, amistad y alegría en un mismo lugar",
-    galleryCopy: "Conoce Ruach Breslov en sus momentos reales: personas que aprenden juntas, comparten la mesa y crean vínculos duraderos.",
+    galleryTitle: "Descubre cómo se siente estar en la sala.",
+    galleryCopy: "No son fotos de archivo ni una idea escenificada de comunidad: son las mesas, los rostros, el aprendizaje y los momentos compartidos que hacen real a Ruach Breslov.",
     subscriptionTitle: "Mantente al día",
     subscriptionCopy: "Elige boletines, anuncios de eventos o ambos. Tú mantienes el control de tus preferencias."
   },
@@ -560,11 +603,20 @@ const es: Dictionary = {
     emptyTitle: "Próximamente publicaremos videos",
     emptyCopy: "Mantente en contacto para recibir nuevas enseñanzas, conversaciones e historias de la comunidad.",
     channelCta: "Visita nuestro canal de YouTube",
-    items: [
-      { title: "El poder del rúaj", description: "El rabino David Yisrael Kalmus explora el poder del rúaj en esta enseñanza oficial de Ruach Breslov." },
-      { title: "Likkutei Moharan: Torá 7", description: "Una clase oficial de Ruach Breslov sobre Likkutei Moharan, Torá 7." },
-      { title: "Likkutei Moharan: Torá 4", description: "Una clase oficial de Ruach Breslov sobre Likkutei Moharan, Torá 4." }
-    ]
+    channelDescription: "Una comunidad en crecimiento que lleva las enseñanzas de Rebe Najmán a la vida real, con claridad, alegría, profundidad y conexión.",
+    videoCount: "{count} videos",
+    videosTab: "Videos",
+    shortsTab: "Shorts",
+    latest: "Más recientes",
+    popular: "Populares",
+    oldest: "Más antiguos",
+    searchLabel: "Buscar en este canal",
+    searchPlaceholder: "Buscar videos",
+    clearSearch: "Borrar búsqueda",
+    closePlayer: "Cerrar reproductor",
+    playVideo: "Reproducir video",
+    views: "visualizaciones",
+    noResults: "Ningún video coincide con la búsqueda."
   },
   gallery: {
     eyebrow: "La vida en Ruach Breslov",
@@ -652,7 +704,7 @@ const es: Dictionary = {
     ]
   },
   footer: {
-    description: "Compartimos la sabiduría atemporal del Rebe Najmán mediante la fe, la alegría, el crecimiento y vínculos significativos.",
+    description: "Un lugar en Queens para aprender, compartir la mesa y avanzar juntos.",
     privacy: "Privacidad",
     rights: "Todos los derechos reservados."
   }
@@ -660,7 +712,7 @@ const es: Dictionary = {
 
 const fa: Dictionary = {
   siteName: "Ruach Breslov",
-  siteTagline: "حکمت جاودانۀ ربی نحمان را از راه ایمان، شادی، رشد فردی و پیوندی معنادار زنده می‌کنیم.",
+  siteTagline: "تورات، دوستی، ایمان و شادی در کویینز.",
   languageLabel: "زبان",
   system: {
     skipToContent: "رفتن به محتوا",
@@ -677,7 +729,8 @@ const fa: Dictionary = {
   actions: {
     exploreEvents: "مشاهده رویدادها",
     contactUs: "تماس با ما",
-    watchVideos: "تماشای ویدیوها",
+    donate: "اهدای کمک",
+    watchVideos: "ببینید و بیاموزید",
     rsvp: "ثبت حضور",
     supportUs: "حمایت کنید",
     submit: "ارسال پیام",
@@ -687,26 +740,28 @@ const fa: Dictionary = {
     openMenu: "باز کردن منو"
   },
   home: {
-    eyebrow: "حکمت جاودانۀ ربی نحمان",
-    title: "امید را بیابید. با ایمان رشد کنید. هدفمند زندگی کنید.",
-    description: "Ruach Breslov حکمت جاودانۀ ربی نحمان را از راه ایمان، شادی، رشد فردی و پیوندی معنادار زنده می‌کند. ما فضایی پذیرا برای افراد با هر پیشینه‌ای فراهم می‌کنیم تا امید بیابند، رابطۀ خود با خدا را عمیق‌تر کنند، با قدرت با چالش‌های زندگی روبه‌رو شوند و هدف، نیکی و معنای بیشتری کشف کنند.",
-    featureTitle: "فراتر از یک کلاس؛ جامعه‌ای که با هم رشد می‌کند",
-    featureCopy: "گردهمایی‌های ما تورات را با ایمان، شادی، صداقت، دوستی و پیوندی واقعی زنده می‌کنند.",
+    eyebrow: "تورات، دوستی و کمی نور بیشتر",
+    title: "همان‌گونه که هستید بیایید. اینجا جایی برای شماست.",
+    description: "Ruach Breslov جامعه‌ای رو به رشد در کویینز است؛ جایی که آموزه‌های ربی نحمان با زندگی واقعی روبه‌رو می‌شوند. با هم می‌آموزیم، غذا می‌خوریم، صادقانه می‌پرسیم و با ایمان و شادی به یکدیگر برای پیش رفتن کمک می‌کنیم.",
+    gatheringCopy: "این اتاق فقط یک پس‌زمینه نیست؛ جایی است که تورات به گفت‌وگو تبدیل می‌شود، غریبه‌ها دوست می‌شوند و آدم‌ها نیروی گام بعدی را پیدا می‌کنند.",
+    featureEyebrow: "اینجا چه می‌گذرد",
+    featureTitle: "فراتر از یک کلاس؛ اتاقی پُر از آدم‌هایی که واقعاً حضور دارند.",
+    featureCopy: "بدون نمایش و بدون نیاز به پیشینه‌ای بی‌نقص؛ فقط تورات کاربردی، گرما و گفت‌وگویی صادقانه.",
     features: [
       { title: "کلاس‌های هفتگی تورات", copy: "گردهمایی‌های الهام‌بخش پیرامون آموزه‌های ربی نحمان، رشد فردی، پیوند و شادی." },
       { title: "راهنمایی فردی", copy: "راهنمایی و دلگرمی برای هرکس که به دنبال مسیر، حمایت یا همراهی در راه است." },
       { title: "رویدادهای اجتماعی", copy: "غذا، موسیقی، یادگیری و دوستی برای ساختن تجربه‌ای معنادار از زندگی یهودی کنار هم می‌آیند." },
       { title: "سخنرانان مهمان و ارتباط‌گیری", copy: "نگاهی تازه به تورات و دستی گشوده برای کسانی که به دنبال پیوند و دلگرمی هستند." }
     ],
-    storyEyebrow: "میراثی از نور",
-    storyTitle: "جایی برای تعلق داشتن، درست همان‌گونه که هستید.",
+    storyEyebrow: "چگونه آغاز شد",
+    storyTitle: "چند نفر دور یک میز به برادری تبدیل شدند.",
     storyParagraphs: [
       "آنچه با گردهمایی کوچکی آغاز شد، به برادری واقعی بر پایۀ تورات، صداقت، دوستی و این باور تبدیل شده است که هیچ‌کس نباید در دشواری‌هایش تنها بماند.",
       "با الهام از ربی نحمان باور داریم هر روح نوری بی‌اندازه در خود دارد، حتی زمانی که آن نور پنهان به نظر می‌رسد. گاهی یک آموزۀ درست، یک دوست خوب یا گفت‌وگویی صادقانه به انسان یادآوری می‌کند که واقعاً کیست."
     ],
     galleryEyebrow: "درون جامعه",
-    galleryTitle: "یادگیری، دوستی و شادی در کنار هم",
-    galleryCopy: "Ruach Breslov را در لحظه‌های واقعی ببینید: کسانی که با هم می‌آموزند، سفره‌ای را سهیم می‌شوند و پیوندهایی ماندگار می‌سازند.",
+    galleryTitle: "ببینید بودن در این اتاق چه حسی دارد.",
+    galleryCopy: "نه عکس‌های آماده و نه تصویری صحنه‌سازی‌شده از جامعه؛ اینها میزها، چهره‌ها، یادگیری و لحظه‌های مشترکی هستند که Ruach Breslov را واقعی می‌کنند.",
     subscriptionTitle: "در ارتباط بمانید",
     subscriptionCopy: "خبرنامه، اطلاعیه رویدادها یا هر دو را انتخاب کنید. کنترل ترجیحات در اختیار شماست."
   },
@@ -727,11 +782,20 @@ const fa: Dictionary = {
     emptyTitle: "ویدیوها به‌زودی منتشر می‌شوند",
     emptyCopy: "برای دریافت آموزه‌ها، گفت‌وگوها و روایت‌های تازه از جامعه با ما در ارتباط بمانید.",
     channelCta: "مشاهدۀ کانال YouTube ما",
-    items: [
-      { title: "قدرت روح", description: "ربی دیوید اسرائیل کالموس در این آموزش رسمی Ruach Breslov از قدرت روح می‌گوید." },
-      { title: "لیکوتی موهران: تورات ۷", description: "درسی رسمی از Ruach Breslov دربارۀ لیکوتی موهران، تورات ۷." },
-      { title: "لیکوتی موهران: تورات ۴", description: "درسی رسمی از Ruach Breslov دربارۀ لیکوتی موهران، تورات ۴." }
-    ]
+    channelDescription: "جامعه‌ای رو به رشد که آموزه‌های ربی نحمان را با روشنی، شادی، عمق و پیوند وارد زندگی واقعی می‌کند.",
+    videoCount: "{count} ویدیو",
+    videosTab: "ویدیوها",
+    shortsTab: "Shorts",
+    latest: "جدیدترین",
+    popular: "محبوب‌ترین",
+    oldest: "قدیمی‌ترین",
+    searchLabel: "جست‌وجو در کانال",
+    searchPlaceholder: "جست‌وجوی ویدیوها",
+    clearSearch: "پاک کردن جست‌وجو",
+    closePlayer: "بستن پخش‌کننده",
+    playVideo: "پخش ویدیو",
+    views: "بازدید",
+    noResults: "هیچ ویدیویی با این جست‌وجو مطابقت ندارد."
   },
   gallery: {
     eyebrow: "زندگی در Ruach Breslov",
@@ -819,7 +883,7 @@ const fa: Dictionary = {
     ]
   },
   footer: {
-    description: "حکمت جاودانۀ ربی نحمان را با ایمان، شادی، رشد و پیوندی معنادار به اشتراک می‌گذاریم.",
+    description: "جایی در کویینز برای یادگیری، هم‌سفره شدن و پیش رفتن در کنار هم.",
     privacy: "حریم خصوصی",
     rights: "همه حقوق محفوظ است."
   }
