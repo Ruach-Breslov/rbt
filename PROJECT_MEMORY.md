@@ -77,6 +77,8 @@ Last updated: September 6, 2026
 - `https://ruachbreslov.org`, all four canonical language homepages, the events page, and the privacy page return HTTP 200 with valid TLS. Plain HTTP redirects to HTTPS, and `https://www.ruachbreslov.org` redirects to the apex.
 - GitHub Actions deployment run `33866088097` published the gallery/donation release after passing all typechecks, lint, 10 Worker tests, 22 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment. The npm audit registry timed out in CI and emitted the intentional warning; the same release passed `npm audit --audit-level=high` locally.
 - Live release checks confirm HTTP 200 for the homepage, English and Hebrew galleries, the support page, optimized hero/photo/video assets, and API health. The deployed support page contains the expected one-time link, all four monthly links, and customer-portal login.
+- GitHub Actions deployment run `34032857560` published the official YouTube integration after passing the dependency audit, all typechecks, lint, 10 Worker tests, 24 browser tests, production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
+- Live release checks confirm HTTP 200 for the English video page and the official YouTube channel. The deployed page contains the canonical channel link, all three selected video IDs, and the verified “The Power of RUACH” title.
 
 ## Remaining work — handle one item at a time
 
@@ -102,3 +104,4 @@ Last updated: September 6, 2026
 - `70512e7` — gallery and donation launch continuity record
 - `4f667f6` — bounded CI audit network wait while preserving vulnerability failures
 - `b49e9b9` — removed npm install's duplicate implicit audit call
+- `2de812c` — official YouTube channel and featured video integration
