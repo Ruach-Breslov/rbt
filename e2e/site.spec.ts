@@ -1,5 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { getVideos } from "../data/videos";
+
+const expectedLongVideos = getVideos().filter((video) => video.kind === "video").length;
+const expectedShorts = getVideos().filter((video) => video.kind === "short").length;
 
 test.beforeEach(async ({ page }) => {
   await page.route("https://challenges.cloudflare.com/**", async (route) => {
@@ -135,13 +139,13 @@ test("mirrors the Ruach Breslov channel library and opens a closable player", as
   await page.goto("/en/videos");
   await expect(page.getByRole("heading", { name: "Ruach Breslov" })).toBeVisible();
   await expect(page.getByText("@RuachBreslov", { exact: true })).toBeVisible();
-  await expect(page.locator(".video-card")).toHaveCount(13);
+  await expect(page.locator(".video-card")).toHaveCount(expectedLongVideos);
   await expect(page.getByRole("button", { name: "Videos", exact: true })).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(".video-player-frame iframe")).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Visit our YouTube channel" })).toHaveAttribute("href", "https://www.youtube.com/@RuachBreslov");
 
   await page.getByRole("button", { name: "Shorts", exact: true }).click();
-  await expect(page.locator(".video-card")).toHaveCount(3);
+  await expect(page.locator(".video-card")).toHaveCount(expectedShorts);
   await page.getByRole("button", { name: "Videos", exact: true }).click();
 
   await page.getByRole("button", { name: "Search this channel" }).click();

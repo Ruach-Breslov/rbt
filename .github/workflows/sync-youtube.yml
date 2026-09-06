@@ -1,0 +1,63 @@
+name: Sync YouTube uploads
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: youtube-upload-sync
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  sync:
+    name: Check official channel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Test feed parser
+        run: npm run test:youtube
+
+      - name: Sync public uploads
+        run: npm run sync:youtube
+
+      - name: Detect catalog changes
+        id: catalog
+        shell: bash
+        run: |
+          if git diff --quiet -- data/youtube-catalog.json; then
+            echo "changed=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "changed=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Archive new uploads
+        if: steps.catalog.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/youtube-catalog.json
+          git commit -m "chore: sync YouTube uploads"
+          git push origin HEAD:main
+
+      - name: Deploy updated catalog
+        if: steps.catalog.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-github-pages.yml --ref main

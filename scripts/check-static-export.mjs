@@ -94,6 +94,22 @@ if (!existsSync(outDir)) {
   }
   if (!videosHtml.includes("/media/videos/77ibzlmzv2E.webp")) fail("Videos page is missing the local official-video thumbnail.");
   if (!exportPathExists(`${basePath}/media/videos/77ibzlmzv2E.webp`)) fail("Missing exported official-video thumbnail.");
+  try {
+    const videoCatalog = JSON.parse(readFileSync(path.join(projectRoot, "data", "youtube-catalog.json"), "utf8"));
+    if (!Array.isArray(videoCatalog) || !videoCatalog.length) {
+      fail("The YouTube catalog must contain at least one video.");
+    } else {
+      for (const video of videoCatalog) {
+        if (!/^[A-Za-z0-9_-]{11}$/.test(video?.youtubeId ?? "")) {
+          fail("The YouTube catalog contains an invalid video ID.");
+        } else if (!videosHtml.includes(video.youtubeId)) {
+          fail(`Videos page is missing catalog entry: ${video.youtubeId}`);
+        }
+      }
+    }
+  } catch {
+    fail("The YouTube catalog is missing or invalid JSON.");
+  }
 
   if (!/<html lang="en" dir="ltr"/i.test(rootHtml)) fail("Root page must declare English LTR document direction.");
   const expectedHeroImage = heroImage || "/media/hero/home-hero-client.webp";
