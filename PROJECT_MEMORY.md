@@ -70,6 +70,7 @@ Last updated: September 6, 2026
 - Enlarged the complete navigation system for low-vision usability: a 112px desktop header and 96px mobile header, an uncropped 80px/68px brand mark, larger organization copy, navigation labels, controls, icons, menu items, and click targets. The compact menu now activates at 1180px to prevent crowding, the linked brand retains its localized accessible name for screen readers, and the owner-approved header surface is slightly transparent at 88% opacity with background blur.
 - Rebuilt the video page around the official channel's own content and interaction pattern. It contains 13 verified long videos and three Shorts with local thumbnails, Videos/Shorts tabs, Latest/Popular/Oldest sorting, channel search, and an accessible animated player that uses YouTube's privacy-enhanced domain only after an explicit click and can be closed by its visible exit control or Escape.
 - Added an hourly, no-secret YouTube upload sync. It validates the official channel's public feed, archives unseen uploads in `data/youtube-catalog.json`, distinguishes Shorts when YouTube exposes the Shorts route, and explicitly dispatches the existing tested Pages deployment only when the catalog changes. Feed errors or invalid entries fail closed and leave the published library untouched.
+- Added a localized Google Maps location panel to the contact page for the confirmed Flushing address, with a visible pin, a cross-device driving-navigation action, and a separate open-in-Maps link. Visitors are reminded to confirm the class date and time before traveling. Google Maps is allowlisted only for frames, and the four-language privacy notice now discloses the map request.
 - Added `docs/SITE_STRATEGY.md`, a research-backed audience, content, and phased roadmap grounded in Ruach Breslov's own stated purpose and authoritative Breslov Research Institute context. No unconfirmed program or event claims were added.
 - Updated the GitHub Pages `NEXT_PUBLIC_HERO_IMAGE` variable from the previous gallery photograph to `/media/hero/home-hero-client.webp` so production builds cannot override the owner-selected hero.
 
@@ -99,9 +100,10 @@ Last updated: September 6, 2026
 ## Remaining work — handle one item at a time
 
 1. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
-2. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
-3. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
-4. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
+2. Confirm the event-editing workflow. The current recommendation is a dedicated public “Ruach Breslov Events” Google Calendar shared only with approved editors, synchronized into the site's own event cards; this remains a recommendation until the owner approves it and supplies the calendar's public iCal address.
+3. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
+4. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
+5. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
 ## Recorded commits
 

@@ -26,7 +26,7 @@ export function contentSecurityPolicy() {
     "style-src 'self' 'unsafe-inline'",
     `script-src ${scriptSources}`,
     `connect-src ${connectSources}`,
-    "frame-src https://www.youtube-nocookie.com https://checkout.stripe.com https://challenges.cloudflare.com",
+    "frame-src https://www.youtube-nocookie.com https://www.google.com https://checkout.stripe.com https://challenges.cloudflare.com",
     "form-action 'self' https://checkout.stripe.com https://buy.stripe.com",
     process.env.NODE_ENV === "production" ? "upgrade-insecure-requests" : ""
   ].filter(Boolean).join("; ");

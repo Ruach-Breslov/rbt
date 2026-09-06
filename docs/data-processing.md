@@ -20,7 +20,7 @@ This is an engineering inventory, not legal advice or a privacy notice. The orga
 - Document purposes and lawful bases for contact, marketing, RSVP, accessibility/dietary, fraud-prevention, and payment processing.
 - Decide whether optional sensitive RSVP notes are necessary and who may access them.
 - Approve deletion schedules and a documented procedure for D1, mailboxes, Resend, Stripe, logs, backups, and exports.
-- List Cloudflare, GitHub, Resend, Stripe, and YouTube as applicable processors/third parties and document international transfers.
+- List Cloudflare, GitHub, Resend, Stripe, YouTube, and Google Maps as applicable processors/third parties and document international transfers.
 - Define age eligibility, parental-consent requirements, and prohibited data.
 - Arrange professional review of English, Hebrew, Spanish, and Persian legal/consent text.
 

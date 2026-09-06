@@ -76,7 +76,10 @@ test("shows Ruach Breslov's public contact details", async ({ page }) => {
   await page.goto("/en/contact");
   await expect(page.getByRole("link", { name: "info@ruachbreslov.org" })).toHaveAttribute("href", "mailto:info@ruachbreslov.org");
   await expect(page.getByRole("link", { name: "917-740-4509" })).toHaveAttribute("href", "tel:9177404509");
-  await expect(page.getByText("71-27 147th St, Flushing, NY 11367", { exact: true })).toBeVisible();
+  await expect(page.getByText("71-27 147th St, Flushing, NY 11367", { exact: true })).toHaveCount(2);
+  await expect(page.getByTitle("Google Map showing the Ruach Breslov location in Flushing")).toHaveAttribute("src", /google\.com\/maps\?q=71-27%20147th%20St/);
+  await expect(page.getByRole("link", { name: "Get driving directions" })).toHaveAttribute("href", /google\.com\/maps\/dir\/\?api=1.*travelmode=driving.*dir_action=navigate/);
+  await expect(page.getByRole("link", { name: "Open in Google Maps" })).toHaveAttribute("target", "_blank");
 });
 
 test("presents Ruach Breslov's purpose in every supported language", async ({ page }) => {

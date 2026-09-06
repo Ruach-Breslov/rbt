@@ -119,6 +119,12 @@ export type Dictionary = {
     hours: string;
     responseTitle: string;
     responseCopy: string;
+    mapEyebrow: string;
+    mapTitle: string;
+    mapCopy: string;
+    mapFrameTitle: string;
+    directionsCta: string;
+    openMapCta: string;
     faqTitle: string;
     faqs: Array<{ question: string; answer: string }>;
   };
@@ -288,6 +294,12 @@ const en: Dictionary = {
     hours: "Please contact us before planning an in-person visit.",
     responseTitle: "What happens next",
     responseCopy: "Messages are sent securely to the Ruach Breslov team. We will respond as soon as we can.",
+    mapEyebrow: "Plan your visit",
+    mapTitle: "Find us in Flushing",
+    mapCopy: "Open driving directions straight to our location. Please confirm the class date and time with us before traveling.",
+    mapFrameTitle: "Google Map showing the Ruach Breslov location in Flushing",
+    directionsCta: "Get driving directions",
+    openMapCta: "Open in Google Maps",
     faqTitle: "Frequently asked questions",
     faqs: [
       { question: "How quickly will I hear back?", answer: "We review messages and respond as soon as we can. For a direct inquiry, email info@ruachbreslov.org or call 917-740-4509." },
@@ -340,7 +352,7 @@ const en: Dictionary = {
     sections: [
       { title: "Information you provide", copy: "The contact form collects your name, email address, message, and any optional details you choose to provide. Subscription forms collect your name, email address, and selected communication topics." },
       { title: "How we use information", copy: "We use submitted information to answer inquiries, protect the forms from abuse, confirm subscription requests, and send only the communications you requested." },
-      { title: "Service providers", copy: "GitHub Pages hosts the website. Cloudflare provides DNS, API hosting, database services, and Turnstile security. Resend delivers email and manages confirmed subscriptions. Stripe securely processes donations and recurring payment details on its hosted pages. When you choose to play an embedded video, YouTube receives the request and processes it under its policies. These providers process information only as needed to provide those services." },
+      { title: "Service providers", copy: "GitHub Pages hosts the website. Cloudflare provides DNS, API hosting, database services, and Turnstile security. Resend delivers email and manages confirmed subscriptions. Stripe securely processes donations and recurring payment details on its hosted pages. When you choose to play an embedded video, YouTube receives the request and processes it under its policies. When the location map loads or you open directions, Google Maps receives the request and processes it under its policies. These providers process information only as needed to provide those services." },
       { title: "Retention and security", copy: "Contact messages are delivered by email and are not stored in the website database. Unconfirmed subscription requests expire after 24 hours. Confirmed subscription details remain with Resend until you unsubscribe or request deletion. Limited security records are retained to prevent abuse." },
       { title: "Your choices", copy: "You can unsubscribe using links in our emails. To request access, correction, or deletion of information you submitted, contact info@ruachbreslov.org." }
     ]
@@ -467,6 +479,12 @@ const he: Dictionary = {
     hours: "אנא צרו איתנו קשר לפני תכנון ביקור במקום.",
     responseTitle: "מה קורה לאחר השליחה",
     responseCopy: "ההודעות נשלחות באופן מאובטח לצוות Ruach Breslov. נשיב בהקדם האפשרי.",
+    mapEyebrow: "מתכננים את הביקור",
+    mapTitle: "איך מגיעים אלינו בפלאשינג",
+    mapCopy: "פתחו הוראות נסיעה ישירות למיקום שלנו. אנא אשרו איתנו את תאריך ושעת השיעור לפני היציאה לדרך.",
+    mapFrameTitle: "מפת Google המציגה את מיקום Ruach Breslov בפלאשינג",
+    directionsCta: "הוראות נסיעה",
+    openMapCta: "פתיחה ב‑Google Maps",
     faqTitle: "שאלות נפוצות",
     faqs: [
       { question: "תוך כמה זמן אקבל תשובה?", answer: "אנו בודקים את ההודעות ומשיבים בהקדם האפשרי. לפנייה ישירה כתבו ל‑info@ruachbreslov.org או התקשרו ל‑917-740-4509." },
@@ -519,7 +537,7 @@ const he: Dictionary = {
     sections: [
       { title: "מידע שאתם מוסרים", copy: "טופס יצירת הקשר אוסף שם, כתובת דוא״ל, הודעה ופרטים אופציונליים שתבחרו למסור. טופס ההרשמה אוסף שם, כתובת דוא״ל ונושאי תקשורת שבחרתם." },
       { title: "כיצד אנו משתמשים במידע", copy: "אנו משתמשים במידע כדי לענות לפניות, להגן על הטפסים מפני שימוש לרעה, לאשר בקשות הרשמה ולשלוח רק את התקשורת שביקשתם." },
-      { title: "ספקי שירות", copy: "GitHub Pages מאחסן את האתר. Cloudflare מספקת DNS, אחסון API, מסד נתונים ואבטחת Turnstile. Resend שולחת דוא״ל ומנהלת הרשמות מאושרות. Stripe מעבדת באופן מאובטח תרומות ופרטי תשלומים חוזרים בעמודים המאוחסנים אצלה. כאשר בוחרים להפעיל סרטון מוטמע, YouTube מקבלת את הבקשה ומעבדת אותה בהתאם למדיניות שלה. ספקים אלה מעבדים מידע רק ככל שנדרש להפעלת השירותים." },
+      { title: "ספקי שירות", copy: "GitHub Pages מאחסן את האתר. Cloudflare מספקת DNS, אחסון API, מסד נתונים ואבטחת Turnstile. Resend שולחת דוא״ל ומנהלת הרשמות מאושרות. Stripe מעבדת באופן מאובטח תרומות ופרטי תשלומים חוזרים בעמודים המאוחסנים אצלה. כאשר בוחרים להפעיל סרטון מוטמע, YouTube מקבלת את הבקשה ומעבדת אותה בהתאם למדיניות שלה. כאשר מפת המיקום נטענת או כשפותחים הוראות נסיעה, Google Maps מקבלת את הבקשה ומעבדת אותה בהתאם למדיניות שלה. ספקים אלה מעבדים מידע רק ככל שנדרש להפעלת השירותים." },
       { title: "שמירה ואבטחה", copy: "הודעות קשר נמסרות בדוא״ל ואינן נשמרות במסד הנתונים של האתר. בקשות הרשמה שלא אושרו פגות לאחר 24 שעות. פרטי הרשמה מאושרים נשמרים ב‑Resend עד להסרה או לבקשת מחיקה. רשומות אבטחה מוגבלות נשמרות למניעת שימוש לרעה." },
       { title: "הבחירות שלכם", copy: "אפשר להסיר הרשמה באמצעות הקישורים בהודעות שלנו. לבקשת גישה, תיקון או מחיקה של מידע שמסרתם, כתבו ל‑info@ruachbreslov.org." }
     ]
@@ -646,6 +664,12 @@ const es: Dictionary = {
     hours: "Contáctanos antes de planificar una visita en persona.",
     responseTitle: "Qué sucede después",
     responseCopy: "Los mensajes se envían de forma segura al equipo de Ruach Breslov. Responderemos tan pronto como podamos.",
+    mapEyebrow: "Planifica tu visita",
+    mapTitle: "Encuéntranos en Flushing",
+    mapCopy: "Abre indicaciones para llegar directamente a nuestra ubicación. Confirma con nosotros la fecha y hora de la clase antes de viajar.",
+    mapFrameTitle: "Mapa de Google que muestra la ubicación de Ruach Breslov en Flushing",
+    directionsCta: "Cómo llegar en auto",
+    openMapCta: "Abrir en Google Maps",
     faqTitle: "Preguntas frecuentes",
     faqs: [
       { question: "¿Cuándo recibiré una respuesta?", answer: "Revisamos los mensajes y respondemos tan pronto como podemos. Para una consulta directa, escribe a info@ruachbreslov.org o llama al 917-740-4509." },
@@ -698,7 +722,7 @@ const es: Dictionary = {
     sections: [
       { title: "Información que proporcionas", copy: "El formulario de contacto recopila tu nombre, correo electrónico, mensaje y los datos opcionales que decidas proporcionar. El formulario de suscripción recopila tu nombre, correo electrónico y los temas de comunicación seleccionados." },
       { title: "Cómo usamos la información", copy: "Usamos la información para responder consultas, proteger los formularios contra abusos, confirmar solicitudes de suscripción y enviar únicamente las comunicaciones que pediste." },
-      { title: "Proveedores de servicios", copy: "GitHub Pages aloja el sitio. Cloudflare proporciona DNS, alojamiento de la API, base de datos y seguridad Turnstile. Resend entrega correos y administra suscripciones confirmadas. Stripe procesa de forma segura las donaciones y los datos de pagos recurrentes en sus páginas alojadas. Cuando eliges reproducir un video incorporado, YouTube recibe la solicitud y la procesa conforme a sus políticas. Estos proveedores procesan información solo cuando es necesario para prestar esos servicios." },
+      { title: "Proveedores de servicios", copy: "GitHub Pages aloja el sitio. Cloudflare proporciona DNS, alojamiento de la API, base de datos y seguridad Turnstile. Resend entrega correos y administra suscripciones confirmadas. Stripe procesa de forma segura las donaciones y los datos de pagos recurrentes en sus páginas alojadas. Cuando eliges reproducir un video incorporado, YouTube recibe la solicitud y la procesa conforme a sus políticas. Cuando se carga el mapa de ubicación o abres las indicaciones, Google Maps recibe la solicitud y la procesa conforme a sus políticas. Estos proveedores procesan información solo cuando es necesario para prestar esos servicios." },
       { title: "Conservación y seguridad", copy: "Los mensajes de contacto se entregan por correo y no se guardan en la base de datos del sitio. Las solicitudes de suscripción no confirmadas vencen después de 24 horas. Los datos de suscripciones confirmadas permanecen en Resend hasta que canceles la suscripción o solicites su eliminación. Conservamos registros de seguridad limitados para prevenir abusos." },
       { title: "Tus opciones", copy: "Puedes cancelar la suscripción mediante los enlaces incluidos en nuestros correos. Para solicitar acceso, corrección o eliminación de información que enviaste, escribe a info@ruachbreslov.org." }
     ]
@@ -825,6 +849,12 @@ const fa: Dictionary = {
     hours: "پیش از برنامه‌ریزی برای مراجعه حضوری با ما تماس بگیرید.",
     responseTitle: "پس از ارسال چه می‌شود",
     responseCopy: "پیام‌ها به‌صورت امن به تیم Ruach Breslov می‌رسند. در اولین فرصت پاسخ خواهیم داد.",
+    mapEyebrow: "برای مراجعه برنامه‌ریزی کنید",
+    mapTitle: "موقعیت ما در فلاشینگ",
+    mapCopy: "مسیر رانندگی مستقیم به محل ما را باز کنید. لطفاً پیش از حرکت، تاریخ و ساعت کلاس را با ما تأیید کنید.",
+    mapFrameTitle: "نقشه Google که موقعیت Ruach Breslov در فلاشینگ را نشان می‌دهد",
+    directionsCta: "مسیریابی رانندگی",
+    openMapCta: "باز کردن در Google Maps",
     faqTitle: "پرسش‌های متداول",
     faqs: [
       { question: "چه زمانی پاسخ می‌گیرم؟", answer: "پیام‌ها را بررسی می‌کنیم و در اولین فرصت پاسخ می‌دهیم. برای تماس مستقیم به info@ruachbreslov.org ایمیل بزنید یا با 917-740-4509 تماس بگیرید." },
@@ -877,7 +907,7 @@ const fa: Dictionary = {
     sections: [
       { title: "اطلاعاتی که ارائه می‌کنید", copy: "فرم تماس نام، نشانی ایمیل، پیام و هر اطلاعات اختیاری را که وارد کنید دریافت می‌کند. فرم عضویت نام، نشانی ایمیل و موضوعات ارتباطی انتخاب‌شده را دریافت می‌کند." },
       { title: "نحوۀ استفاده از اطلاعات", copy: "از اطلاعات برای پاسخ به پرسش‌ها، محافظت از فرم‌ها در برابر سوءاستفاده، تأیید درخواست عضویت و ارسال تنها پیام‌هایی که خواسته‌اید استفاده می‌کنیم." },
-      { title: "ارائه‌دهندگان خدمات", copy: "GitHub Pages میزبان وب‌سایت است. Cloudflare خدمات DNS، میزبانی API، پایگاه داده و امنیت Turnstile را ارائه می‌دهد. Resend ایمیل‌ها و عضویت‌های تأییدشده را مدیریت می‌کند. Stripe کمک‌ها و اطلاعات پرداخت‌های دوره‌ای را به‌صورت امن در صفحه‌های میزبانی‌شدۀ خود پردازش می‌کند. وقتی پخش یک ویدیوی جاسازی‌شده را انتخاب می‌کنید، YouTube درخواست را دریافت و طبق سیاست‌های خود پردازش می‌کند. این ارائه‌دهندگان فقط به میزان لازم برای ارائۀ خدمات اطلاعات را پردازش می‌کنند." },
+      { title: "ارائه‌دهندگان خدمات", copy: "GitHub Pages میزبان وب‌سایت است. Cloudflare خدمات DNS، میزبانی API، پایگاه داده و امنیت Turnstile را ارائه می‌دهد. Resend ایمیل‌ها و عضویت‌های تأییدشده را مدیریت می‌کند. Stripe کمک‌ها و اطلاعات پرداخت‌های دوره‌ای را به‌صورت امن در صفحه‌های میزبانی‌شدۀ خود پردازش می‌کند. وقتی پخش یک ویدیوی جاسازی‌شده را انتخاب می‌کنید، YouTube درخواست را دریافت و طبق سیاست‌های خود پردازش می‌کند. وقتی نقشۀ موقعیت بارگیری می‌شود یا مسیریابی را باز می‌کنید، Google Maps درخواست را دریافت و طبق سیاست‌های خود پردازش می‌کند. این ارائه‌دهندگان فقط به میزان لازم برای ارائۀ خدمات اطلاعات را پردازش می‌کنند." },
       { title: "نگهداری و امنیت", copy: "پیام‌های تماس از طریق ایمیل تحویل می‌شوند و در پایگاه دادۀ وب‌سایت ذخیره نمی‌شوند. درخواست‌های عضویت تأییدنشده پس از ۲۴ ساعت منقضی می‌شوند. اطلاعات عضویت تأییدشده تا لغو عضویت یا درخواست حذف در Resend باقی می‌ماند. سوابق امنیتی محدود برای جلوگیری از سوءاستفاده نگهداری می‌شوند." },
       { title: "انتخاب‌های شما", copy: "می‌توانید از پیوندهای موجود در ایمیل‌ها عضویت را لغو کنید. برای درخواست دسترسی، اصلاح یا حذف اطلاعاتی که فرستاده‌اید به info@ruachbreslov.org ایمیل بزنید." }
     ]

@@ -82,6 +82,7 @@ if (!existsSync(outDir)) {
   const rootHtml = routeHtml("/");
   const galleryHtml = routeHtml("/en/gallery");
   const videosHtml = routeHtml("/en/videos");
+  const contactHtml = routeHtml("/en/contact");
   for (const asset of [
     "/media/hero/home-hero-client.webp",
     "/media/gallery/community-study.webp",
@@ -94,6 +95,12 @@ if (!existsSync(outDir)) {
   }
   if (!videosHtml.includes("/media/videos/77ibzlmzv2E.webp")) fail("Videos page is missing the local official-video thumbnail.");
   if (!exportPathExists(`${basePath}/media/videos/77ibzlmzv2E.webp`)) fail("Missing exported official-video thumbnail.");
+  if (!contactHtml.includes("https://www.google.com/maps?q=") || !contactHtml.includes("output=embed")) {
+    fail("Contact page is missing the pinned Google map.");
+  }
+  if (!contactHtml.includes("https://www.google.com/maps/dir/?api=1") || !contactHtml.includes("travelmode=driving")) {
+    fail("Contact page is missing Google Maps driving directions.");
+  }
   try {
     const videoCatalog = JSON.parse(readFileSync(path.join(projectRoot, "data", "youtube-catalog.json"), "utf8"));
     if (!Array.isArray(videoCatalog) || !videoCatalog.length) {
@@ -162,8 +169,8 @@ if (!existsSync(outDir)) {
     }
   }
 
-  if (!rootHtml.includes("https://www.youtube-nocookie.com") || !rootHtml.includes("https://checkout.stripe.com")) {
-    fail("CSP must allow the configured YouTube and Stripe hosted experiences.");
+  if (!rootHtml.includes("https://www.youtube-nocookie.com") || !rootHtml.includes("https://www.google.com") || !rootHtml.includes("https://checkout.stripe.com")) {
+    fail("CSP must allow the configured YouTube, Google Maps, and Stripe hosted experiences.");
   }
 
   const configuredVideoIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "").split(",").map((value) => value.trim()).filter(Boolean);

@@ -60,7 +60,9 @@ The design should avoid generic charity cards, excessive rounded pills, syntheti
 
 - Confirm weekly schedule, intended audience, access/parking, accessibility, and what a first-time visitor should expect.
 - Publish real upcoming events and connect RSVP confirmations.
-- Add calendar and map actions only after the underlying details are confirmed.
+- Use a dedicated public “Ruach Breslov Events” Google Calendar as the recommended nontechnical editing source. Invite approved staff as calendar editors instead of sharing a password; they can create, revise, repeat, or cancel events in the familiar Calendar app.
+- Sync that calendar into the site's own branded event cards so updates, cancellations, localized date formatting, map directions, and RSVP links remain clear without asking staff to edit code.
+- Keep the organization's personal/internal calendars separate; only details placed on the dedicated public events calendar should be published.
 
 ### Phase 4 — Build a durable teaching library
 
@@ -81,3 +83,5 @@ The design should avoid generic charity cards, excessive rounded pills, syntheti
 - Breslov Research Institute overview: https://breslov.org/about-the-breslov-research-institute-bri/
 - Breslov Research Institute FAQ on personal prayer, joy, simple faith, and individual growth: https://breslov.org/breslov-faq/
 - Breslov Research Institute on simplicity, sincerity, Torah, prayer, and joy: https://breslov.org/simplicity-in-torah-and-mitzvot/
+- Google Calendar Help on public calendars and website publishing: https://support.google.com/calendar/answer/37083
+- Google Calendar Help on calendar sharing and editor permissions: https://support.google.com/calendar/answer/37082
