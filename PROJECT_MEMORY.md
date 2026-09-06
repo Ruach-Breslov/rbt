@@ -96,6 +96,8 @@ Last updated: September 6, 2026
 - Three YouTube synchronization unit tests cover feed validation, archive merging, entity decoding, remote thumbnails, and Shorts classification. A live feed check found all 15 current public feed entries already present and correctly left the 16-item archived catalog unchanged.
 - GitHub Actions deployment run `34055867658` published the automatic YouTube synchronization release after passing the dependency audit, all typechecks, lint, three sync tests, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
 - Manual synchronization run `34056021685` successfully checked the live official feed and correctly skipped both the catalog commit and redundant deployment because all 15 feed entries were already archived.
+- GitHub Actions deployment run `34056792175` published the contact-map release after passing the dependency audit, all typechecks, lint, YouTube sync tests, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
+- Live Cloudflare-facing browser checks confirm the contact page returns HTTP 200, loads the pinned Google map, routes driving navigation to `71-27 147th St, Flushing, NY 11367`, and has no horizontal overflow.
 
 ## Remaining work — handle one item at a time
 
@@ -126,3 +128,4 @@ Last updated: September 6, 2026
 - `44370db` — client-selected warm palette, authentic-photo hero, and shared cinematic gallery
 - `34c5446` — approved cinematic rescue facelift, enlarged navigation, and full channel-style video library
 - `cf74645` — hourly official-channel sync with persistent catalog and tested conditional deployment
+- `85f9f16` — localized Google Maps location and driving directions on the contact page
