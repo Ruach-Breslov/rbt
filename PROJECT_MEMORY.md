@@ -1,6 +1,6 @@
 # Ruach Breslov Main Site — Project Memory
 
-Last updated: September 6, 2026
+Last updated: September 7, 2026
 
 ## Working boundary
 
@@ -34,6 +34,7 @@ Last updated: September 6, 2026
 - Confirmed legacy theme: a small gathering grew into a brotherhood built on Torah, honesty, friendship, and the conviction that no one should feel alone.
 - Donation impact language may cover weekly classes, food and hospitality, guest speakers, community events, and outreach.
 - Official YouTube channel: `https://www.youtube.com/@RuachBreslov` (handle `@ruachbreslov`, channel ID `UCOhxrylucgg0_WdPRFU1d_w`).
+- The owner approved a dedicated public **Ruach Breslov Events** Google Calendar as the nontechnical event-editing workflow. Only approved people receive edit access; the public feed exposes event details but never grants public editing.
 
 ## Language behavior
 
@@ -71,6 +72,7 @@ Last updated: September 6, 2026
 - Rebuilt the video page around the official channel's own content and interaction pattern. It contains 13 verified long videos and three Shorts with local thumbnails, Videos/Shorts tabs, Latest/Popular/Oldest sorting, channel search, and an accessible animated player that uses YouTube's privacy-enhanced domain only after an explicit click and can be closed by its visible exit control or Escape.
 - Added an hourly, no-secret YouTube upload sync. It validates the official channel's public feed, archives unseen uploads in `data/youtube-catalog.json`, distinguishes Shorts when YouTube exposes the Shorts route, and explicitly dispatches the existing tested Pages deployment only when the catalog changes. Feed errors or invalid entries fail closed and leave the published library untouched.
 - Added a localized Google Maps location panel to the contact page for the confirmed Flushing address, with a visible pin, a cross-device driving-navigation action, and a separate open-in-Maps link. Visitors are reminded to confirm the class date and time before traveling. Google Maps is allowlisted only for frames, and the four-language privacy notice now discloses the map request.
+- Built the approved Google Calendar event workflow. A tested hourly GitHub Action converts the dedicated calendar's public iCal feed into the site's own event cards, including recurring events, edited occurrences, cancellations, all-day dates, source time zones, locations, and concise descriptions. It commits and deploys only when the future catalog changes, fails closed on invalid feeds, and stays runner-free while unconfigured. The current empty catalog therefore continues to publish no unconfirmed events until the owner supplies the public iCal address. Calendar publication remains separate from capacity-validated production RSVP records, so synced events never expose a broken RSVP action.
 - Added `docs/SITE_STRATEGY.md`, a research-backed audience, content, and phased roadmap grounded in Ruach Breslov's own stated purpose and authoritative Breslov Research Institute context. No unconfirmed program or event claims were added.
 - Updated the GitHub Pages `NEXT_PUBLIC_HERO_IMAGE` variable from the previous gallery photograph to `/media/hero/home-hero-client.webp` so production builds cannot override the owner-selected hero.
 
@@ -98,12 +100,13 @@ Last updated: September 6, 2026
 - Manual synchronization run `34056021685` successfully checked the live official feed and correctly skipped both the catalog commit and redundant deployment because all 15 feed entries were already archived.
 - GitHub Actions deployment run `34056792175` published the contact-map release after passing the dependency audit, all typechecks, lint, YouTube sync tests, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
 - Live Cloudflare-facing browser checks confirm the contact page returns HTTP 200, loads the pinned Google map, routes driving navigation to `71-27 147th St, Flushing, NY 11367`, and has no horizontal overflow.
+- Four Google Calendar synchronization unit tests pass for future-event filtering, recurring-event exclusions and edits, cancellations, all-day ranges, New York time-zone conversion, safe stable IDs, and strict public Google iCal URL validation. The complete local production gate passes with zero audit findings, all typechecks and lint, 10 Worker tests, both sync suites, the production build, and the 29-route export check; all 28 desktop/mobile browser and WCAG checks also pass.
 
 ## Remaining work — handle one item at a time
 
 1. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
-2. Confirm the event-editing workflow. The current recommendation is a dedicated public “Ruach Breslov Events” Google Calendar shared only with approved editors, synchronized into the site's own event cards; this remains a recommendation until the owner approves it and supplies the calendar's public iCal address.
-3. Add confirmed events, dates, locations, and RSVP requirements as they are announced.
+2. Create/share the approved dedicated **Ruach Breslov Events** Google Calendar, supply its **Public address in iCal format**, save it as the `GOOGLE_CALENDAR_ICAL_URL` GitHub Actions variable, and run the initial manual synchronization. The automation is deployed but intentionally inactive until this one public value exists.
+3. Confirm capacity and RSVP requirements for each event that should accept on-site reservations; calendar publication alone does not create a production RSVP database record.
 4. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
 5. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
@@ -129,3 +132,4 @@ Last updated: September 6, 2026
 - `34c5446` — approved cinematic rescue facelift, enlarged navigation, and full channel-style video library
 - `cf74645` — hourly official-channel sync with persistent catalog and tested conditional deployment
 - `85f9f16` — localized Google Maps location and driving directions on the contact page
+- `42d0b65` — safe hourly Google Calendar synchronization and nontechnical event-editor handoff
