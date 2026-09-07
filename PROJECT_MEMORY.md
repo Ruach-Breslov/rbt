@@ -108,6 +108,8 @@ Last updated: September 7, 2026
 - Four Google Calendar synchronization unit tests pass for future-event filtering, recurring-event exclusions and edits, cancellations, all-day ranges, New York time-zone conversion, safe stable IDs, and strict public Google iCal URL validation. The complete local production gate passes with zero audit findings, all typechecks and lint, 10 Worker tests, both sync suites, the production build, and the 29-route export check; all 28 desktop/mobile browser and WCAG checks also pass.
 - GitHub Actions deployment run `34084780842` published the calendar-ready release after passing the dependency audit, all typechecks, lint, both synchronization suites, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment. Manual calendar run `34084966596` also passed its parser tests and correctly skipped fetch, commit, and deployment because `GOOGLE_CALENDAR_ICAL_URL` is not configured yet.
 - The live English events page returns HTTP 200, retains the honest no-scheduled-events state, and exposes no RSVP button while the public calendar is unconnected.
+- GitHub Actions deployment run `34114669424` published the nonprofit-verification release from commit `e1f76ba` after passing the zero-vulnerability audit, all typechecks, lint, both synchronization suites, 10 Worker tests, all 30 desktop/mobile browser tests, the 33-route production export, launch gate, artifact upload, and Pages deployment.
+- Live Cloudflare-facing checks confirm all four localized About pages return HTTP 200 and visibly contain Ruach Breslov Inc., EIN 41-3212278, Benjamin Roberts, and Executive Director. The English homepage and support page expose the mission and nonprofit proof, the rendered mobile About page has no horizontal overflow, and the support page retains all five live Stripe-hosted donation choices.
 
 ## Remaining work — handle one item at a time
 
@@ -141,3 +143,4 @@ Last updated: September 7, 2026
 - `cf74645` — hourly official-channel sync with persistent catalog and tested conditional deployment
 - `85f9f16` — localized Google Maps location and driving directions on the contact page
 - `42d0b65` — safe hourly Google Calendar synchronization and nontechnical event-editor handoff
+- `e1f76ba` — verification-ready mission, legal identity, About page, and Executive Director attribution
