@@ -14,17 +14,19 @@
     "typecheck:worker": "tsc -p tsconfig.worker.json",
     "typecheck:tests": "tsc -p worker/test/tsconfig.json && tsc -p e2e/tsconfig.json",
     "lint": "eslint .",
+    "sync:events": "node scripts/sync-google-calendar.mjs",
+    "test:events": "node --test scripts/google-calendar.test.mjs",
     "sync:youtube": "node scripts/sync-youtube.mjs",
     "test:youtube": "node --test scripts/youtube-feed.test.mjs",
     "test:worker": "vitest run --config vitest.worker.config.mts",
     "test:e2e": "playwright test",
-    "test": "npm run test:youtube && npm run test:worker && npm run test:e2e",
+    "test": "npm run test:events && npm run test:youtube && npm run test:worker && npm run test:e2e",
     "worker:dev": "wrangler dev",
     "worker:deploy": "wrangler deploy",
     "db:migrate:local": "wrangler d1 migrations apply ruach-breslov-production --local",
     "db:migrate:remote": "wrangler d1 migrations apply ruach-breslov-production --remote",
     "db:seed:local": "wrangler d1 execute ruach-breslov-production --local --file worker/seeds/dev.sql",
-    "check": "npm run audit && npm run typecheck && npm run typecheck:worker && npm run typecheck:tests && npm run lint && npm run test:youtube && npm run test:worker && npm run build && npm run check:static-export"
+    "check": "npm run audit && npm run typecheck && npm run typecheck:worker && npm run typecheck:tests && npm run lint && npm run test:events && npm run test:youtube && npm run test:worker && npm run build && npm run check:static-export"
   },
   "overrides": {
     "postcss": "$postcss"
@@ -42,6 +44,7 @@
     "@webgpu/types": "^0.1.72",
     "eslint": "^10.3.0",
     "globals": "^17.6.0",
+    "ical.js": "^2.2.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",
     "vitest": "^4.1.11",

@@ -77,6 +77,9 @@ jobs:
       - name: Test YouTube sync
         run: npm run test:youtube
 
+      - name: Test event sync
+        run: npm run test:events
+
       - name: Test Worker
         run: npm run test:worker
 

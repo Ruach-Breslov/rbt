@@ -11,7 +11,7 @@ The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pa
 - Responsive navigation and language selector
 - Animated, reduced-motion-aware landing page
 - Newsletter and event-announcement preference form
-- Event cards and reusable RSVP dialog
+- Google Calendar-synchronized event cards and reusable RSVP dialog
 - Click-to-load, privacy-enhanced YouTube video library
 - Official Ruach Breslov channel link and curated featured teachings
 - Authentic Ruach Breslov community photography throughout the public experience
@@ -65,7 +65,7 @@ The deployment workflow also runs `npm run check:launch`. That gate deliberately
 ## Configure a new website
 
 1. Replace placeholder organization details and translated content in `data/locales.ts` and `data/site.ts`.
-2. Replace sample events in `data/events.ts`.
+2. Connect the dedicated public events calendar by following `docs/EVENT_CALENDAR.md`.
 3. Copy `.env.example` to `.env.local` and set only public development values, including the four official organization names and the Turnstile site key.
 4. Deploy the included Worker by following `docs/backend-deployment.md`, then set `NEXT_PUBLIC_API_BASE_URL`.
 5. Create a Stripe Payment Link and set `NEXT_PUBLIC_STRIPE_PAYMENT_LINK`.
@@ -107,13 +107,15 @@ Never source, deploy, or upload the master file as a whole.
 | `NEXT_PUBLIC_YOUTUBE_VIDEO_IDS` | Up to three comma-separated YouTube IDs |
 | `NEXT_PUBLIC_YOUTUBE_CHANNEL_URL` | Optional public YouTube channel URL |
 | `NEXT_PUBLIC_HERO_IMAGE` | Optional local `/media/...` community hero photograph |
+| `GOOGLE_CALENDAR_ICAL_URL` | CI-only public Google Calendar iCal feed for hourly event sync |
 
 Never use a `NEXT_PUBLIC_*` variable for a Resend API key, Stripe secret/restricted key, webhook secret, database credential, CAPTCHA secret, or any other confidential value.
 
 ## Content map
 
 - `data/locales.ts`: all translated interface and page copy
-- `data/events.ts`: event dates and structural data
+- `data/events.ts`: event catalog types and localized date formatting
+- `data/calendar-events.json`: generated upcoming-event catalog; edit the connected Google Calendar instead
 - `data/videos.ts`: YouTube library configuration
 - `data/site.ts`: public contact and integration configuration
 - `app/[locale]/`: localized static pages
@@ -122,6 +124,7 @@ Never use a `NEXT_PUBLIC_*` variable for a Resend API key, Stripe secret/restric
 - `worker/test/`: Worker-runtime integration and security tests
 - `e2e/`: desktop/mobile Playwright and axe accessibility tests
 - `docs/security-hardening.md`: production security requirements
+- `docs/EVENT_CALENDAR.md`: nontechnical Google Calendar editing and one-time connection guide
 
 ## Naming the subscription section
 
