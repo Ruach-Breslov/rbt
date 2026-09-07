@@ -28,6 +28,7 @@ test("sets language and direction for every locale", async ({ page }) => {
 });
 
 test("keeps the enlarged navigation accessible and unclipped", async ({ page }) => {
+  if ((page.viewportSize()?.width ?? 0) > 700) await page.setViewportSize({ width: 1600, height: 900 });
   await page.goto("/en");
   await expect(page.getByRole("link", { name: "Ruach Breslov — Home" })).toBeVisible();
   await expect(page.locator(".header-contact-button")).toHaveAttribute("href", "/en/contact");
@@ -53,6 +54,7 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
       imageTransform: image ? getComputedStyle(image).transform : "",
       languageAtOuterEdge: actions?.lastElementChild === languageMenu,
       languageEdgeGap: inner && languageMenu ? Math.abs(inner.getBoundingClientRect().right - languageMenu.getBoundingClientRect().right) : null,
+      languagePageEdgeGap: languageMenu ? Math.abs(document.documentElement.clientWidth - languageMenu.getBoundingClientRect().right) : null,
       contactNextToSupport: actions?.children[0]?.classList.contains("header-contact-button") && actions?.children[1]?.classList.contains("button-primary"),
       minimumTargetHeight: Math.min(...visibleTargets.map((bounds) => bounds.height))
     };
@@ -66,6 +68,8 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
   expect(navigationPresentation.languageAtOuterEdge).toBe(true);
   expect(navigationPresentation.languageEdgeGap).not.toBeNull();
   expect(navigationPresentation.languageEdgeGap ?? 1).toBeLessThan(1);
+  expect(navigationPresentation.languagePageEdgeGap).not.toBeNull();
+  expect(navigationPresentation.languagePageEdgeGap ?? 17).toBeLessThanOrEqual(16);
   expect(navigationPresentation.contactNextToSupport).toBe(true);
   expect(navigationPresentation.minimumTargetHeight).toBeGreaterThanOrEqual(44);
 });
