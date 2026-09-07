@@ -30,10 +30,15 @@ test("sets language and direction for every locale", async ({ page }) => {
 test("keeps the enlarged navigation accessible and unclipped", async ({ page }) => {
   await page.goto("/en");
   await expect(page.getByRole("link", { name: "Ruach Breslov — Home" })).toBeVisible();
+  await expect(page.locator(".header-contact-button")).toHaveAttribute("href", "/en/contact");
+  await expect(page.locator('.desktop-nav a[href="/en/contact"]')).toHaveCount(0);
 
   const navigationPresentation = await page.locator(".site-header").evaluate((header) => {
     const mark = header.querySelector<HTMLElement>(".brand-mark");
     const image = mark?.querySelector<HTMLImageElement>("img");
+    const inner = header.querySelector<HTMLElement>(".site-header-inner");
+    const actions = header.querySelector<HTMLElement>(".header-actions");
+    const languageMenu = actions?.querySelector<HTMLElement>(".language-menu");
     const visibleTargets = Array.from(header.querySelectorAll<HTMLElement>("a, summary"))
       .map((element) => element.getBoundingClientRect())
       .filter((bounds) => bounds.width > 0 && bounds.height > 0);
@@ -46,6 +51,9 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
       markWidth: mark?.getBoundingClientRect().width ?? 0,
       imageFit: image ? getComputedStyle(image).objectFit : "",
       imageTransform: image ? getComputedStyle(image).transform : "",
+      languageAtOuterEdge: actions?.lastElementChild === languageMenu,
+      languageEdgeGap: inner && languageMenu ? Math.abs(inner.getBoundingClientRect().right - languageMenu.getBoundingClientRect().right) : null,
+      contactNextToSupport: actions?.children[0]?.classList.contains("header-contact-button") && actions?.children[1]?.classList.contains("button-primary"),
       minimumTargetHeight: Math.min(...visibleTargets.map((bounds) => bounds.height))
     };
   });
@@ -55,6 +63,10 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
   expect(navigationPresentation.markWidth).toBeGreaterThanOrEqual(68);
   expect(navigationPresentation.imageFit).toBe("contain");
   expect(navigationPresentation.imageTransform).toBe("none");
+  expect(navigationPresentation.languageAtOuterEdge).toBe(true);
+  expect(navigationPresentation.languageEdgeGap).not.toBeNull();
+  expect(navigationPresentation.languageEdgeGap ?? 1).toBeLessThan(1);
+  expect(navigationPresentation.contactNextToSupport).toBe(true);
   expect(navigationPresentation.minimumTargetHeight).toBeGreaterThanOrEqual(44);
 });
 

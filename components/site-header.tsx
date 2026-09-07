@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Menu } from "lucide-react";
+import { Heart, Mail, Menu } from "lucide-react";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
 import { LanguageMenu } from "@/components/language-menu";
 import { publicAsset } from "@/data/site";
@@ -10,8 +10,7 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
     { label: dictionary.nav.about, href: localeHref(locale, "about") },
     { label: dictionary.nav.events, href: localeHref(locale, "events") },
     { label: dictionary.nav.gallery, href: localeHref(locale, "gallery") },
-    { label: dictionary.nav.videos, href: localeHref(locale, "videos") },
-    { label: dictionary.nav.contact, href: localeHref(locale, "contact") }
+    { label: dictionary.nav.videos, href: localeHref(locale, "videos") }
   ];
 
   return (
@@ -30,7 +29,10 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
         </nav>
 
         <div className="header-actions">
-          <LanguageMenu locale={locale} dictionary={dictionary} />
+          <Link href={localeHref(locale, "contact")} className="button button-small header-contact-button">
+            <Mail aria-hidden="true" />
+            {dictionary.actions.contactUs}
+          </Link>
           <Link href={localeHref(locale, "support")} className="button button-small button-primary">
             <Heart aria-hidden="true" />
             {dictionary.actions.supportUs}
@@ -39,9 +41,11 @@ export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary:
             <summary aria-label={dictionary.actions.openMenu}><Menu aria-hidden="true" /></summary>
             <nav aria-label="Mobile navigation">
               {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+              <Link href={localeHref(locale, "contact")}>{dictionary.nav.contact}</Link>
               <Link href={localeHref(locale, "support")}>{dictionary.nav.support}</Link>
             </nav>
           </details>
+          <LanguageMenu locale={locale} dictionary={dictionary} />
         </div>
       </div>
     </header>
