@@ -170,6 +170,12 @@ export type Dictionary = {
     customTitle: string;
     customCopy: string;
     unavailable: string;
+    givingFrequency: string;
+    oneTimeOption: string;
+    monthlyOption: string;
+    monthlyAmountPrompt: string;
+    continueToStripe: string;
+    stripeRedirectNote: string;
     oneTimeCta: string;
     monthlyCta: string;
     monthlyLabel: string;
@@ -387,6 +393,12 @@ const en: Dictionary = {
     customTitle: "Become a monthly supporter",
     customCopy: "Recurring support gives classes, hospitality, speakers, and outreach a dependable foundation.",
     unavailable: "Online contributions are not currently available. Please contact us if you would like to support Ruach Breslov.",
+    givingFrequency: "Donation frequency",
+    oneTimeOption: "One time",
+    monthlyOption: "Monthly",
+    monthlyAmountPrompt: "Choose a monthly amount",
+    continueToStripe: "Continue securely with Stripe",
+    stripeRedirectNote: "Stripe opens in a new tab to securely collect and process your payment.",
     oneTimeCta: "Choose a one-time amount",
     monthlyCta: "Give {amount} monthly",
     monthlyLabel: "per month",
@@ -610,6 +622,12 @@ const he: Dictionary = {
     customTitle: "מצטרפים כתומכים חודשיים",
     customCopy: "תמיכה קבועה מעניקה בסיס יציב לשיעורים, לאירוח, למרצים ולקירוב.",
     unavailable: "תרומות מקוונות אינן זמינות כרגע. צרו איתנו קשר אם תרצו לתמוך ב‑Ruach Breslov.",
+    givingFrequency: "תדירות התרומה",
+    oneTimeOption: "חד־פעמית",
+    monthlyOption: "חודשית",
+    monthlyAmountPrompt: "בחרו סכום חודשי",
+    continueToStripe: "המשך מאובטח ל‑Stripe",
+    stripeRedirectNote: "Stripe ייפתח בכרטיסייה חדשה כדי לאסוף ולעבד את התשלום באופן מאובטח.",
     oneTimeCta: "בחירת סכום חד־פעמי",
     monthlyCta: "תרומה של {amount} בכל חודש",
     monthlyLabel: "לחודש",
@@ -833,6 +851,12 @@ const es: Dictionary = {
     customTitle: "Hazte colaborador mensual",
     customCopy: "El apoyo recurrente da una base estable a las clases, la hospitalidad, los oradores y el alcance comunitario.",
     unavailable: "Las contribuciones en línea aún no están disponibles. Contáctanos si deseas apoyar a Ruach Breslov.",
+    givingFrequency: "Frecuencia de donación",
+    oneTimeOption: "Una vez",
+    monthlyOption: "Mensual",
+    monthlyAmountPrompt: "Elige una cantidad mensual",
+    continueToStripe: "Continuar de forma segura en Stripe",
+    stripeRedirectNote: "Stripe se abre en una pestaña nueva para recopilar y procesar tu pago de forma segura.",
     oneTimeCta: "Elegir una cantidad única",
     monthlyCta: "Donar {amount} al mes",
     monthlyLabel: "al mes",
@@ -1056,6 +1080,12 @@ const fa: Dictionary = {
     customTitle: "حامی ماهانه شوید",
     customCopy: "حمایت مستمر، پایه‌ای مطمئن برای کلاس‌ها، پذیرایی، سخنرانان و ارتباط با جامعه فراهم می‌کند.",
     unavailable: "کمک آنلاین در حال حاضر فعال نیست. اگر مایل به حمایت از Ruach Breslov هستید با ما تماس بگیرید.",
+    givingFrequency: "تکرار کمک",
+    oneTimeOption: "یک‌باره",
+    monthlyOption: "ماهانه",
+    monthlyAmountPrompt: "مبلغ ماهانه را انتخاب کنید",
+    continueToStripe: "ادامه امن در Stripe",
+    stripeRedirectNote: "Stripe در برگه‌ای جدید باز می‌شود تا پرداخت شما را به‌صورت امن دریافت و پردازش کند.",
     oneTimeCta: "انتخاب مبلغ یک‌باره",
     monthlyCta: "ماهانه {amount} کمک کنید",
     monthlyLabel: "در ماه",

@@ -182,11 +182,20 @@ test("opens the cinematic gallery directly from Inside the Community", async ({ 
   await page.getByRole("button", { name: "Close" }).click();
 });
 
-test("presents one-time and recurring Stripe-hosted donation choices", async ({ page }) => {
+test("presents one focused chooser for one-time and recurring Stripe-hosted donations", async ({ page }) => {
   await page.goto("/en/support");
   await expect(page.getByRole("heading", { name: "Make a one-time donation" })).toBeVisible();
+  const frequency = page.getByRole("group", { name: "Donation frequency" });
+  await expect(frequency.getByRole("button", { name: "One time" })).toHaveAttribute("aria-pressed", "true");
+  await expect(frequency.getByRole("button", { name: "Monthly" })).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByRole("link", { name: "Continue securely with Stripe" })).toHaveAttribute("href", /^https:\/\/donate\.stripe\.com\//);
+
+  await frequency.getByRole("button", { name: "Monthly" }).click();
   await expect(page.getByRole("heading", { name: "Become a monthly supporter" })).toBeVisible();
-  await expect(page.locator('.support-layout a[href^="https://donate.stripe.com/"]')).toHaveCount(5);
+  await expect(page.getByRole("button", { name: "Give $18 monthly" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Give $72 monthly" }).click();
+  await expect(page.getByRole("button", { name: "Give $72 monthly" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('.support-layout a[href^="https://donate.stripe.com/"]')).toHaveCount(1);
   await expect(page.getByRole("link", { name: "Manage monthly support" })).toHaveAttribute("href", /^https:\/\/billing\.stripe\.com\//);
   await expect(page.getByText("Monthly donations renew automatically each month until canceled.", { exact: false })).toBeVisible();
 });

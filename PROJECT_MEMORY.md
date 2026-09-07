@@ -22,6 +22,7 @@ Last updated: September 7, 2026
 - The owner supplied and approved the local `Pictures` folder for site use. Keep those originals ignored, untracked, and untouched; publish only selected, optimized derivatives under `public/media`.
 - The Wix cream/burgundy/gold palette remains a source reference, but the owner rejected the first literal warm treatment as bland and impersonal on September 6, 2026. The approved rescue direction reinterprets it with cinematic charcoal, firelit gold, oxblood, parchment, and quiet sage.
 - Stripe live account `acct_1UBfcGJcQUW3PSlA` now provides hosted checkout. The full-access secret remains local provisioning-only and is not installed in GitHub, the frontend, or the Worker.
+- On September 7, 2026, the owner rejected the subscription-first Payment Link with a one-time add-on and approved the original consolidated approach: one focused chooser on the website switches between one-time and monthly giving, while the existing five Stripe-hosted pages remain the underlying payment destinations. The website must never collect card details. The rejected unlisted preview link was deactivated and its preview-only fixed add-on Price was archived; neither received a payment.
 
 ## Confirmed organization details
 
@@ -80,6 +81,7 @@ Last updated: September 7, 2026
 - Added `docs/SITE_STRATEGY.md`, a research-backed audience, content, and phased roadmap grounded in Ruach Breslov's own stated purpose and authoritative Breslov Research Institute context. No unconfirmed program or event claims were added.
 - Updated the GitHub Pages `NEXT_PUBLIC_HERO_IMAGE` variable from the previous gallery photograph to `/media/hero/home-hero-client.webp` so production builds cannot override the owner-selected hero.
 - Added a full localized About page and prominent homepage mission statement for nonprofit verification. The About page explains the mission, origin, programs, public accountability, and leadership; identifies Benjamin Roberts as Executive Director; publishes the legal name Ruach Breslov Inc. and EIN 41-3212278; links visitors to the IRS search; and reuses authentic community photography. The support page and footer repeat the nonprofit identity at decision points, while localized NGO JSON-LD exposes the same legal name, tax ID, address, contact information, mission, and official YouTube profile to verification systems.
+- Consolidated the five established Stripe donation destinations behind one owner-approved giving chooser. Donors switch between a one-time gift and monthly support in one composed interface, select among the four monthly amounts when relevant, and continue through one changing action to Stripe's hosted checkout; the site never receives payment-card details.
 
 ## Verification baseline
 
@@ -111,6 +113,7 @@ Last updated: September 7, 2026
 - GitHub Actions deployment run `34114669424` published the nonprofit-verification release from commit `e1f76ba` after passing the zero-vulnerability audit, all typechecks, lint, both synchronization suites, 10 Worker tests, all 30 desktop/mobile browser tests, the 33-route production export, launch gate, artifact upload, and Pages deployment.
 - Live Cloudflare-facing checks confirm all four localized About pages return HTTP 200 and visibly contain Ruach Breslov Inc., EIN 41-3212278, Benjamin Roberts, and Executive Director. The English homepage and support page expose the mission and nonprofit proof, the rendered mobile About page has no horizontal overflow, and the support page retains all five live Stripe-hosted donation choices.
 - The owner-approved desktop navigation spacing passes typecheck, lint, and all 30 desktop/mobile browser and accessibility checks; the responsive offsets preserve the anchored logo, the selected wide-screen composition, at least 10px between Support and the language selector, 44px minimum targets, and the established compact navigation.
+- The owner-approved consolidated giving chooser passes typecheck, lint, production build, the 33-route/four-locale static-export check, launch readiness, and all 30 desktop/mobile browser and WCAG checks. Its one-time state routes to Stripe's customer-selected-amount page; its monthly state exposes $18, $36, $72, and $180 choices through one changing checkout action.
 
 ## Remaining work — handle one item at a time
 
