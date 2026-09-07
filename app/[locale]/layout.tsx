@@ -6,7 +6,7 @@ import { LocalePreference } from "@/components/locale-preference";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getDictionary, isLocale, localeDetails, locales } from "@/data/locales";
-import { absoluteUrl, publicAsset } from "@/data/site";
+import { absoluteUrl, publicAsset, site } from "@/data/site";
 import { contentSecurityPolicy } from "@/lib/security";
 
 export const dynamicParams = false;
@@ -40,11 +40,35 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dictionary = getDictionary(locale);
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    name: dictionary.siteName,
+    legalName: site.organization.legalName,
+    url: absoluteUrl("/"),
+    taxID: site.organization.ein,
+    description: dictionary.about.mission,
+    email: site.contact.email,
+    telephone: site.contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.organization.address.street,
+      addressLocality: site.organization.address.locality,
+      addressRegion: site.organization.address.region,
+      postalCode: site.organization.address.postalCode,
+      addressCountry: site.organization.address.country
+    },
+    sameAs: [site.youtube.channelUrl]
+  };
 
   return (
     <html lang={locale} dir={localeDetails[locale].dir} data-scroll-behavior="smooth">
       <head><meta httpEquiv="Content-Security-Policy" content={contentSecurityPolicy()} /></head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
+        />
         <LocalePreference locale={locale} />
         <a className="skip-link" href="#main-content">{dictionary.system.skipToContent}</a>
         <AmbientBackground />

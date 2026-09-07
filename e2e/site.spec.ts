@@ -96,6 +96,34 @@ test("presents Ruach Breslov's purpose in every supported language", async ({ pa
   }
 });
 
+test("publishes the mission, legal identity, and organizational leadership", async ({ page }) => {
+  await page.goto("/en/about");
+  await expect(page.getByRole("heading", { level: 1, name: "Faith that meets real life. Community that shows up." })).toBeVisible();
+  await expect(page.locator('.site-header a[href="/en/about"]').first()).toHaveAttribute("href", "/en/about");
+
+  const mission = page.locator(".about-mission");
+  await expect(mission.getByText("Our mission", { exact: true })).toBeVisible();
+  await expect(mission).toContainText("so no one has to struggle or grow alone");
+
+  const leadership = page.locator(".leadership-card");
+  await expect(leadership.getByRole("heading", { name: "Benjamin Roberts" })).toBeVisible();
+  await expect(leadership.getByText("Executive Director", { exact: true })).toBeVisible();
+
+  const legalIdentity = page.locator(".legal-identity");
+  await expect(legalIdentity).toContainText("Ruach Breslov Inc.");
+  await expect(legalIdentity).toContainText("41-3212278");
+  await expect(legalIdentity).toContainText("Public charity");
+  await expect(legalIdentity.getByRole("link", { name: "Verify our status with the IRS" })).toHaveAttribute("target", "_blank");
+
+  const organizationData = await page.locator('script[type="application/ld+json"]').evaluate((script) => JSON.parse(script.textContent ?? "{}"));
+  expect(organizationData).toMatchObject({ "@type": "NGO", legalName: "Ruach Breslov Inc.", taxID: "41-3212278" });
+
+  await page.goto("/en");
+  await expect(page.locator(".home-mission").getByRole("heading", { name: "Torah for real life. A community that shows up." })).toBeVisible();
+  await page.goto("/en/support");
+  await expect(page.locator(".nonprofit-proof")).toContainText("Ruach Breslov Inc. · EIN 41-3212278");
+});
+
 test("does not publish unconfirmed events", async ({ page }) => {
   await page.goto("/en/events");
   await expect(page.getByRole("heading", { name: "No events are currently scheduled" })).toBeVisible();
@@ -211,7 +239,7 @@ test("honors reduced-motion preferences", async ({ page }) => {
 
 test("has no automatically detectable WCAG A/AA violations on core routes", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  for (const route of ["/en", "/he", "/es/events", "/fa/contact", "/en/gallery", "/he/support", "/en/videos"]) {
+  for (const route of ["/en", "/he", "/es/events", "/fa/contact", "/en/gallery", "/he/support", "/en/videos", "/en/about"]) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
       .exclude(".turnstile-shell")

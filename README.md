@@ -10,6 +10,7 @@ The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pa
 - Correct LTR/RTL document direction and language metadata
 - Responsive navigation and language selector
 - Animated, reduced-motion-aware landing page
+- Verification-ready About page with a clear mission, leadership, legal name, EIN, and IRS-status link
 - Newsletter and event-announcement preference form
 - Google Calendar-synchronized event cards and reusable RSVP dialog
 - Click-to-load, privacy-enhanced YouTube video library
@@ -117,7 +118,7 @@ Never use a `NEXT_PUBLIC_*` variable for a Resend API key, Stripe secret/restric
 - `data/events.ts`: event catalog types and localized date formatting
 - `data/calendar-events.json`: generated upcoming-event catalog; edit the connected Google Calendar instead
 - `data/videos.ts`: YouTube library configuration
-- `data/site.ts`: public contact and integration configuration
+- `data/site.ts`: public contact, nonprofit identity, leadership, and integration configuration
 - `app/[locale]/`: localized static pages
 - `components/forms/`: contact, subscription, and RSVP clients
 - `worker/`: Cloudflare Worker API, D1 migration, and provider integrations

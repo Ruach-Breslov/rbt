@@ -7,6 +7,7 @@ import { publicAsset } from "@/data/site";
 export function SiteHeader({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const navigation = [
     { label: dictionary.nav.home, href: localeHref(locale) },
+    { label: dictionary.nav.about, href: localeHref(locale, "about") },
     { label: dictionary.nav.events, href: localeHref(locale, "events") },
     { label: dictionary.nav.gallery, href: localeHref(locale, "gallery") },
     { label: dictionary.nav.videos, href: localeHref(locale, "videos") },

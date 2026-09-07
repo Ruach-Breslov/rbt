@@ -26,6 +26,23 @@ const oneTimePaymentLink = optionalPublicUrl(
 
 export const site = {
   url: configuredSiteUrl,
+  organization: {
+    legalName: "Ruach Breslov Inc.",
+    ein: "41-3212278",
+    classification: "IRS-listed public charity",
+    leader: {
+      name: "Benjamin Roberts",
+      role: "Executive Director"
+    },
+    irsSearchUrl: "https://apps.irs.gov/app/eos/",
+    address: {
+      street: "71-27 147th St",
+      locality: "Flushing",
+      region: "NY",
+      postalCode: "11367",
+      country: "US"
+    }
+  },
   contact: {
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "info@ruachbreslov.org",
     phone: process.env.NEXT_PUBLIC_CONTACT_PHONE?.trim() || "917-740-4509",

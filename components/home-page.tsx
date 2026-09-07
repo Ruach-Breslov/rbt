@@ -55,6 +55,15 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
         </MotionReveal>
       </section>
 
+      <section className="home-mission section-shell">
+        <MotionReveal>
+          <p className="eyebrow">{dictionary.home.missionEyebrow}</p>
+          <h2>{dictionary.home.missionTitle}</h2>
+          <p>{dictionary.home.missionCopy}</p>
+          <Link href={localeHref(locale, "about")} className="button button-secondary">{dictionary.actions.aboutUs}<ArrowUpRight aria-hidden="true" /></Link>
+        </MotionReveal>
+      </section>
+
       <section className="features-section section-shell">
         <MotionReveal className="section-heading">
           <p className="eyebrow">{dictionary.home.featureEyebrow}</p>

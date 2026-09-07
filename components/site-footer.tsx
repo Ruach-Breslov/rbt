@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { localeHref, type Dictionary, type Locale } from "@/data/locales";
-import { publicAsset } from "@/data/site";
+import { publicAsset, site } from "@/data/site";
 
 export function SiteFooter({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   return (
@@ -11,6 +11,7 @@ export function SiteFooter({ locale, dictionary }: { locale: Locale; dictionary:
           <p>{dictionary.footer.description}</p>
         </div>
         <div className="footer-links">
+          <Link href={localeHref(locale, "about")}>{dictionary.nav.about}</Link>
           <Link href={localeHref(locale, "events")}>{dictionary.nav.events}</Link>
           <Link href={localeHref(locale, "gallery")}>{dictionary.nav.gallery}</Link>
           <Link href={localeHref(locale, "videos")}>{dictionary.nav.videos}</Link>
@@ -18,7 +19,10 @@ export function SiteFooter({ locale, dictionary }: { locale: Locale; dictionary:
           <Link href={localeHref(locale, "privacy")}>{dictionary.footer.privacy}</Link>
         </div>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} {dictionary.siteName}. {dictionary.footer.rights}</div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} {dictionary.siteName}. {dictionary.footer.rights}</span>
+        <span>{site.organization.legalName} · EIN {site.organization.ein} · Flushing, NY</span>
+      </div>
     </footer>
   );
 }

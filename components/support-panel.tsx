@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, CreditCard, LockKeyhole, Mail, RefreshCw } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Check, CreditCard, LockKeyhole, Mail, RefreshCw } from "lucide-react";
 import type { Dictionary, Locale } from "@/data/locales";
 import { site } from "@/data/site";
 
@@ -86,6 +86,18 @@ export function SupportPanel({ locale, dictionary }: { locale: Locale; dictionar
       <aside className="support-impact" aria-labelledby="support-impact-title">
         <h2 id="support-impact-title">{dictionary.support.impactTitle}</h2>
         <ul>{dictionary.support.impactItems.map((item) => <li key={item}><Check aria-hidden="true" />{item}</li>)}</ul>
+      </aside>
+
+      <aside className="nonprofit-proof" aria-labelledby="nonprofit-proof-title">
+        <BadgeCheck aria-hidden="true" />
+        <div>
+          <h2 id="nonprofit-proof-title">{dictionary.support.nonprofitTitle}</h2>
+          <p>{dictionary.support.nonprofitCopy}</p>
+          <strong>{site.organization.legalName} · EIN {site.organization.ein}</strong>
+          <a href={site.organization.irsSearchUrl} target="_blank" rel="noopener noreferrer">
+            {dictionary.support.verifyStatus}<ArrowUpRight aria-hidden="true" />
+          </a>
+        </div>
       </aside>
 
       <div className="payment-security-note">

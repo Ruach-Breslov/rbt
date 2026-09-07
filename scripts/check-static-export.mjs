@@ -10,7 +10,7 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://example.co
 const heroImage = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim() ?? "";
 const locales = ["en", "he", "es", "fa"];
 const rtlLocales = new Set(["he", "fa"]);
-const localizedPages = ["", "contact", "events", "gallery", "privacy", "support", "videos"];
+const localizedPages = ["", "about", "contact", "events", "gallery", "privacy", "support", "videos"];
 const requiredRoutes = ["/", ...locales.flatMap((locale) => localizedPages.map((page) => `/${locale}${page ? `/${page}` : ""}`))];
 const requiredFiles = ["404.html", ".nojekyll", "media/brand/ruach-icon-192.png", "media/brand/ruach-icon-512.png", "robots.txt", "site.webmanifest", "sitemap.xml"];
 const errors = [];
@@ -80,9 +80,16 @@ if (!existsSync(outDir)) {
   }
 
   const rootHtml = routeHtml("/");
+  const aboutHtml = routeHtml("/en/about");
   const galleryHtml = routeHtml("/en/gallery");
   const videosHtml = routeHtml("/en/videos");
   const contactHtml = routeHtml("/en/contact");
+  for (const requiredIdentity of ["Ruach Breslov Inc.", "41-3212278", "Benjamin Roberts", "Executive Director"]) {
+    if (!aboutHtml.includes(requiredIdentity)) fail(`About page is missing verified identity content: ${requiredIdentity}`);
+  }
+  if (!aboutHtml.includes('"@type":"NGO"') || !aboutHtml.includes('"taxID":"41-3212278"')) {
+    fail("About page is missing nonprofit organization structured data.");
+  }
   for (const asset of [
     "/media/hero/home-hero-client.webp",
     "/media/gallery/community-study.webp",

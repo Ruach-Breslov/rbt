@@ -29,6 +29,10 @@ Last updated: September 7, 2026
 - Public email: info@ruachbreslov.org
 - Public phone: 917-740-4509
 - Public address: 71-27 147th St, Flushing, NY 11367
+- Legal name: Ruach Breslov Inc.
+- Employer Identification Number (EIN): 41-3212278
+- IRS status: listed in Publication 78 as a public charity (`PC`) eligible to receive tax-deductible charitable contributions; official dataset row confirmed September 7, 2026.
+- Organizational leader: Benjamin Roberts, Executive Director. The owner selected “Executive Director” as the public title on September 7, 2026, superseding the earlier CEO and Director of Operations suggestions.
 - Core purpose: “Ruach Breslov brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection. We create a welcoming space for people of all backgrounds to find hope, deepen their relationship with God, face life’s challenges with strength, and discover greater purpose, goodness, and meaning.”
 - Confirmed offerings: weekly Torah gatherings/classes, one-on-one mentorship, community events and hospitality, guest speakers, and outreach.
 - Confirmed legacy theme: a small gathering grew into a brotherhood built on Torah, honesty, friendship, and the conviction that no one should feel alone.
@@ -75,13 +79,14 @@ Last updated: September 7, 2026
 - Built the approved Google Calendar event workflow. A tested hourly GitHub Action converts the dedicated calendar's public iCal feed into the site's own event cards, including recurring events, edited occurrences, cancellations, all-day dates, source time zones, locations, and concise descriptions. It commits and deploys only when the future catalog changes, fails closed on invalid feeds, and stays runner-free while unconfigured. The current empty catalog therefore continues to publish no unconfirmed events until the owner supplies the public iCal address. Calendar publication remains separate from capacity-validated production RSVP records, so synced events never expose a broken RSVP action.
 - Added `docs/SITE_STRATEGY.md`, a research-backed audience, content, and phased roadmap grounded in Ruach Breslov's own stated purpose and authoritative Breslov Research Institute context. No unconfirmed program or event claims were added.
 - Updated the GitHub Pages `NEXT_PUBLIC_HERO_IMAGE` variable from the previous gallery photograph to `/media/hero/home-hero-client.webp` so production builds cannot override the owner-selected hero.
+- Added a full localized About page and prominent homepage mission statement for nonprofit verification. The About page explains the mission, origin, programs, public accountability, and leadership; identifies Benjamin Roberts as Executive Director; publishes the legal name Ruach Breslov Inc. and EIN 41-3212278; links visitors to the IRS search; and reuses authentic community photography. The support page and footer repeat the nonprofit identity at decision points, while localized NGO JSON-LD exposes the same legal name, tax ID, address, contact information, mission, and official YouTube profile to verification systems.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
-- Static export generates all 29 expected routes across four locales.
+- Static export generates all 33 expected routes across four locales, including the localized About page.
 - All 10 Cloudflare Worker tests pass.
-- All 28 desktop/mobile end-to-end tests pass, including locale behavior, public identity, forms, both cinematic gallery/lightbox entry points, recurring donation choices, the complete YouTube channel library and player, the authentic community-photo hero, enlarged navigation, reduced motion, and automated WCAG A/AA checks on core routes.
+- All 30 desktop/mobile end-to-end tests pass, including locale behavior, mission and nonprofit identity, Executive Director attribution, organization JSON-LD, forms, both cinematic gallery/lightbox entry points, recurring donation choices, the complete YouTube channel library and player, the authentic community-photo hero, enlarged navigation, reduced motion, and automated WCAG A/AA checks on core routes.
 - The launch-readiness gate passes with the confirmed production public configuration and complete Stripe one-time/monthly link set; optional YouTube values remain strictly validated whenever supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
 - GitHub Actions deployment run `33858694809` passed the dependency audit, all typechecks, lint, Worker tests, 18 browser tests, production build, static-export check, launch gate, artifact upload, and Pages deployment.
@@ -106,11 +111,12 @@ Last updated: September 7, 2026
 
 ## Remaining work — handle one item at a time
 
-1. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
-2. Create/share the approved dedicated **Ruach Breslov Events** Google Calendar, supply its **Public address in iCal format**, save it as the `GOOGLE_CALENDAR_ICAL_URL` GitHub Actions variable, and run the initial manual synchronization. The automation is deployed but intentionally inactive until this one public value exists.
-3. Confirm capacity and RSVP requirements for each event that should accept on-site reservations; calendar publication alone does not create a production RSVP database record.
-4. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
-5. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
+1. Submit or resubmit Google for Nonprofits verification using the localized About page, legal name Ruach Breslov Inc., EIN 41-3212278, and the organization’s supporting IRS documentation if requested.
+2. Monitor GitHub's native Pages certificate; once issued, enable native HTTPS enforcement and reassess Cloudflare Full (strict) origin validation. Public HTTPS is already enforced at Cloudflare and is not blocked on this item.
+3. Create/share the approved dedicated **Ruach Breslov Events** Google Calendar, supply its **Public address in iCal format**, save it as the `GOOGLE_CALENDAR_ICAL_URL` GitHub Actions variable, and run the initial manual synchronization. The automation is deployed but intentionally inactive until this one public value exists.
+4. Confirm capacity and RSVP requirements for each event that should accept on-site reservations; calendar publication alone does not create a production RSVP database record.
+5. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
+6. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
 
 ## Recorded commits
 

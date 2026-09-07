@@ -28,6 +28,7 @@ export type Dictionary = {
   };
   nav: {
     home: string;
+    about: string;
     events: string;
     gallery: string;
     videos: string;
@@ -44,6 +45,7 @@ export type Dictionary = {
     submit: string;
     subscribe: string;
     viewGallery: string;
+    aboutUs: string;
     close: string;
     openMenu: string;
   };
@@ -52,6 +54,9 @@ export type Dictionary = {
     title: string;
     description: string;
     gatheringCopy: string;
+    missionEyebrow: string;
+    missionTitle: string;
+    missionCopy: string;
     featureEyebrow: string;
     featureTitle: string;
     featureCopy: string;
@@ -64,6 +69,34 @@ export type Dictionary = {
     galleryCopy: string;
     subscriptionTitle: string;
     subscriptionCopy: string;
+  };
+  about: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    missionEyebrow: string;
+    missionTitle: string;
+    mission: string;
+    storyEyebrow: string;
+    storyTitle: string;
+    storyParagraphs: string[];
+    workEyebrow: string;
+    workTitle: string;
+    workCopy: string;
+    leadershipEyebrow: string;
+    leadershipTitle: string;
+    leadershipCopy: string;
+    legalEyebrow: string;
+    legalTitle: string;
+    legalCopy: string;
+    legalNameLabel: string;
+    einLabel: string;
+    classificationLabel: string;
+    classification: string;
+    addressLabel: string;
+    verifyStatus: string;
+    ctaTitle: string;
+    ctaCopy: string;
   };
   events: {
     eyebrow: string;
@@ -144,6 +177,9 @@ export type Dictionary = {
     manageMonthlyCta: string;
     impactTitle: string;
     impactItems: string[];
+    nonprofitTitle: string;
+    nonprofitCopy: string;
+    verifyStatus: string;
     secureNote: string;
     processingContext: string;
   };
@@ -194,7 +230,7 @@ const en: Dictionary = {
     recommendedDefault: "Recommended default",
     backendRequired: "Secure backend required."
   },
-  nav: { home: "Home", events: "Events", gallery: "Gallery", videos: "Videos", contact: "Contact", support: "Support" },
+  nav: { home: "Home", about: "About", events: "Events", gallery: "Gallery", videos: "Videos", contact: "Contact", support: "Support" },
   actions: {
     exploreEvents: "Explore events",
     contactUs: "Contact us",
@@ -205,6 +241,7 @@ const en: Dictionary = {
     submit: "Send message",
     subscribe: "Subscribe",
     viewGallery: "View the gallery",
+    aboutUs: "About Ruach Breslov",
     close: "Close",
     openMenu: "Open menu"
   },
@@ -213,6 +250,9 @@ const en: Dictionary = {
     title: "Come as you are. There’s a place for you here.",
     description: "Ruach Breslov is a growing Queens community where Rebbe Nachman’s teachings meet real life. We learn, eat, ask honest questions, and help one another move forward—with emunah and joy.",
     gatheringCopy: "This room is more than a backdrop. It is where Torah becomes conversation, strangers become friends, and people find the strength to take their next step.",
+    missionEyebrow: "Our mission",
+    missionTitle: "Torah for real life. A community that shows up.",
+    missionCopy: "Bringing Rebbe Nachman’s teachings into everyday life so people can find hope, deepen their faith, build honest friendships, and face life’s challenges with joy and purpose.",
     featureEyebrow: "What happens here",
     featureTitle: "More than a class. A room full of people who show up.",
     featureCopy: "No performance and no perfect background required—just practical Torah, warmth, and honest conversation.",
@@ -233,6 +273,37 @@ const en: Dictionary = {
     galleryCopy: "Not stock photos and not a staged idea of community—these are the tables, faces, learning, and shared moments that make Ruach Breslov real.",
     subscriptionTitle: "Stay connected",
     subscriptionCopy: "Choose newsletters, event announcements, or both. You remain in control of your preferences."
+  },
+  about: {
+    eyebrow: "Who we are",
+    title: "Faith that meets real life. Community that shows up.",
+    description: "Ruach Breslov is a public charity in Flushing, New York, bringing Rebbe Nachman’s teachings into everyday life through Torah learning, personal mentorship, hospitality, and community.",
+    missionEyebrow: "Our mission",
+    missionTitle: "Help every person find hope, faith, and a place to belong.",
+    mission: "Ruach Breslov’s mission is to strengthen Jewish life and human connection by bringing the teachings of Rebbe Nachman into the realities of everyday life. Through accessible Torah learning, one-on-one mentorship, shared meals, community gatherings, and compassionate outreach, we create a welcoming place where people of all backgrounds can find hope, deepen their relationship with God, build honest friendships, and meet life’s challenges with faith, joy, and purpose—so no one has to struggle or grow alone.",
+    storyEyebrow: "Our story",
+    storyTitle: "A few people around a table became a community.",
+    storyParagraphs: [
+      "Ruach Breslov began with people learning together, speaking honestly, and making room for one another. The gathering grew because nobody had to pretend they had everything figured out.",
+      "Inspired by Rebbe Nachman, we believe every soul carries immeasurable light, even when it feels hidden. Sometimes a piece of Torah, a shared meal, a good friend, or one real conversation is enough to help someone see it again."
+    ],
+    workEyebrow: "What we do",
+    workTitle: "The mission becomes real in the room.",
+    workCopy: "Our programs bring learning, mentorship, hospitality, and human connection together in practical ways.",
+    leadershipEyebrow: "Organizational leadership",
+    leadershipTitle: "Leadership",
+    leadershipCopy: "Benjamin Roberts guides Ruach Breslov’s day-to-day operations and helps turn its mission into consistent programs, relationships, and community support.",
+    legalEyebrow: "Public accountability",
+    legalTitle: "Our legal identity",
+    legalCopy: "Ruach Breslov Inc. is listed by the Internal Revenue Service as a public charity eligible to receive tax-deductible charitable contributions.",
+    legalNameLabel: "Legal name",
+    einLabel: "Employer Identification Number (EIN)",
+    classificationLabel: "IRS classification",
+    classification: "Public charity",
+    addressLabel: "Principal location",
+    verifyStatus: "Verify our status with the IRS",
+    ctaTitle: "Help keep the door open.",
+    ctaCopy: "Your support helps provide weekly Torah learning, personal guidance, food and hospitality, guest speakers, community events, and outreach."
   },
   events: {
     eyebrow: "Gather and participate",
@@ -323,6 +394,9 @@ const en: Dictionary = {
     manageMonthlyCta: "Manage monthly support",
     impactTitle: "Your support helps provide",
     impactItems: ["Weekly Torah classes", "Food and hospitality", "Inspiring guest speakers", "Community events and outreach"],
+    nonprofitTitle: "Give with confidence",
+    nonprofitCopy: "Ruach Breslov Inc. is listed by the IRS as a public charity eligible to receive tax-deductible charitable contributions.",
+    verifyStatus: "Verify our status with the IRS",
     secureNote: "This website never asks for or stores payment-card details.",
     processingContext: "Payments are configured in {currency}; operational times use {timeZone} (U.S. Eastern Time)."
   },
@@ -379,7 +453,7 @@ const he: Dictionary = {
     recommendedDefault: "ברירת מחדל מומלצת",
     backendRequired: "נדרש שרת מאובטח."
   },
-  nav: { home: "בית", events: "אירועים", gallery: "גלריה", videos: "וידאו", contact: "יצירת קשר", support: "תמיכה" },
+  nav: { home: "בית", about: "אודותינו", events: "אירועים", gallery: "גלריה", videos: "וידאו", contact: "יצירת קשר", support: "תמיכה" },
   actions: {
     exploreEvents: "לאירועים",
     contactUs: "צרו קשר",
@@ -390,6 +464,7 @@ const he: Dictionary = {
     submit: "שליחת הודעה",
     subscribe: "הרשמה",
     viewGallery: "לצפייה בגלריה",
+    aboutUs: "אודות Ruach Breslov",
     close: "סגירה",
     openMenu: "פתיחת תפריט"
   },
@@ -398,6 +473,9 @@ const he: Dictionary = {
     title: "בואו כמו שאתם. יש לכם מקום כאן.",
     description: "Ruach Breslov היא קהילה צומחת בקווינס שבה תורת רבי נחמן פוגשת את החיים עצמם. לומדים, אוכלים, שואלים בכנות ועוזרים זה לזה להתקדם — באמונה ובשמחה.",
     gatheringCopy: "החדר הזה הוא יותר מתפאורה. כאן התורה הופכת לשיחה, זרים הופכים לחברים ואנשים מוצאים את הכוח לצעד הבא שלהם.",
+    missionEyebrow: "המשימה שלנו",
+    missionTitle: "תורה לחיים עצמם. קהילה שבאמת נוכחת.",
+    missionCopy: "להביא את תורת רבי נחמן אל חיי היום־יום, כדי שאנשים ימצאו תקווה, יעמיקו את אמונתם, יבנו חברויות כנות ויתמודדו עם אתגרי החיים בשמחה ובתכלית.",
     featureEyebrow: "מה קורה כאן",
     featureTitle: "יותר משיעור. חדר מלא באנשים שבאמת מגיעים.",
     featureCopy: "בלי הצגות ובלי צורך ברקע מושלם — רק תורה מעשית, חום ושיחה כנה.",
@@ -418,6 +496,37 @@ const he: Dictionary = {
     galleryCopy: "לא תמונות מאגר ולא רעיון מבוים של קהילה — אלה השולחנות, הפנים, הלימוד והרגעים המשותפים שהופכים את Ruach Breslov לאמיתית.",
     subscriptionTitle: "נשארים מחוברים",
     subscriptionCopy: "בחרו עדכונים, הודעות על אירועים או את שניהם. השליטה בהעדפות נשארת בידיכם."
+  },
+  about: {
+    eyebrow: "מי אנחנו",
+    title: "אמונה שפוגשת את החיים. קהילה שבאמת נוכחת.",
+    description: "Ruach Breslov היא עמותת צדקה ציבורית בפלאשינג, ניו יורק, המביאה את תורת רבי נחמן אל חיי היום־יום באמצעות לימוד תורה, ליווי אישי, הכנסת אורחים וקהילה.",
+    missionEyebrow: "המשימה שלנו",
+    missionTitle: "לעזור לכל אדם למצוא תקווה, אמונה ומקום להשתייך אליו.",
+    mission: "המשימה של Ruach Breslov היא לחזק את החיים היהודיים ואת הקשר האנושי באמצעות הבאת תורת רבי נחמן אל המציאות של חיי היום־יום. דרך לימוד תורה נגיש, ליווי אישי, ארוחות משותפות, מפגשים קהילתיים ופעילות קירוב מתוך אכפתיות, אנו יוצרים מקום מזמין שבו אנשים מכל רקע יכולים למצוא תקווה, להעמיק את הקשר עם ה׳, לבנות חברויות כנות ולהתמודד עם אתגרי החיים באמונה, בשמחה ובתכלית — כדי שאיש לא יצטרך להתמודד או לצמוח לבד.",
+    storyEyebrow: "הסיפור שלנו",
+    storyTitle: "כמה אנשים סביב שולחן הפכו לקהילה.",
+    storyParagraphs: [
+      "Ruach Breslov התחילה באנשים שלמדו יחד, דיברו בכנות ופינו מקום זה לזה. המפגש צמח מפני שאיש לא נדרש להעמיד פנים שיש לו את כל התשובות.",
+      "בהשראת רבי נחמן אנו מאמינים שבכל נשמה יש אור שאין לו שיעור, גם כשהוא נסתר. לפעמים דבר תורה, ארוחה משותפת, חבר טוב או שיחה אמיתית מספיקים כדי לעזור לאדם לראות אותו מחדש."
+    ],
+    workEyebrow: "מה אנחנו עושים",
+    workTitle: "המשימה הופכת למציאות בתוך החדר.",
+    workCopy: "התוכניות שלנו מחברות לימוד, ליווי, הכנסת אורחים וקשר אנושי בדרכים מעשיות.",
+    leadershipEyebrow: "הנהגת הארגון",
+    leadershipTitle: "הנהגה",
+    leadershipCopy: "Benjamin Roberts מוביל את הפעילות השוטפת של Ruach Breslov ומסייע להפוך את המשימה שלה לתוכניות עקביות, לקשרים ולתמיכה בקהילה.",
+    legalEyebrow: "אחריות ציבורית",
+    legalTitle: "הזהות המשפטית שלנו",
+    legalCopy: "Ruach Breslov Inc. רשומה ברשות המסים האמריקאית כעמותת צדקה ציבורית הזכאית לקבל תרומות המוכרות לצורכי מס.",
+    legalNameLabel: "שם משפטי",
+    einLabel: "מספר זיהוי מעסיק (EIN)",
+    classificationLabel: "סיווג ברשות המסים האמריקאית",
+    classification: "עמותת צדקה ציבורית",
+    addressLabel: "מיקום עיקרי",
+    verifyStatus: "אימות המעמד שלנו באתר רשות המסים",
+    ctaTitle: "עזרו לנו להשאיר את הדלת פתוחה.",
+    ctaCopy: "התמיכה שלכם מסייעת לקיים לימוד תורה שבועי, הכוונה אישית, אוכל ואירוח, מרצים אורחים, אירועי קהילה ופעילות קירוב."
   },
   events: {
     eyebrow: "נפגשים ומשתתפים",
@@ -508,6 +617,9 @@ const he: Dictionary = {
     manageMonthlyCta: "ניהול התמיכה החודשית",
     impactTitle: "התמיכה שלכם מסייעת לקיים",
     impactItems: ["שיעורי תורה שבועיים", "אוכל ואירוח", "מרצים אורחים מעוררי השראה", "אירועי קהילה ופעילות קירוב"],
+    nonprofitTitle: "תורמים בביטחון",
+    nonprofitCopy: "Ruach Breslov Inc. רשומה ברשות המסים האמריקאית כעמותת צדקה ציבורית הזכאית לקבל תרומות המוכרות לצורכי מס.",
+    verifyStatus: "אימות המעמד שלנו באתר רשות המסים",
     secureNote: "האתר אינו מבקש ואינו שומר פרטי כרטיס.",
     processingContext: "התשלומים מוגדרים ב־{currency}; זמני התפעול משתמשים באזור {timeZone} (שעון מזרח ארה״ב)."
   },
@@ -564,7 +676,7 @@ const es: Dictionary = {
     recommendedDefault: "Opción recomendada",
     backendRequired: "Se requiere un servidor seguro."
   },
-  nav: { home: "Inicio", events: "Eventos", gallery: "Galería", videos: "Videos", contact: "Contacto", support: "Apoyar" },
+  nav: { home: "Inicio", about: "Quiénes somos", events: "Eventos", gallery: "Galería", videos: "Videos", contact: "Contacto", support: "Apoyar" },
   actions: {
     exploreEvents: "Explorar eventos",
     contactUs: "Contáctanos",
@@ -575,6 +687,7 @@ const es: Dictionary = {
     submit: "Enviar mensaje",
     subscribe: "Suscribirme",
     viewGallery: "Ver la galería",
+    aboutUs: "Conoce Ruach Breslov",
     close: "Cerrar",
     openMenu: "Abrir menú"
   },
@@ -583,6 +696,9 @@ const es: Dictionary = {
     title: "Ven tal como eres. Aquí hay un lugar para ti.",
     description: "Ruach Breslov es una comunidad creciente de Queens donde las enseñanzas del Rebe Najmán se encuentran con la vida real. Aprendemos, comemos, hacemos preguntas sinceras y nos ayudamos a avanzar, con emuná y alegría.",
     gatheringCopy: "La sala es mucho más que un escenario. Aquí la Torá se vuelve conversación, los desconocidos se vuelven amigos y cada persona encuentra fuerzas para dar su próximo paso.",
+    missionEyebrow: "Nuestra misión",
+    missionTitle: "Torá para la vida real. Una comunidad que se hace presente.",
+    missionCopy: "Llevamos las enseñanzas del Rebe Najmán a la vida cotidiana para que las personas encuentren esperanza, profundicen su fe, construyan amistades sinceras y afronten los desafíos con alegría y propósito.",
     featureEyebrow: "Lo que sucede aquí",
     featureTitle: "Más que una clase. Una sala llena de personas que se hacen presentes.",
     featureCopy: "Sin apariencias y sin exigir una historia perfecta: Torá práctica, calidez y conversación sincera.",
@@ -603,6 +719,37 @@ const es: Dictionary = {
     galleryCopy: "No son fotos de archivo ni una idea escenificada de comunidad: son las mesas, los rostros, el aprendizaje y los momentos compartidos que hacen real a Ruach Breslov.",
     subscriptionTitle: "Mantente al día",
     subscriptionCopy: "Elige boletines, anuncios de eventos o ambos. Tú mantienes el control de tus preferencias."
+  },
+  about: {
+    eyebrow: "Quiénes somos",
+    title: "Fe que se encuentra con la vida real. Una comunidad que se hace presente.",
+    description: "Ruach Breslov es una organización benéfica pública en Flushing, Nueva York, que lleva las enseñanzas del Rebe Najmán a la vida cotidiana mediante el estudio de Torá, el acompañamiento personal, la hospitalidad y la comunidad.",
+    missionEyebrow: "Nuestra misión",
+    missionTitle: "Ayudar a cada persona a encontrar esperanza, fe y un lugar al que pertenecer.",
+    mission: "La misión de Ruach Breslov es fortalecer la vida judía y los vínculos humanos llevando las enseñanzas del Rebe Najmán a la realidad cotidiana. Mediante el estudio accesible de la Torá, el acompañamiento personal, las comidas compartidas, los encuentros comunitarios y un alcance compasivo, creamos un lugar acogedor donde personas de todos los orígenes puedan encontrar esperanza, profundizar su relación con Dios, construir amistades sinceras y afrontar los desafíos de la vida con fe, alegría y propósito, para que nadie tenga que luchar ni crecer en soledad.",
+    storyEyebrow: "Nuestra historia",
+    storyTitle: "Unas personas alrededor de una mesa se convirtieron en una comunidad.",
+    storyParagraphs: [
+      "Ruach Breslov comenzó con personas que aprendían juntas, hablaban con sinceridad y se hacían espacio unas a otras. El encuentro creció porque nadie tenía que fingir que ya lo tenía todo resuelto.",
+      "Inspirados por el Rebe Najmán, creemos que cada alma lleva una luz inconmensurable, aun cuando parezca escondida. A veces una enseñanza de Torá, una comida compartida, un buen amigo o una conversación real bastan para ayudar a alguien a verla de nuevo."
+    ],
+    workEyebrow: "Lo que hacemos",
+    workTitle: "La misión se vuelve real dentro de la sala.",
+    workCopy: "Nuestros programas unen aprendizaje, acompañamiento, hospitalidad y conexión humana de maneras prácticas.",
+    leadershipEyebrow: "Liderazgo de la organización",
+    leadershipTitle: "Liderazgo",
+    leadershipCopy: "Benjamin Roberts dirige las operaciones cotidianas de Ruach Breslov y ayuda a convertir su misión en programas constantes, relaciones y apoyo comunitario.",
+    legalEyebrow: "Responsabilidad pública",
+    legalTitle: "Nuestra identidad legal",
+    legalCopy: "Ruach Breslov Inc. figura ante el Servicio de Impuestos Internos de EE. UU. como una organización benéfica pública autorizada para recibir contribuciones caritativas deducibles de impuestos.",
+    legalNameLabel: "Nombre legal",
+    einLabel: "Número de Identificación del Empleador (EIN)",
+    classificationLabel: "Clasificación del IRS",
+    classification: "Organización benéfica pública",
+    addressLabel: "Ubicación principal",
+    verifyStatus: "Verificar nuestro estado ante el IRS",
+    ctaTitle: "Ayúdanos a mantener la puerta abierta.",
+    ctaCopy: "Tu apoyo ayuda a ofrecer estudio semanal de Torá, orientación personal, comida y hospitalidad, oradores invitados, eventos comunitarios y alcance."
   },
   events: {
     eyebrow: "Reúnete y participa",
@@ -693,6 +840,9 @@ const es: Dictionary = {
     manageMonthlyCta: "Administrar apoyo mensual",
     impactTitle: "Tu apoyo ayuda a ofrecer",
     impactItems: ["Clases semanales de Torá", "Comida y hospitalidad", "Oradores invitados inspiradores", "Eventos y alcance comunitario"],
+    nonprofitTitle: "Dona con confianza",
+    nonprofitCopy: "Ruach Breslov Inc. figura ante el IRS como una organización benéfica pública autorizada para recibir contribuciones caritativas deducibles de impuestos.",
+    verifyStatus: "Verificar nuestro estado ante el IRS",
     secureNote: "Este sitio nunca solicita ni almacena datos de tarjetas.",
     processingContext: "Los pagos se configuran en {currency}; los horarios operativos usan {timeZone} (hora del este de EE. UU.)."
   },
@@ -749,7 +899,7 @@ const fa: Dictionary = {
     recommendedDefault: "گزینه پیشنهادی",
     backendRequired: "سرور امن لازم است."
   },
-  nav: { home: "خانه", events: "رویدادها", gallery: "گالری", videos: "ویدیوها", contact: "تماس", support: "حمایت" },
+  nav: { home: "خانه", about: "دربارۀ ما", events: "رویدادها", gallery: "گالری", videos: "ویدیوها", contact: "تماس", support: "حمایت" },
   actions: {
     exploreEvents: "مشاهده رویدادها",
     contactUs: "تماس با ما",
@@ -760,6 +910,7 @@ const fa: Dictionary = {
     submit: "ارسال پیام",
     subscribe: "عضویت",
     viewGallery: "مشاهدۀ گالری",
+    aboutUs: "دربارۀ Ruach Breslov",
     close: "بستن",
     openMenu: "باز کردن منو"
   },
@@ -768,6 +919,9 @@ const fa: Dictionary = {
     title: "همان‌گونه که هستید بیایید. اینجا جایی برای شماست.",
     description: "Ruach Breslov جامعه‌ای رو به رشد در کویینز است؛ جایی که آموزه‌های ربی نحمان با زندگی واقعی روبه‌رو می‌شوند. با هم می‌آموزیم، غذا می‌خوریم، صادقانه می‌پرسیم و با ایمان و شادی به یکدیگر برای پیش رفتن کمک می‌کنیم.",
     gatheringCopy: "این اتاق فقط یک پس‌زمینه نیست؛ جایی است که تورات به گفت‌وگو تبدیل می‌شود، غریبه‌ها دوست می‌شوند و آدم‌ها نیروی گام بعدی را پیدا می‌کنند.",
+    missionEyebrow: "ماموریت ما",
+    missionTitle: "تورات برای زندگی واقعی؛ جامعه‌ای که واقعاً حضور دارد.",
+    missionCopy: "آموزه‌های ربی نحمان را به زندگی روزمره می‌آوریم تا مردم امید بیابند، ایمان خود را عمیق‌تر کنند، دوستی‌های صادقانه بسازند و با شادی و هدف با دشواری‌های زندگی روبه‌رو شوند.",
     featureEyebrow: "اینجا چه می‌گذرد",
     featureTitle: "فراتر از یک کلاس؛ اتاقی پُر از آدم‌هایی که واقعاً حضور دارند.",
     featureCopy: "بدون نمایش و بدون نیاز به پیشینه‌ای بی‌نقص؛ فقط تورات کاربردی، گرما و گفت‌وگویی صادقانه.",
@@ -788,6 +942,37 @@ const fa: Dictionary = {
     galleryCopy: "نه عکس‌های آماده و نه تصویری صحنه‌سازی‌شده از جامعه؛ اینها میزها، چهره‌ها، یادگیری و لحظه‌های مشترکی هستند که Ruach Breslov را واقعی می‌کنند.",
     subscriptionTitle: "در ارتباط بمانید",
     subscriptionCopy: "خبرنامه، اطلاعیه رویدادها یا هر دو را انتخاب کنید. کنترل ترجیحات در اختیار شماست."
+  },
+  about: {
+    eyebrow: "ما که هستیم",
+    title: "ایمانی که با زندگی واقعی روبه‌رو می‌شود؛ جامعه‌ای که واقعاً حضور دارد.",
+    description: "Ruach Breslov یک خیریۀ عمومی در فلاشینگِ نیویورک است که آموزه‌های ربی نحمان را از راه آموزش تورات، راهنمایی فردی، مهمان‌نوازی و جامعه وارد زندگی روزمره می‌کند.",
+    missionEyebrow: "ماموریت ما",
+    missionTitle: "کمک کنیم هر فرد امید، ایمان و جایی برای تعلق پیدا کند.",
+    mission: "ماموریت Ruach Breslov تقویت زندگی یهودی و پیوند انسانی با آوردن آموزه‌های ربی نحمان به واقعیت زندگی روزمره است. از راه آموزش دسترس‌پذیر تورات، راهنمایی فردی، وعده‌های مشترک، گردهمایی‌های اجتماعی و ارتباط‌گیری دلسوزانه، فضایی پذیرا می‌سازیم تا افراد با هر پیشینه‌ای امید بیابند، رابطۀ خود با خدا را عمیق‌تر کنند، دوستی‌های صادقانه بسازند و با ایمان، شادی و هدف با دشواری‌های زندگی روبه‌رو شوند؛ تا هیچ‌کس مجبور نباشد تنها مبارزه کند یا رشد کند.",
+    storyEyebrow: "داستان ما",
+    storyTitle: "چند نفر دور یک میز به یک جامعه تبدیل شدند.",
+    storyParagraphs: [
+      "Ruach Breslov با افرادی آغاز شد که کنار هم می‌آموختند، صادقانه سخن می‌گفتند و برای یکدیگر جا باز می‌کردند. این جمع رشد کرد چون هیچ‌کس مجبور نبود وانمود کند پاسخ همۀ پرسش‌ها را می‌داند.",
+      "با الهام از ربی نحمان باور داریم هر روح نوری بی‌اندازه در خود دارد، حتی زمانی که پنهان به نظر می‌رسد. گاهی یک آموزۀ تورات، یک وعدۀ مشترک، دوستی خوب یا گفت‌وگویی واقعی کافی است تا کسی دوباره آن نور را ببیند."
+    ],
+    workEyebrow: "کار ما",
+    workTitle: "ماموریت در این اتاق به واقعیت تبدیل می‌شود.",
+    workCopy: "برنامه‌های ما آموزش، راهنمایی، مهمان‌نوازی و پیوند انسانی را به شیوه‌هایی عملی در کنار هم قرار می‌دهند.",
+    leadershipEyebrow: "رهبری سازمان",
+    leadershipTitle: "رهبری",
+    leadershipCopy: "Benjamin Roberts فعالیت‌های روزمرۀ Ruach Breslov را هدایت می‌کند و کمک می‌کند ماموریت آن به برنامه‌های منظم، روابط پایدار و حمایت از جامعه تبدیل شود.",
+    legalEyebrow: "پاسخ‌گویی عمومی",
+    legalTitle: "هویت حقوقی ما",
+    legalCopy: "Ruach Breslov Inc. در فهرست ادارۀ مالیات ایالات متحده به‌عنوان خیریۀ عمومی واجد شرایط دریافت کمک‌های خیریۀ قابل کسر از مالیات ثبت شده است.",
+    legalNameLabel: "نام حقوقی",
+    einLabel: "شمارۀ شناسایی کارفرما (EIN)",
+    classificationLabel: "رده‌بندی ادارۀ مالیات آمریکا",
+    classification: "خیریۀ عمومی",
+    addressLabel: "محل اصلی",
+    verifyStatus: "تأیید وضعیت ما در ادارۀ مالیات آمریکا",
+    ctaTitle: "کمک کنید درِ این خانه باز بماند.",
+    ctaCopy: "حمایت شما به برگزاری آموزش هفتگی تورات، راهنمایی فردی، غذا و پذیرایی، سخنرانان مهمان، رویدادهای اجتماعی و ارتباط‌گیری کمک می‌کند."
   },
   events: {
     eyebrow: "گردهمایی و مشارکت",
@@ -878,6 +1063,9 @@ const fa: Dictionary = {
     manageMonthlyCta: "مدیریت حمایت ماهانه",
     impactTitle: "حمایت شما به فراهم کردن این موارد کمک می‌کند",
     impactItems: ["کلاس‌های هفتگی تورات", "غذا و پذیرایی", "سخنرانان مهمان الهام‌بخش", "رویدادها و ارتباط با جامعه"],
+    nonprofitTitle: "با اطمینان کمک کنید",
+    nonprofitCopy: "Ruach Breslov Inc. در فهرست ادارۀ مالیات آمریکا به‌عنوان خیریۀ عمومی واجد شرایط دریافت کمک‌های خیریۀ قابل کسر از مالیات ثبت شده است.",
+    verifyStatus: "تأیید وضعیت ما در ادارۀ مالیات آمریکا",
     secureNote: "این وب‌سایت هرگز اطلاعات کارت را درخواست یا ذخیره نمی‌کند.",
     processingContext: "پرداخت‌ها با {currency} تنظیم شده‌اند؛ زمان‌های عملیاتی از {timeZone} (وقت شرقی آمریکا) استفاده می‌کنند."
   },
