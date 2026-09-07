@@ -101,6 +101,8 @@ Last updated: September 7, 2026
 - GitHub Actions deployment run `34056792175` published the contact-map release after passing the dependency audit, all typechecks, lint, YouTube sync tests, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment.
 - Live Cloudflare-facing browser checks confirm the contact page returns HTTP 200, loads the pinned Google map, routes driving navigation to `71-27 147th St, Flushing, NY 11367`, and has no horizontal overflow.
 - Four Google Calendar synchronization unit tests pass for future-event filtering, recurring-event exclusions and edits, cancellations, all-day ranges, New York time-zone conversion, safe stable IDs, and strict public Google iCal URL validation. The complete local production gate passes with zero audit findings, all typechecks and lint, 10 Worker tests, both sync suites, the production build, and the 29-route export check; all 28 desktop/mobile browser and WCAG checks also pass.
+- GitHub Actions deployment run `34084780842` published the calendar-ready release after passing the dependency audit, all typechecks, lint, both synchronization suites, 10 Worker tests, all 28 desktop/mobile browser tests, the production build, 29-route export check, launch gate, artifact upload, and Pages deployment. Manual calendar run `34084966596` also passed its parser tests and correctly skipped fetch, commit, and deployment because `GOOGLE_CALENDAR_ICAL_URL` is not configured yet.
+- The live English events page returns HTTP 200, retains the honest no-scheduled-events state, and exposes no RSVP button while the public calendar is unconnected.
 
 ## Remaining work — handle one item at a time
 
