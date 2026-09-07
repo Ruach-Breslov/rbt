@@ -11,16 +11,18 @@ function required(name) {
   return value;
 }
 
-function requireHttps(name, allowedHosts = []) {
+function requireHttps(name, allowedHosts = [], originOnly = false) {
   const value = required(name);
   if (!value) return;
   try {
     const url = new URL(value);
     if (url.protocol !== "https:") errors.push(`${name} must use HTTPS.`);
+    if (url.username || url.password) errors.push(`${name} must not contain URL credentials.`);
     if (allowedHosts.length && !allowedHosts.includes(url.hostname)) {
       errors.push(`${name} must use one of: ${allowedHosts.join(", ")}.`);
     }
     if (url.hostname.includes("example")) errors.push(`${name} still uses an example hostname.`);
+    if (originOnly && (url.pathname !== "/" || url.search || url.hash)) errors.push(`${name} must be an origin without a path, query, or fragment.`);
   } catch {
     errors.push(`${name} must be a valid URL.`);
   }
@@ -32,6 +34,7 @@ function optionalHttps(name, allowedHosts = []) {
   try {
     const url = new URL(value);
     if (url.protocol !== "https:") errors.push(`${name} must use HTTPS.`);
+    if (url.username || url.password) errors.push(`${name} must not contain URL credentials.`);
     if (allowedHosts.length && !allowedHosts.includes(url.hostname)) {
       errors.push(`${name} must use one of: ${allowedHosts.join(", ")}.`);
     }
@@ -41,9 +44,9 @@ function optionalHttps(name, allowedHosts = []) {
   }
 }
 
-requireHttps("NEXT_PUBLIC_SITE_URL");
-requireHttps("NEXT_PUBLIC_API_BASE_URL");
-const stripeHosts = ["buy.stripe.com", "checkout.stripe.com", "donate.stripe.com"];
+requireHttps("NEXT_PUBLIC_SITE_URL", ["ruachbreslov.org"], true);
+requireHttps("NEXT_PUBLIC_API_BASE_URL", ["api.ruachbreslov.org"], true);
+const stripeHosts = ["buy.stripe.com", "donate.stripe.com"];
 optionalHttps("NEXT_PUBLIC_STRIPE_PAYMENT_LINK", stripeHosts);
 optionalHttps("NEXT_PUBLIC_STRIPE_ONE_TIME_PAYMENT_LINK", stripeHosts);
 optionalHttps("NEXT_PUBLIC_STRIPE_MONTHLY_PAYMENT_LINK_18", stripeHosts);

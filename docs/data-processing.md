@@ -10,7 +10,7 @@ This is an engineering inventory, not legal advice or a privacy notice. The orga
 | RSVP | Name, email, guest count, optional accessibility/dietary notes, event, locale | Cloudflare D1 and Resend transactional email | 365 days by default; configurable with `RSVP_RETENTION_DAYS` |
 | Abuse prevention | Salted hashes of IP and normalized email, counters | Cloudflare D1 | Approximately two rate-limit windows |
 | Request idempotency | Request UUID, route, status, generic response | Cloudflare D1 | 30 days when no retained RSVP/confirmation references it |
-| Provider webhooks | Verified raw Resend/Stripe event body, ID, and type | Cloudflare D1 | 90 days |
+| Provider webhooks | Verified raw Resend event body, ID, and type | Cloudflare D1 | 90 days |
 | Bot challenge | Turnstile token, IP, hostname, action | Cloudflare Turnstile | Provider-controlled; confirm in the production agreement |
 | Payments | Payment and billing fields | Stripe-hosted pages; card data does not pass through this site | Stripe and organizational policy |
 

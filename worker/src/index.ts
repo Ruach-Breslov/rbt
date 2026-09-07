@@ -1,4 +1,4 @@
-import { sha256Hex, verifyResendSignature, verifyStripeSignature } from "./crypto";
+import { sha256Hex, verifyResendSignature } from "./crypto";
 import {
   claimRequest,
   cleanExpiredData,
@@ -10,14 +10,14 @@ import {
   reserveRsvp,
   storeWebhookEvent
 } from "./database";
-import { createStripeCheckout, sendEmail, upsertResendContact, validateTurnstile } from "./providers";
+import { sendEmail, upsertResendContact, validateTurnstile } from "./providers";
 import { PublicError, requireBinding, type Env } from "./types";
-import { readJson, validateCheckout, validateContact, validateRsvp, validateSubscription } from "./validation";
+import { readJson, validateContact, validateRsvp, validateSubscription } from "./validation";
 
 type JsonObject = Record<string, unknown>;
 type ExecutionContextLike = Pick<ExecutionContext, "waitUntil">;
 
-const publicPostRoutes = new Set(["/v1/contact", "/v1/subscribe", "/v1/rsvp", "/v1/checkout"]);
+const publicPostRoutes = new Set(["/v1/contact", "/v1/subscribe", "/v1/rsvp"]);
 
 function allowedOrigins(env: Env) {
   return new Set(env.ALLOWED_ORIGINS.split(",").map((value) => value.trim()).filter(Boolean));
@@ -32,9 +32,14 @@ function requestOrigin(request: Request, env: Env) {
 function responseHeaders(origin = "") {
   const headers = new Headers({
     "Cache-Control": "no-store",
+    "Content-Security-Policy": "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
     "Content-Type": "application/json; charset=utf-8",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()",
     "Referrer-Policy": "no-referrer",
-    "X-Content-Type-Options": "nosniff"
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "0"
   });
   if (origin) {
     headers.set("Access-Control-Allow-Origin", origin);
@@ -72,31 +77,10 @@ async function privateHash(env: Env, purpose: string, value: string) {
   return sha256Hex(`${salt}:${purpose}:${value}`);
 }
 
-async function rateLimitPerson(env: Env, route: string, ip: string, email: string, ipLimit: number, emailLimit: number) {
-  const [ipHash, emailHash] = await Promise.all([
-    privateHash(env, "ip", ip),
-    privateHash(env, "email", email)
-  ]);
-  await env.DB.batch([
-    env.DB.prepare(
-      `INSERT INTO rate_limits (key, bucket, count, expires_at) VALUES (?, ?, 1, ?)
-       ON CONFLICT(key, bucket) DO UPDATE SET count = count + 1`
-    ).bind(`${route}:ip:${ipHash}`, Math.floor(Date.now() / 600_000), Math.floor(Date.now() / 1000) + 1200),
-    env.DB.prepare(
-      `INSERT INTO rate_limits (key, bucket, count, expires_at) VALUES (?, ?, 1, ?)
-       ON CONFLICT(key, bucket) DO UPDATE SET count = count + 1`
-    ).bind(`${route}:email:${emailHash}`, Math.floor(Date.now() / 600_000), Math.floor(Date.now() / 1000) + 1200)
-  ]);
-  const [ipCount, emailCount] = await Promise.all([
-    env.DB.prepare("SELECT count FROM rate_limits WHERE key = ? AND bucket = ?")
-      .bind(`${route}:ip:${ipHash}`, Math.floor(Date.now() / 600_000)).first<{ count: number }>(),
-    env.DB.prepare("SELECT count FROM rate_limits WHERE key = ? AND bucket = ?")
-      .bind(`${route}:email:${emailHash}`, Math.floor(Date.now() / 600_000)).first<{ count: number }>()
-  ]);
-  if (!ipCount || !emailCount || ipCount.count > ipLimit || emailCount.count > emailLimit) {
-    throw new PublicError(429, "RATE_LIMITED");
-  }
-  return emailHash;
+async function rateLimitValue(env: Env, route: string, purpose: "ip" | "email", value: string, limit: number) {
+  const hash = await privateHash(env, purpose, value);
+  await enforceRateLimit(env, `${route}:${purpose}:${hash}`, limit, 600);
+  return hash;
 }
 
 async function idempotent(
@@ -130,9 +114,10 @@ function assertReturnUrlAllowed(value: string, env: Env) {
 
 async function handleContact(request: Request, env: Env, origin: string) {
   const input = validateContact(await readJson(request));
-  await rateLimitPerson(env, "contact", remoteIp(request), input.email, 8, 4);
+  await rateLimitValue(env, "contact", "ip", remoteIp(request), 20);
   const response = await idempotent(env, input.requestId, "contact", async () => {
     await validateTurnstile(env, input.turnstileToken, remoteIp(request), input.requestId, "contact");
+    await rateLimitValue(env, "contact", "email", input.email, 4);
     const organizationName = requireBinding(env, "ORGANIZATION_NAME");
     const message = [
       `New contact request for ${organizationName}`,
@@ -162,9 +147,10 @@ async function handleContact(request: Request, env: Env, origin: string) {
 
 async function handleSubscription(request: Request, env: Env, origin: string) {
   const input = validateSubscription(await readJson(request));
-  await rateLimitPerson(env, "subscribe", remoteIp(request), input.email, 6, 3);
+  await rateLimitValue(env, "subscribe", "ip", remoteIp(request), 15);
   const response = await idempotent(env, input.requestId, "subscribe", async () => {
     await validateTurnstile(env, input.turnstileToken, remoteIp(request), input.requestId, "subscribe");
+    await rateLimitValue(env, "subscribe", "email", input.email, 3);
     const token = await privateHash(env, "subscription-confirmation", input.requestId);
     const tokenHash = await sha256Hex(token);
     await createSubscriptionConfirmation(env, input, tokenHash);
@@ -209,14 +195,17 @@ async function handleSubscriptionConfirmation(request: Request, env: Env) {
   const redirectUrl = assertReturnUrlAllowed(requireBinding(env, "SUBSCRIPTION_CONFIRMATION_REDIRECT_URL"), env);
   const target = new URL(redirectUrl);
   target.searchParams.set("subscription", "confirmed");
-  return Response.redirect(target.toString(), 303);
+  const headers = responseHeaders();
+  headers.set("Location", target.toString());
+  return new Response(null, { status: 303, headers });
 }
 
 async function handleRsvp(request: Request, env: Env, origin: string) {
   const input = validateRsvp(await readJson(request));
-  const emailHash = await rateLimitPerson(env, "rsvp", remoteIp(request), input.email, 12, 6);
+  await rateLimitValue(env, "rsvp", "ip", remoteIp(request), 30);
   const response = await idempotent(env, input.requestId, "rsvp", async () => {
     await validateTurnstile(env, input.turnstileToken, remoteIp(request), input.requestId, "rsvp");
+    const emailHash = await rateLimitValue(env, "rsvp", "email", input.email, 6);
     const rsvpId = await reserveRsvp(env, input, emailHash);
     const organizationName = requireBinding(env, "ORGANIZATION_NAME");
     await Promise.all([
@@ -250,19 +239,6 @@ async function handleRsvp(request: Request, env: Env, origin: string) {
     return { ok: true, requestId: input.requestId, confirmationId: rsvpId };
   });
   return json(response, 202, origin);
-}
-
-async function handleCheckout(request: Request, env: Env, origin: string) {
-  const input = validateCheckout(await readJson(request, 4096));
-  const ipHash = await privateHash(env, "ip", remoteIp(request));
-  await enforceRateLimit(env, `checkout:ip:${ipHash}`, 10, 600);
-  const returnUrl = assertReturnUrlAllowed(input.returnUrl, env);
-  const response = await idempotent(env, input.requestId, "checkout", async () => ({
-    ok: true,
-    requestId: input.requestId,
-    url: await createStripeCheckout(env, { requestId: input.requestId, returnUrl })
-  }));
-  return json(response, 200, origin);
 }
 
 async function readWebhookBody(request: Request) {
@@ -300,19 +276,6 @@ async function handleResendWebhook(request: Request, env: Env) {
   return json({ ok: true });
 }
 
-async function handleStripeWebhook(request: Request, env: Env) {
-  const rawBody = await readWebhookBody(request);
-  const valid = await verifyStripeSignature(
-    rawBody,
-    request.headers.get("stripe-signature") ?? "",
-    requireBinding(env, "STRIPE_WEBHOOK_SECRET")
-  );
-  if (!valid) throw new PublicError(400, "INVALID_WEBHOOK_SIGNATURE");
-  const event = webhookIdentity(rawBody);
-  await storeWebhookEvent(env, "stripe", event.id, event.type, rawBody);
-  return json({ ok: true });
-}
-
 async function route(request: Request, env: Env) {
   const url = new URL(request.url);
   if (request.method === "OPTIONS" && publicPostRoutes.has(url.pathname)) return preflight(request, env);
@@ -325,14 +288,12 @@ async function route(request: Request, env: Env) {
     return handleSubscriptionConfirmation(request, env);
   }
   if (request.method === "POST" && url.pathname === "/webhooks/resend") return handleResendWebhook(request, env);
-  if (request.method === "POST" && url.pathname === "/webhooks/stripe") return handleStripeWebhook(request, env);
 
   if (request.method === "POST" && publicPostRoutes.has(url.pathname)) {
     const origin = requestOrigin(request, env);
     if (url.pathname === "/v1/contact") return handleContact(request, env, origin);
     if (url.pathname === "/v1/subscribe") return handleSubscription(request, env, origin);
     if (url.pathname === "/v1/rsvp") return handleRsvp(request, env, origin);
-    if (url.pathname === "/v1/checkout") return handleCheckout(request, env, origin);
   }
 
   throw new PublicError(404, "NOT_FOUND");
@@ -348,7 +309,7 @@ async function fetchHandler(request: Request, env: Env) {
       correlationId,
       method: request.method,
       path: new URL(request.url).pathname,
-      error: error instanceof Error ? error.message : "Unknown error"
+      error: error instanceof PublicError ? error.code : error instanceof Error ? error.name : "UnknownError"
     }));
     const origin = request.headers.get("origin") ?? "";
     const safeOrigin = origin && allowedOrigins(env).has(origin) ? origin : "";

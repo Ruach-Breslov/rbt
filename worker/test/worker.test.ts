@@ -1,6 +1,6 @@
 import { env } from "cloudflare:workers";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { sha256Hex, verifyResendSignature, verifyStripeSignature } from "../src/crypto";
+import { sha256Hex, verifyResendSignature } from "../src/crypto";
 import { fetchHandler } from "../src/index";
 
 const origin = "https://site.test";
@@ -41,9 +41,6 @@ function mockProviders(action: string) {
       return Response.json({ success: true, hostname: "localhost", action });
     }
     if (url.startsWith("https://api.resend.com/")) return Response.json({ id: "provider-id" });
-    if (url === "https://api.stripe.com/v1/checkout/sessions") {
-      return Response.json({ url: "https://checkout.stripe.com/c/pay/test" });
-    }
     throw new Error(`Unexpected outbound request: ${url}`);
   });
 }
@@ -69,6 +66,9 @@ describe("Worker HTTP boundary", () => {
     const response = await fetchHandler(new Request("https://api.test/health"), env);
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({ ok: true });
+    expect(response.headers.get("content-security-policy")).toContain("default-src 'none'");
+    expect(response.headers.get("permissions-policy")).toContain("payment=()");
+    expect(response.headers.get("x-frame-options")).toBe("DENY");
   });
 
   it("rejects public requests from unapproved origins", async () => {
@@ -142,39 +142,66 @@ describe("Worker HTTP boundary", () => {
     expect(pending?.used_at).toBeNull();
   });
 
-  it("creates only allowlisted hosted Stripe Checkout sessions", async () => {
-    mockProviders("checkout");
+  it("keeps removed server-side payment routes closed", async () => {
     const payload = { type: "support", requestId: crypto.randomUUID(), locale: "en", returnUrl: `${origin}/en/support` };
     const response = await fetchHandler(publicRequest("/v1/checkout", payload), env);
-    expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toMatchObject({ ok: true, url: "https://checkout.stripe.com/c/pay/test" });
+    expect(response.status).toBe(404);
+    const webhook = await fetchHandler(new Request("https://api.test/webhooks/stripe", { method: "POST", body: "{}" }), env);
+    expect(webhook.status).toBe(404);
+  });
 
-    const rejected = await fetchHandler(publicRequest("/v1/checkout", {
-      ...payload,
-      requestId: crypto.randomUUID(),
-      returnUrl: "https://attacker.test/steal"
-    }), env);
-    expect(rejected.status).toBe(400);
+  it("rejects line breaks in identity and email-subject fields", async () => {
+    for (const overrides of [
+      { name: "Ada\nBcc: attacker@example.test" },
+      { organization: "Society\r\nInjected", reason: "Partnership", preferredLanguage: "en", phone: "", message: "A sufficiently long message." },
+      { reason: "Hello\nBcc: attacker@example.test", preferredLanguage: "en", phone: "", organization: "", message: "A sufficiently long message." },
+      { reason: "Hello\u2028Bcc: attacker@example.test", preferredLanguage: "en", phone: "", organization: "", message: "A sufficiently long message." },
+      { reason: "Hello\u202eBcc: attacker@example.test", preferredLanguage: "en", phone: "", organization: "", message: "A sufficiently long message." }
+    ]) {
+      const payload = common("contact", {
+        phone: "",
+        organization: "",
+        preferredLanguage: "en",
+        reason: "Partnership",
+        message: "I would like to discuss a responsible collaboration.",
+        ...overrides
+      });
+      const response = await fetchHandler(publicRequest("/v1/contact", payload), env);
+      expect(response.status).toBe(400);
+    }
+  });
+
+  it("rejects JSON lookalike content types", async () => {
+    const request = publicRequest("/v1/contact", {});
+    request.headers.set("Content-Type", "application/jsonp");
+    const response = await fetchHandler(request, env);
+    expect(response.status).toBe(415);
+  });
+
+  it("does not let a failed bot challenge exhaust an email quota", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(Response.json({ success: false }));
+    const payload = common("contact", {
+      phone: "",
+      organization: "",
+      preferredLanguage: "en",
+      reason: "Partnership",
+      message: "I would like to discuss a responsible collaboration."
+    });
+    const response = await fetchHandler(publicRequest("/v1/contact", payload), env);
+    expect(response.status).toBe(400);
+    const emailLimits = await env.DB.prepare("SELECT COUNT(*) AS count FROM rate_limits WHERE key LIKE 'contact:email:%'")
+      .first<{ count: number }>();
+    expect(emailLimits?.count).toBe(0);
   });
 });
 
 describe("webhook signatures", () => {
-  it("verifies Stripe HMAC signatures and rejects altered payloads", async () => {
-    const body = JSON.stringify({ id: "evt_test", type: "checkout.session.completed" });
-    const timestamp = Math.floor(Date.now() / 1000);
-    const key = await crypto.subtle.importKey("raw", new TextEncoder().encode("whsec_stripe_test"), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-    const signature = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`${timestamp}.${body}`)));
-    const hex = [...signature].map((value) => value.toString(16).padStart(2, "0")).join("");
-    expect(await verifyStripeSignature(body, `t=${timestamp},v1=${hex}`, "whsec_stripe_test")).toBe(true);
-    expect(await verifyStripeSignature(`${body} `, `t=${timestamp},v1=${hex}`, "whsec_stripe_test")).toBe(false);
-  });
-
   it("hashes private discriminators deterministically", async () => {
     await expect(sha256Hex("same-value")).resolves.toBe(await sha256Hex("same-value"));
     expect(await sha256Hex("same-value")).not.toBe(await sha256Hex("other-value"));
   });
 
   it("rejects malformed Resend signatures", async () => {
-    expect(await verifyResendSignature("{}", "msg_test", `${Math.floor(Date.now() / 1000)}`, "v1,invalid", "whsec_dGVzdA==")).toBe(false);
+    expect(await verifyResendSignature("{}", "msg_test", `${Math.floor(Date.now() / 1000)}`, "v1,invalid", "dGVzdA==")).toBe(false);
   });
 });

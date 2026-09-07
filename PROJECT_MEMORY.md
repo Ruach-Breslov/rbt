@@ -1,6 +1,6 @@
 # Ruach Breslov Main Site — Project Memory
 
-Last updated: September 7, 2026
+Last updated: September 8, 2026
 
 ## Working boundary
 
@@ -12,7 +12,8 @@ Last updated: September 7, 2026
 - The repository is public. GitHub Pages uses the included GitHub Actions workflow, has `ruachbreslov.org` configured as its custom domain, and successfully published the first production site on September 4, 2026.
 - A dedicated Ed25519 keypair also exists at `%USERPROFILE%/.ssh/id_ed25519_ruach_breslov_rbt` (fingerprint `SHA256:Y/aK9sybOXt/WpiY44j13jO1IOSHyassnvrtAP2ROOM`) but is not needed by the current HTTPS connection. The private key must stay outside the repository and env files; only its path is recorded in the ignored master worksheet.
 - The production Cloudflare account ID is `021dbe9c5c0ac9f63b2532a0a9c86359`; the active `ruachbreslov.org` zone ID is `0a4fde7c3ae973afc410b5af0d3a2aec`. Global API Key authentication to that account was verified from the ignored master worksheet, and no Cloudflare secret is committed.
-- Cloudflare DNS preserves the existing Google MX/TXT records and routes the website to GitHub Pages using four apex A records, four apex AAAA records, and `www` as a CNAME to `ruach-breslov.github.io`. Those nine website records are proxied through Cloudflare; Universal SSL is active, the zone uses Full origin encryption, and Always Use HTTPS is enabled. GitHub Pages remains the origin.
+- Cloudflare DNS preserves the existing Google MX/TXT records and routes the website to GitHub Pages using four apex A records, four apex AAAA records, and `www` as a CNAME to `ruach-breslov.github.io`. Those nine website records are proxied through Cloudflare; Universal SSL is active, the zone uses Full origin encryption, Always Use HTTPS is enabled, and the minimum accepted TLS version is 1.2. GitHub Pages remains the origin.
+- On September 7, 2026, Cloudflare began enforcing a site-only response-header policy with CSP, clickjacking denial, MIME-sniffing protection, permissions restrictions, referrer control, cross-origin isolation hints, and legacy cross-domain policy denial. A staged 30-day HSTS policy is active without subdomain inheritance or preload. The policy passed report-only and enforced browser probes of the homepage, map, video player, and donation chooser with zero violations. Cloudflare Web Analytics was disabled after the probe found its unnecessary auto-injected beacon; it was not added to the CSP allowlist.
 - Public HTTPS is currently terminated and enforced by Cloudflare while GitHub's native Pages certificate remains unissued. Because the website records are proxied, GitHub's domain-health API currently identifies Cloudflare IPs and reports the apex and `www` as not HTTPS-eligible; native Pages `https_enforced` remains off.
 - The production API is Worker `ruach-breslov-api` at `https://api.ruachbreslov.org`, backed by D1 database `ruach-breslov-production` (`21eb66cf-2a77-49c5-91c3-e606a24713ab`). The initial schema and daily cleanup cron are deployed, and required secret names are enforced by Wrangler.
 - The production Turnstile widget is restricted to `ruachbreslov.org` and `www.ruachbreslov.org`; its public site key is `0x4AAAAAAEmvXUpwE6Qy8Y81`, and its secret exists only in Cloudflare's Worker secret store.
@@ -21,7 +22,7 @@ Last updated: September 7, 2026
 - Treat `https://ruachbreslov.wixsite.com/ruach-breslev` as a content reference only. Reuse confirmed organization facts and themes, not its layout, sample events, generic blog promises, or unverified testimonials.
 - The owner supplied and approved the local `Pictures` folder for site use. Keep those originals ignored, untracked, and untouched; publish only selected, optimized derivatives under `public/media`.
 - The Wix cream/burgundy/gold palette remains a source reference, but the owner rejected the first literal warm treatment as bland and impersonal on September 6, 2026. The approved rescue direction reinterprets it with cinematic charcoal, firelit gold, oxblood, parchment, and quiet sage.
-- Stripe live account `acct_1UBfcGJcQUW3PSlA` now provides hosted checkout. The full-access secret remains local provisioning-only and is not installed in GitHub, the frontend, or the Worker.
+- Stripe live account `acct_1UBfcGJcQUW3PSlA` now provides hosted checkout. The full-access secret remains local provisioning-only and is not installed in GitHub, the frontend, or the Worker. The Worker intentionally exposes no Stripe checkout or webhook route.
 - On September 7, 2026, the owner rejected the subscription-first Payment Link with a one-time add-on and approved the original consolidated approach: one focused chooser on the website switches between one-time and monthly giving, while the existing five Stripe-hosted pages remain the underlying payment destinations. The website must never collect card details. The rejected unlisted preview link was deactivated and its preview-only fixed add-on Price was archived; neither received a payment.
 
 ## Confirmed organization details
@@ -82,12 +83,13 @@ Last updated: September 7, 2026
 - Updated the GitHub Pages `NEXT_PUBLIC_HERO_IMAGE` variable from the previous gallery photograph to `/media/hero/home-hero-client.webp` so production builds cannot override the owner-selected hero.
 - Added a full localized About page and prominent homepage mission statement for nonprofit verification. The About page explains the mission, origin, programs, public accountability, and leadership; identifies Benjamin Roberts as Executive Director; publishes the legal name Ruach Breslov Inc. and EIN 41-3212278; links visitors to the IRS search; and reuses authentic community photography. The support page and footer repeat the nonprofit identity at decision points, while localized NGO JSON-LD exposes the same legal name, tax ID, address, contact information, mission, and official YouTube profile to verification systems.
 - Consolidated the five established Stripe donation destinations behind one owner-approved giving chooser. Donors switch between a one-time gift and monthly support in one composed interface, select among the four monthly amounts when relevant, and continue through one changing action to Stripe's hosted checkout; the site never receives payment-card details.
+- Completed a defense-in-depth security pass: narrowed the CSP and Stripe URL allowlists, removed dormant custom Stripe backend code and bindings, rejected JSON lookalike media types and line/control-character injection, separated bot-attempt IP limits from verified email quotas, sanitized Worker error logs, secured confirmation redirects, scanned every exported text asset for common secret formats, and verified every external new-tab link is isolated. GitHub Actions now use immutable full commit SHAs and least-privilege job permissions. Live repository controls enable secret scanning with push protection, Dependabot security updates, CodeQL default setup, private vulnerability reporting, and default-branch deletion/force-push protection; the unused repository Actions secret `SU` was deleted after confirming no workflow or history reference.
 
 ## Verification baseline
 
 - Next.js 16.3.3 production build succeeds.
 - Static export generates all 33 expected routes across four locales, including the localized About page.
-- All 10 Cloudflare Worker tests pass.
+- All 12 Cloudflare Worker tests pass.
 - All 30 desktop/mobile end-to-end tests pass, including locale behavior, mission and nonprofit identity, Executive Director attribution, organization JSON-LD, forms, both cinematic gallery/lightbox entry points, recurring donation choices, the complete YouTube channel library and player, the authentic community-photo hero, enlarged navigation, reduced motion, and automated WCAG A/AA checks on core routes.
 - The launch-readiness gate passes with the confirmed production public configuration and complete Stripe one-time/monthly link set; optional YouTube values remain strictly validated whenever supplied.
 - The live production API health check returns `{ "ok": true }` from `https://api.ruachbreslov.org/health`.
@@ -114,6 +116,7 @@ Last updated: September 7, 2026
 - Live Cloudflare-facing checks confirm all four localized About pages return HTTP 200 and visibly contain Ruach Breslov Inc., EIN 41-3212278, Benjamin Roberts, and Executive Director. The English homepage and support page expose the mission and nonprofit proof, the rendered mobile About page has no horizontal overflow, and the support page retains all five live Stripe-hosted donation choices.
 - The owner-approved desktop navigation spacing passes typecheck, lint, and all 30 desktop/mobile browser and accessibility checks; the responsive offsets preserve the anchored logo, the selected wide-screen composition, at least 10px between Support and the language selector, 44px minimum targets, and the established compact navigation.
 - The owner-approved consolidated giving chooser passes typecheck, lint, production build, the 33-route/four-locale static-export check, launch readiness, and all 30 desktop/mobile browser and WCAG checks. Its one-time state routes to Stripe's customer-selected-amount page; its monthly state exposes $18, $36, $72, and $180 choices through one changing checkout action.
+- The September 8 security build passes a zero-vulnerability dependency audit, all application/Worker/test typechecks, lint, both synchronization suites, 12 Worker tests, the 33-route/four-locale production export and enhanced secret/external-link checks, launch readiness, and all 30 desktop/mobile browser and WCAG checks. The enforced live Cloudflare policy returns CSP, HSTS, `X-Content-Type-Options`, `X-Frame-Options`, Referrer Policy, and Permissions Policy headers; its four-route interaction probe reports zero CSP violations and zero page errors.
 
 ## Remaining work — handle one item at a time
 
@@ -123,6 +126,9 @@ Last updated: September 7, 2026
 4. Confirm capacity and RSVP requirements for each event that should accept on-site reservations; calendar publication alone does not create a production RSVP database record.
 5. Confirm office hours, response-time expectations, visiting policy, accessibility, parking/transit details, and any additional contact FAQs.
 6. Have the current privacy notice reviewed for the organization’s operating jurisdictions and update it as practices change.
+7. After the 30-day HSTS observation period, consider extending `max-age` to one year. Enable `includeSubDomains` or preload only after every present and future subdomain is confirmed HTTPS-only.
+8. Replace the legacy Cloudflare Global API Key with a least-privilege scoped API token, then rotate the Global API Key and remove it from the local worksheet. This requires owner-level Cloudflare account coordination.
+9. Ask a Ruach-Breslov organization owner to audit organization-level GitHub Actions secrets; repository administration cannot list them. Repository-level Actions secrets are currently empty.
 
 ## Recorded commits
 

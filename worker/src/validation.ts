@@ -6,8 +6,8 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function hasUnsafeControlCharacters(value: string) {
   return [...value].some((character) => {
-    const code = character.charCodeAt(0);
-    return code === 127 || (code < 32 && code !== 9 && code !== 10 && code !== 13);
+    const code = character.codePointAt(0) ?? 0;
+    return code === 127 || (code >= 128 && code <= 159) || (code < 32 && code !== 9 && code !== 10 && code !== 13);
   });
 }
 
@@ -16,11 +16,10 @@ type JsonRecord = Record<string, unknown>;
 export type ContactInput = ReturnType<typeof validateContact>;
 export type SubscribeInput = ReturnType<typeof validateSubscription>;
 export type RsvpInput = ReturnType<typeof validateRsvp>;
-export type CheckoutInput = ReturnType<typeof validateCheckout>;
 
 export async function readJson(request: Request, maximumBytes = 16_384): Promise<JsonRecord> {
-  const contentType = request.headers.get("content-type")?.toLowerCase() ?? "";
-  if (!contentType.startsWith("application/json")) throw new PublicError(415, "UNSUPPORTED_CONTENT_TYPE");
+  const contentType = request.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase() ?? "";
+  if (contentType !== "application/json") throw new PublicError(415, "UNSUPPORTED_CONTENT_TYPE");
 
   const declaredLength = Number(request.headers.get("content-length") ?? 0);
   if (Number.isFinite(declaredLength) && declaredLength > maximumBytes) throw new PublicError(413, "REQUEST_TOO_LARGE");
@@ -48,27 +47,33 @@ function text(input: JsonRecord, key: string, minimum: number, maximum: number, 
   return value;
 }
 
+function singleLineText(input: JsonRecord, key: string, minimum: number, maximum: number, optional = false) {
+  const value = text(input, key, minimum, maximum, optional);
+  if (/[\t\r\n\u2028\u2029\u202a-\u202e\u2066-\u2069]/u.test(value)) throw new PublicError(400, "INVALID_INPUT");
+  return value;
+}
+
 function email(input: JsonRecord) {
-  const value = text(input, "email", 3, 254).toLowerCase();
+  const value = singleLineText(input, "email", 3, 254).toLowerCase();
   if (!emailPattern.test(value)) throw new PublicError(400, "INVALID_INPUT");
   return value;
 }
 
 function locale(input: JsonRecord) {
-  const value = text(input, "locale", 2, 2) as SupportedLocale;
+  const value = singleLineText(input, "locale", 2, 2) as SupportedLocale;
   if (!locales.has(value)) throw new PublicError(400, "INVALID_INPUT");
   return value;
 }
 
 function requestId(input: JsonRecord) {
-  const value = text(input, "requestId", 36, 36);
+  const value = singleLineText(input, "requestId", 36, 36);
   if (!uuidPattern.test(value)) throw new PublicError(400, "INVALID_INPUT");
   return value.toLowerCase();
 }
 
 function timing(input: JsonRecord) {
   const startedAt = input.startedAt;
-  const submittedAt = text(input, "submittedAt", 20, 40);
+  const submittedAt = singleLineText(input, "submittedAt", 20, 40);
   if (typeof startedAt !== "number" || !Number.isFinite(startedAt)) throw new PublicError(400, "INVALID_INPUT");
   const submittedMs = Date.parse(submittedAt);
   const now = Date.now();
@@ -83,12 +88,12 @@ function timing(input: JsonRecord) {
 
 function common(input: JsonRecord) {
   if (text(input, "website", 0, 200, true)) throw new PublicError(400, "SUSPICIOUS_SUBMISSION");
-  if (text(input, "consent", 7, 7) !== "granted") throw new PublicError(400, "CONSENT_REQUIRED");
-  const turnstileToken = text(input, "cf-turnstile-response", 1, 2048);
+  if (singleLineText(input, "consent", 7, 7) !== "granted") throw new PublicError(400, "CONSENT_REQUIRED");
+  const turnstileToken = singleLineText(input, "cf-turnstile-response", 1, 2048);
   return {
     requestId: requestId(input),
     locale: locale(input),
-    name: text(input, "name", 2, 100),
+    name: singleLineText(input, "name", 2, 100),
     email: email(input),
     turnstileToken,
     ...timing(input)
@@ -98,16 +103,16 @@ function common(input: JsonRecord) {
 export function validateContact(input: JsonRecord) {
   if (text(input, "type", 7, 7) !== "contact") throw new PublicError(400, "INVALID_INPUT");
   const result = common(input);
-  const phone = text(input, "phone", 0, 40, true);
+  const phone = singleLineText(input, "phone", 0, 40, true);
   if (phone && !/^[+\d][\d\s().-]{4,39}$/.test(phone)) throw new PublicError(400, "INVALID_INPUT");
-  const preferredLanguage = text(input, "preferredLanguage", 2, 2) as SupportedLocale;
+  const preferredLanguage = singleLineText(input, "preferredLanguage", 2, 2) as SupportedLocale;
   if (!locales.has(preferredLanguage)) throw new PublicError(400, "INVALID_INPUT");
   return {
     ...result,
     phone,
-    organization: text(input, "organization", 0, 120, true),
+    organization: singleLineText(input, "organization", 0, 120, true),
     preferredLanguage,
-    reason: text(input, "reason", 2, 140),
+    reason: singleLineText(input, "reason", 2, 140),
     message: text(input, "message", 10, 5000)
   };
 }
@@ -130,17 +135,8 @@ export function validateRsvp(input: JsonRecord) {
   if (!Number.isInteger(guests) || guests < 1 || guests > 12) throw new PublicError(400, "INVALID_INPUT");
   return {
     ...result,
-    eventId: text(input, "eventId", 2, 100),
+    eventId: singleLineText(input, "eventId", 2, 100),
     guests,
     accessibility: text(input, "accessibility", 0, 1000, true)
-  };
-}
-
-export function validateCheckout(input: JsonRecord) {
-  if (text(input, "type", 7, 7) !== "support") throw new PublicError(400, "INVALID_INPUT");
-  return {
-    requestId: requestId(input),
-    locale: locale(input),
-    returnUrl: text(input, "returnUrl", 8, 2048)
   };
 }

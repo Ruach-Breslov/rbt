@@ -97,7 +97,7 @@ export function VideoLibrary({ videos, dictionary, locale }: { videos: VideoReco
             <h1 id="channel-name">Ruach Breslov</h1>
             <p className="channel-meta"><strong>@RuachBreslov</strong><span>·</span><span>{dictionary.videos.videoCount.replace("{count}", String(videos.length))}</span></p>
             <p>{dictionary.videos.channelDescription}</p>
-            <a className="channel-subscribe" href={site.youtube.channelUrl} target="_blank" rel="noreferrer">
+            <a className="channel-subscribe" href={site.youtube.channelUrl} target="_blank" rel="noopener noreferrer">
               {dictionary.videos.channelCta}<ExternalLink aria-hidden="true" />
             </a>
           </div>

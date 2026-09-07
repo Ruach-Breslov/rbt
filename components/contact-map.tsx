@@ -17,10 +17,10 @@ export function ContactMap({ dictionary }: { dictionary: Dictionary }) {
           <p>{dictionary.contact.mapCopy}</p>
           <address><MapPin aria-hidden="true" /><span>{site.contact.address}</span></address>
           <div className="contact-map-actions">
-            <a className="button button-primary" href={directionsUrl} target="_blank" rel="noreferrer">
+            <a className="button button-primary" href={directionsUrl} target="_blank" rel="noopener noreferrer">
               <Navigation aria-hidden="true" />{dictionary.contact.directionsCta}
             </a>
-            <a className="contact-map-link" href={placeUrl} target="_blank" rel="noreferrer">
+            <a className="contact-map-link" href={placeUrl} target="_blank" rel="noopener noreferrer">
               {dictionary.contact.openMapCta}<ExternalLink aria-hidden="true" />
             </a>
           </div>

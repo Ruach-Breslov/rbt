@@ -2,7 +2,7 @@
 
 The multilingual public website for Ruach Breslov. It brings the timeless wisdom of Rebbe Nachman to life through faith, joy, personal growth, and meaningful connection.
 
-The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pages from the included GitHub Actions workflow. Secure forms, RSVP storage, and optional payment services run through the separate Cloudflare Worker backend.
+The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pages from the included GitHub Actions workflow. Secure forms and RSVP storage run through the separate Cloudflare Worker backend. Donations leave the site for Stripe-hosted payment pages.
 
 ## Included
 
@@ -18,13 +18,12 @@ The frontend exports to plain HTML, CSS, and JavaScript and deploys to GitHub Pa
 - Authentic Ruach Breslov community photography throughout the public experience
 - Reusable cinematic gallery with accessible keyboard and mobile lightbox controls
 - Full contact page with inquiry form, details, hours, response expectations, and FAQs
-- Stripe-hosted Payment Link as the recommended payment default
-- Optional custom Stripe Checkout Session frontend
+- Unified one-time and monthly donation chooser backed only by Stripe-hosted Payment Links
 - Localized privacy starter pages, sitemap, robots rules, manifest, CSP meta policy, and static-export verification
 
 ## Important hosting boundary
 
-GitHub Pages is a static host. It can host the entire user interface, but it cannot securely execute Resend requests, create Stripe Checkout Sessions, verify webhooks, rate-limit forms, or store RSVP records.
+GitHub Pages is a static host. It can host the entire user interface, but it cannot securely execute Resend requests, verify provider webhooks, rate-limit forms, or store RSVP records.
 
 The secure production architecture is:
 
@@ -34,11 +33,10 @@ GitHub Pages frontend
         ▼
 Cloudflare Worker + D1
    ├── Resend email and Contacts
-   ├── RSVP database
-   └── Optional Stripe Checkout + verified webhooks
+   └── RSVP database
 ```
 
-The Worker implementation lives in `worker/`. See [docs/backend-deployment.md](docs/backend-deployment.md) before enabling forms or custom Checkout.
+The Worker implementation lives in `worker/`. See [docs/backend-deployment.md](docs/backend-deployment.md) before enabling forms.
 
 ## Local development
 
@@ -69,7 +67,7 @@ The deployment workflow also runs `npm run check:launch`. That gate deliberately
 2. Connect the dedicated public events calendar by following `docs/EVENT_CALENDAR.md`.
 3. Copy `.env.example` to `.env.local` and set only public development values, including the four official organization names and the Turnstile site key.
 4. Deploy the included Worker by following `docs/backend-deployment.md`, then set `NEXT_PUBLIC_API_BASE_URL`.
-5. Create a Stripe Payment Link and set `NEXT_PUBLIC_STRIPE_PAYMENT_LINK`.
+5. Create the Stripe-hosted one-time and monthly donation links and set the corresponding `NEXT_PUBLIC_STRIPE_*` public variables.
 6. Add up to three YouTube IDs with `NEXT_PUBLIC_YOUTUBE_VIDEO_IDS`.
 
 YouTube controls the actual stream resolution adaptively. Its IFrame API no longer supports forcing a playback quality, so the template keeps the native quality controls available and truthfully labels capable videos as highest-available, up to 4K/HDR. Upload a 3840×2160 master with correct HDR metadata when those formats are required.
@@ -104,7 +102,7 @@ Never source, deploy, or upload the master file as a whole.
 | `NEXT_PUBLIC_ORGANIZATION_NAME_{EN,HE,ES,FA}` | Official organization name for each locale |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Public Turnstile widget key; never the secret key |
 | `NEXT_PUBLIC_CONTACT_*` | Public email, phone, and address |
-| `NEXT_PUBLIC_STRIPE_PAYMENT_LINK` | Stripe-hosted Payment Link; recommended payment mode |
+| `NEXT_PUBLIC_STRIPE_*_PAYMENT_LINK*` | Public Stripe-hosted one-time and monthly donation links |
 | `NEXT_PUBLIC_YOUTUBE_VIDEO_IDS` | Up to three comma-separated YouTube IDs |
 | `NEXT_PUBLIC_YOUTUBE_CHANNEL_URL` | Optional public YouTube channel URL |
 | `NEXT_PUBLIC_HERO_IMAGE` | Optional local `/media/...` community hero photograph |

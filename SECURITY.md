@@ -2,7 +2,7 @@
 
 ## Reporting
 
-Configure a private security contact or enable GitHub private vulnerability reporting before publishing this repository. Do not report vulnerabilities through public issues when they include exploit details, credentials, or personal information.
+Use the repository Security tab to submit a private vulnerability report. Do not report vulnerabilities through public issues when they include exploit details, credentials, or personal information.
 
 ## Static frontend
 

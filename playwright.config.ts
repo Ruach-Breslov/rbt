@@ -28,7 +28,7 @@ export default defineConfig({
     env: {
       ...process.env,
       NEXT_PUBLIC_SITE_URL: baseURL,
-      NEXT_PUBLIC_API_BASE_URL: "https://api.example.test",
+      NEXT_PUBLIC_API_BASE_URL: "https://api.ruachbreslov.org",
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA",
       NEXT_PUBLIC_ORGANIZATION_NAME_EN: "Ruach Breslov",
       NEXT_PUBLIC_ORGANIZATION_NAME_HE: "Ruach Breslov",

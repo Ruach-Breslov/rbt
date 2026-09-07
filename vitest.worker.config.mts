@@ -19,16 +19,13 @@ export default defineConfig({
           TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA",
           TURNSTILE_EXPECTED_HOSTNAMES: "localhost",
           RATE_LIMIT_SALT: "test-only-rate-limit-salt-32-characters-long",
-          RESEND_TRANSACTIONAL_API_KEY: "re_test_transactional",
-          RESEND_CONTACTS_API_KEY: "re_test_contacts",
+          RESEND_TRANSACTIONAL_API_KEY: "test-transactional-key",
+          RESEND_CONTACTS_API_KEY: "test-contacts-key",
           RESEND_FROM_EMAIL: "Test Organization <no-reply@example.test>",
           CONTACT_TO_EMAIL: "team@example.test",
           RESEND_NEWSLETTER_TOPIC_ID: "topic_newsletter",
           RESEND_EVENTS_TOPIC_ID: "topic_events",
-          RESEND_WEBHOOK_SECRET: "whsec_dGVzdC1yZXNlbmQtc2VjcmV0",
-          STRIPE_SECRET_KEY: "sk_test_placeholder",
-          STRIPE_PRICE_ID: "price_test",
-          STRIPE_WEBHOOK_SECRET: "whsec_stripe_test"
+          RESEND_WEBHOOK_SECRET: "test-webhook-signing-secret"
         }
       }
     }))

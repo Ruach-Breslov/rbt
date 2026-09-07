@@ -35,7 +35,6 @@ values.
    - `RESEND_NEWSLETTER_TOPIC_ID`
    - `RESEND_EVENTS_TOPIC_ID`
    - `RESEND_WEBHOOK_SECRET`
-   - optionally `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, and `STRIPE_WEBHOOK_SECRET`
 6. Apply the production schema with `npm run db:migrate:remote`.
 7. Insert reviewed production events into D1. Do not execute `worker/seeds/dev.sql` remotely.
 8. Run `npm run check`, `npm run test:e2e`, and `npm run check:launch` with production public variables.
@@ -62,14 +61,12 @@ Register a webhook at `https://api.ruachbreslov.org/webhooks/resend` and install
 
 ## Stripe
 
-For ordinary support, create a Stripe-hosted Payment Link and expose only that `buy.stripe.com` URL to the frontend. Custom Checkout is optional. When enabled, install one server-owned USD Price ID and register `https://YOUR_API_HOST/webhooks/stripe`; the browser cannot choose amounts, currencies, prices, or redirect origins.
-
-The current webhook stores verified events for idempotency and audit. Add explicit fulfillment logic only when the organization defines a concrete product or entitlement workflow.
+Donations do not pass through the Worker. The frontend exposes only public `donate.stripe.com` Payment Links, and Stripe hosts every payment and billing field. Keep any full-access provisioning key only in the ignored local operator worksheet; never install a Stripe secret in the Worker or expose one through a `NEXT_PUBLIC_*` variable.
 
 ## Production verification
 
 - Confirm unexpected origins receive `403` without an `Access-Control-Allow-Origin` header.
 - Confirm valid preflights allow only `POST`, `OPTIONS`, and `Content-Type`.
-- Complete real contact, double-opt-in subscription, RSVP, and payment test-mode flows.
-- Replay request IDs and provider events to confirm no duplicate email, RSVP, or fulfillment action occurs.
+- Complete real contact, double-opt-in subscription, RSVP, and Stripe-hosted donation test-mode flows.
+- Replay request IDs and Resend events to confirm no duplicate email or RSVP action occurs.
 - Confirm scheduled cleanup runs and monitoring alerts on elevated error, CAPTCHA, bounce, and complaint rates.

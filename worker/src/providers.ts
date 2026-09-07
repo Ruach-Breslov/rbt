@@ -88,36 +88,3 @@ export async function upsertResendContact(env: Env, input: { email: string; name
   );
   if (!updateResponse.ok) throw new PublicError(502, "UPSTREAM_FAILURE", `Resend topics returned ${updateResponse.status}`);
 }
-
-function returnUrlWithStatus(value: string, status: "success" | "cancelled") {
-  const url = new URL(value);
-  url.searchParams.set("checkout", status);
-  url.hash = "";
-  return url.toString();
-}
-
-export async function createStripeCheckout(env: Env, input: { requestId: string; returnUrl: string }) {
-  const body = new URLSearchParams();
-  body.set("mode", "payment");
-  body.set("line_items[0][price]", requireBinding(env, "STRIPE_PRICE_ID"));
-  body.set("line_items[0][quantity]", "1");
-  body.set("success_url", returnUrlWithStatus(input.returnUrl, "success"));
-  body.set("cancel_url", returnUrlWithStatus(input.returnUrl, "cancelled"));
-  body.set("client_reference_id", input.requestId);
-  body.set("metadata[request_id]", input.requestId);
-
-  const response = await providerFetch("https://api.stripe.com/v1/checkout/sessions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${requireBinding(env, "STRIPE_SECRET_KEY")}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Idempotency-Key": input.requestId
-    },
-    body
-  }, "Stripe");
-  const result = await response.json<{ url?: string }>();
-  if (!result.url || !result.url.startsWith("https://checkout.stripe.com/")) {
-    throw new PublicError(502, "UPSTREAM_FAILURE", "Stripe returned an invalid Checkout URL");
-  }
-  return result.url;
-}

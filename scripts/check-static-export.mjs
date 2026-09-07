@@ -176,8 +176,51 @@ if (!existsSync(outDir)) {
     }
   }
 
-  if (!rootHtml.includes("https://www.youtube-nocookie.com") || !rootHtml.includes("https://www.google.com") || !rootHtml.includes("https://checkout.stripe.com")) {
-    fail("CSP must allow the configured YouTube, Google Maps, and Stripe hosted experiences.");
+  const decodeHtmlAttribute = (value) => value.replace(
+    /&(?:#(\d+)|#x([0-9a-f]+)|quot|apos|amp|lt|gt);/gi,
+    (entity, decimal, hexadecimal) => {
+      if (decimal) return String.fromCodePoint(Number.parseInt(decimal, 10));
+      if (hexadecimal) return String.fromCodePoint(Number.parseInt(hexadecimal, 16));
+      return { "&quot;": '"', "&apos;": "'", "&amp;": "&", "&lt;": "<", "&gt;": ">" }[entity.toLowerCase()] ?? entity;
+    }
+  );
+  const htmlAttribute = (tag, name) => decodeHtmlAttribute(
+    tag.match(new RegExp(`\\b${name}=(["'])(.*?)\\1`, "i"))?.[2] ?? ""
+  );
+  const cspMeta = [...rootHtml.matchAll(/<meta\b[^>]*>/gi)]
+    .map((match) => match[0])
+    .find((tag) => htmlAttribute(tag, "http-equiv").toLowerCase() === "content-security-policy");
+  const cspDirectives = new Map(
+    htmlAttribute(cspMeta ?? "", "content")
+      .split(";")
+      .map((directive) => directive.trim().split(/\s+/))
+      .filter((tokens) => tokens[0])
+      .map(([name, ...sources]) => [name.toLowerCase(), new Set(sources)])
+  );
+  const hasCspSource = (directive, source) => cspDirectives.get(directive)?.has(source) ?? false;
+  const requiredCspSources = [
+    ["frame-src", "https://www.youtube-nocookie.com"],
+    ["frame-src", "https://www.google.com"],
+    ["script-src-attr", "'none'"],
+    ["form-action", "'self'"],
+  ];
+  if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim()) {
+    requiredCspSources.push(
+      ["script-src", "https://challenges.cloudflare.com"],
+      ["connect-src", "https://challenges.cloudflare.com"],
+      ["frame-src", "https://challenges.cloudflare.com"]
+    );
+  }
+  if (!cspMeta || !requiredCspSources.every(([directive, source]) => hasCspSource(directive, source))) {
+    fail("CSP must allow only the configured YouTube, Google Maps, and Turnstile experiences.");
+  }
+  const forbiddenCspSources = new Set([
+    "https://checkout.stripe.com",
+    "https://buy.stripe.com",
+    "https://donate.stripe.com"
+  ]);
+  if ([...cspDirectives.values()].some((sources) => [...sources].some((source) => forbiddenCspSources.has(source)))) {
+    fail("Stripe checkout hosts must not be granted embedded or form-submit privileges in CSP.");
   }
 
   const configuredVideoIds = (process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_IDS ?? "").split(",").map((value) => value.trim()).filter(Boolean);
@@ -189,12 +232,26 @@ if (!existsSync(outDir)) {
 
   const allFiles = walkFiles(outDir);
   const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
+  const textFiles = allFiles.filter((file) => /\.(?:css|html|js|json|map|txt|webmanifest|xml)$/i.test(file));
+  const secretPattern = /(?:\bre_[A-Za-z0-9_-]{16,}|\b(?:sk|rk)_(?:live|test)_[A-Za-z0-9_-]{16,}|\bwhsec_[A-Za-z0-9_-]{16,}|\bgithub_pat_[A-Za-z0-9_]{20,}|\bgh[pousr]_[A-Za-z0-9]{20,}|-----BEGIN (?:OPENSSH|RSA|EC) PRIVATE KEY-----)/;
+
+  for (const file of textFiles) {
+    if (secretPattern.test(readFileSync(file, "utf8"))) {
+      fail(`${path.relative(outDir, file).replaceAll(path.sep, "/")} appears to expose a service secret.`);
+    }
+  }
+
   for (const file of htmlFiles) {
     const html = readFileSync(file, "utf8");
     const relativeFile = path.relative(outDir, file).replaceAll(path.sep, "/");
 
-    if (/(?:\bre_[A-Za-z0-9_-]{16,}|\bsk_(?:live|test)_[A-Za-z0-9_-]{16,}|\bwhsec_[A-Za-z0-9_-]{16,})/.test(html)) {
-      fail(`${relativeFile} appears to expose a service secret.`);
+    for (const match of html.matchAll(/<a\b[^>]*>/gi)) {
+      const anchor = match[0];
+      if (!/\btarget=["']_blank["']/i.test(anchor)) continue;
+      const relation = anchor.match(/\brel=["']([^"']*)["']/i)?.[1].toLowerCase().split(/\s+/) ?? [];
+      if (!relation.includes("noopener") || !relation.includes("noreferrer")) {
+        fail(`${relativeFile} contains a target=_blank link without noopener noreferrer.`);
+      }
     }
 
     for (const match of html.matchAll(/\b(?:href|src|action)=['"]([^'"]+)['"]/gi)) {

@@ -4,11 +4,6 @@ function bytesToHex(bytes: Uint8Array) {
   return [...bytes].map((value) => value.toString(16).padStart(2, "0")).join("");
 }
 
-function hexToBytes(value: string) {
-  if (!/^[0-9a-f]+$/i.test(value) || value.length % 2) return new Uint8Array();
-  return new Uint8Array(value.match(/.{2}/g)?.map((pair) => Number.parseInt(pair, 16)) ?? []);
-}
-
 function base64ToBytes(value: string) {
   try {
     return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
@@ -37,22 +32,6 @@ export async function sha256Hex(value: string) {
 export function randomToken() {
   const bytes = crypto.getRandomValues(new Uint8Array(32));
   return bytesToBase64Url(bytes);
-}
-
-export async function verifyStripeSignature(rawBody: string, signatureHeader: string, secret: string) {
-  const fields = signatureHeader.split(",").map((field) => field.trim().split("=", 2));
-  const timestamp = fields.find(([key]) => key === "t")?.[1] ?? "";
-  const signatures = fields.filter(([key]) => key === "v1").map(([, value]) => value);
-  const timestampSeconds = Number(timestamp);
-  if (!Number.isInteger(timestampSeconds) || Math.abs(Date.now() / 1000 - timestampSeconds) > 300) return false;
-
-  const key = await importHmacKey(encoder.encode(secret));
-  const payload = encoder.encode(`${timestamp}.${rawBody}`);
-  for (const signature of signatures) {
-    const bytes = hexToBytes(signature);
-    if (bytes.byteLength && await crypto.subtle.verify("HMAC", key, bytes, payload)) return true;
-  }
-  return false;
 }
 
 export async function verifyResendSignature(rawBody: string, id: string, timestamp: string, signatureHeader: string, secret: string) {

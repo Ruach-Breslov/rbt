@@ -2,7 +2,7 @@
 
 ## Why a separate API is required
 
-GitHub Pages cannot run request handlers. Resend and Stripe secret operations require confidential credentials, and RSVP submissions need trusted validation and durable storage. Putting those credentials in browser code would allow anyone to use the associated accounts.
+GitHub Pages cannot run request handlers. Resend operations require confidential credentials, and RSVP submissions need trusted validation and durable storage. Putting those credentials in browser code would allow anyone to use the associated accounts. Donations use public Stripe-hosted Payment Links and do not pass through this API.
 
 Host a small API on a serverless platform such as Cloudflare Workers, Vercel Functions, Netlify Functions, AWS Lambda, or another managed runtime. The frontend expects the HTTPS origin in `NEXT_PUBLIC_API_BASE_URL`.
 
@@ -61,22 +61,6 @@ The API must:
 5. Send confirmation and organizer notifications through Resend.
 6. Avoid putting accessibility or personal details in URLs, analytics, or ordinary logs.
 
-### `POST /v1/checkout` — optional
-
-This is not needed for the recommended Payment Link path. Use it only when dynamic prices, products, inventory, or automatic fulfillment are required.
-
-The browser sends a purpose, locale, return URL, and request ID. The server selects an allowlisted Stripe Price ID and creates a hosted Checkout Session. Never accept a client-provided amount, currency, destination account, or unrestricted success URL.
-
-This implementation's payment defaults are `USD` and the IANA time zone `America/New_York`. Configure Stripe Prices and Payment Links in USD. Keep currency and time-zone selection server-controlled; use `America/New_York`, rather than a fixed `EST` offset, so daylight-saving transitions are handled correctly.
-
-Return only a Stripe-hosted URL:
-
-```json
-{ "url": "https://checkout.stripe.com/..." }
-```
-
-Automatic fulfillment requires an additional Stripe webhook endpoint. Verify the Stripe signature against the raw body, process relevant events idempotently, and treat the webhook—not the success-page redirect—as the payment source of truth.
-
 ## Resend webhooks
 
 For delivery, bounce, complaint, and subscription processing, expose a dedicated webhook endpoint and verify Resend’s signing headers using the raw request body and the server-only webhook secret. Store processed event IDs to reject duplicates and replay attempts.
@@ -101,8 +85,7 @@ The repository now includes a Cloudflare Worker and D1 implementation in `worker
 - mandatory server-side Turnstile verification;
 - Resend transactional delivery and 24-hour double opt-in for Topics;
 - atomic event-capacity checks and normalized RSVP storage;
-- allowlisted Stripe Price IDs and hosted Checkout Session URLs;
-- raw-body Resend and Stripe webhook signature verification;
+- raw-body Resend webhook signature verification;
 - scheduled expiry of rate limits, pending confirmations, request logs, webhook events, and RSVP records.
 
 Apply `worker/migrations/0001_initial.sql` before serving requests. Never use the demo seed in production. Follow `backend-deployment.md` for the account-side setup and secret commands.

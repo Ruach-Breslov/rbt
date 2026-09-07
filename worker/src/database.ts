@@ -153,7 +153,7 @@ export async function markSubscriptionConfirmationUsed(env: Env, id: string) {
   return (result.meta.changes ?? 0) === 1;
 }
 
-export async function storeWebhookEvent(env: Env, provider: "resend" | "stripe", eventId: string, eventType: string, payload: string) {
+export async function storeWebhookEvent(env: Env, provider: "resend", eventId: string, eventType: string, payload: string) {
   const result = await env.DB.prepare(
     `INSERT OR IGNORE INTO webhook_events (provider, event_id, event_type, payload_json, received_at)
      VALUES (?, ?, ?, ?, ?)`

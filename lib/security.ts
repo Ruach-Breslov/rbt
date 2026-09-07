@@ -23,11 +23,15 @@ export function contentSecurityPolicy() {
     "object-src 'none'",
     "img-src 'self' data: https://i.ytimg.com",
     "font-src 'self' data:",
+    "media-src 'self'",
+    "manifest-src 'self'",
     "style-src 'self' 'unsafe-inline'",
     `script-src ${scriptSources}`,
+    "script-src-attr 'none'",
     `connect-src ${connectSources}`,
-    "frame-src https://www.youtube-nocookie.com https://www.google.com https://checkout.stripe.com https://challenges.cloudflare.com",
-    "form-action 'self' https://checkout.stripe.com https://buy.stripe.com",
+    "frame-src https://www.youtube-nocookie.com https://www.google.com https://challenges.cloudflare.com",
+    "form-action 'self'",
+    "worker-src 'self' blob:",
     process.env.NODE_ENV === "production" ? "upgrade-insecure-requests" : ""
   ].filter(Boolean).join("; ");
 }
