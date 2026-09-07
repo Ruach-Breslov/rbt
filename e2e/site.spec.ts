@@ -40,6 +40,7 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
     const inner = header.querySelector<HTMLElement>(".site-header-inner");
     const actions = header.querySelector<HTMLElement>(".header-actions");
     const languageMenu = actions?.querySelector<HTMLElement>(".language-menu");
+    const supportButton = actions?.children[1] as HTMLElement | undefined;
     const visibleTargets = Array.from(header.querySelectorAll<HTMLElement>("a, summary"))
       .map((element) => element.getBoundingClientRect())
       .filter((bounds) => bounds.width > 0 && bounds.height > 0);
@@ -56,6 +57,7 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
       imageTransform: image ? getComputedStyle(image).transform : "",
       languageAtOuterEdge: actions?.lastElementChild === languageMenu,
       languagePageEdgeGap: languageMenu ? Math.abs(document.documentElement.clientWidth - languageMenu.getBoundingClientRect().right) : null,
+      supportLanguageGap: languageMenu && supportButton ? languageMenu.getBoundingClientRect().left - supportButton.getBoundingClientRect().right : null,
       contactNextToSupport: actions?.children[0]?.classList.contains("header-contact-button") && actions?.children[1]?.classList.contains("button-primary"),
       minimumTargetHeight: Math.min(...visibleTargets.map((bounds) => bounds.height))
     };
@@ -68,10 +70,14 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
   expect(navigationPresentation.imageTransform).toBe("none");
   expect(navigationPresentation.languageAtOuterEdge).toBe(true);
   expect(navigationPresentation.languagePageEdgeGap).not.toBeNull();
-  expect(navigationPresentation.languagePageEdgeGap ?? 17).toBeLessThanOrEqual(16);
   if (navigationPresentation.viewportWidth > 700) {
+    expect(navigationPresentation.languagePageEdgeGap ?? 0).toBeGreaterThanOrEqual(115);
+    expect(navigationPresentation.languagePageEdgeGap ?? 0).toBeLessThanOrEqual(117);
+    expect(navigationPresentation.supportLanguageGap ?? -1).toBeGreaterThanOrEqual(10);
     expect(navigationPresentation.innerWidth).toBe(1320);
     expect(navigationPresentation.innerPageLeftGap).toBe(140);
+  } else {
+    expect(navigationPresentation.languagePageEdgeGap ?? 17).toBeLessThanOrEqual(16);
   }
   expect(navigationPresentation.contactNextToSupport).toBe(true);
   expect(navigationPresentation.minimumTargetHeight).toBeGreaterThanOrEqual(44);
