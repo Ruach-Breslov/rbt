@@ -49,11 +49,12 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
       background,
       documentWidth: document.documentElement.scrollWidth,
       viewportWidth: window.innerWidth,
+      innerWidth: inner?.getBoundingClientRect().width ?? 0,
+      innerPageLeftGap: inner?.getBoundingClientRect().left ?? 0,
       markWidth: mark?.getBoundingClientRect().width ?? 0,
       imageFit: image ? getComputedStyle(image).objectFit : "",
       imageTransform: image ? getComputedStyle(image).transform : "",
       languageAtOuterEdge: actions?.lastElementChild === languageMenu,
-      languageEdgeGap: inner && languageMenu ? Math.abs(inner.getBoundingClientRect().right - languageMenu.getBoundingClientRect().right) : null,
       languagePageEdgeGap: languageMenu ? Math.abs(document.documentElement.clientWidth - languageMenu.getBoundingClientRect().right) : null,
       contactNextToSupport: actions?.children[0]?.classList.contains("header-contact-button") && actions?.children[1]?.classList.contains("button-primary"),
       minimumTargetHeight: Math.min(...visibleTargets.map((bounds) => bounds.height))
@@ -66,10 +67,12 @@ test("keeps the enlarged navigation accessible and unclipped", async ({ page }) 
   expect(navigationPresentation.imageFit).toBe("contain");
   expect(navigationPresentation.imageTransform).toBe("none");
   expect(navigationPresentation.languageAtOuterEdge).toBe(true);
-  expect(navigationPresentation.languageEdgeGap).not.toBeNull();
-  expect(navigationPresentation.languageEdgeGap ?? 1).toBeLessThan(1);
   expect(navigationPresentation.languagePageEdgeGap).not.toBeNull();
   expect(navigationPresentation.languagePageEdgeGap ?? 17).toBeLessThanOrEqual(16);
+  if (navigationPresentation.viewportWidth > 700) {
+    expect(navigationPresentation.innerWidth).toBe(1320);
+    expect(navigationPresentation.innerPageLeftGap).toBe(140);
+  }
   expect(navigationPresentation.contactNextToSupport).toBe(true);
   expect(navigationPresentation.minimumTargetHeight).toBeGreaterThanOrEqual(44);
 });
